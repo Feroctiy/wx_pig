@@ -5,10 +5,9 @@
 <view class="container">
 	<view class="address-list">
 		<view class="padding margin-bottom-sm solid-bottom padding bg-white" wx:for-items="{{addressList}}" wx:key="{{index}}">
-			<view>
-				<view class="left-text {{item.state == '1'? 'active':''}}" bindtap="selectTap" data-id="{{item.id}}">
-					<view class="name-tel">
-						 
+			<view bindtap='toChoose' data-id="{{item.DB_ADDRESS_ID}}" >
+				<view class="left-text {{item.state == '1'? 'active':''}}">
+					<view class="name-tel"> 
 						<text>{{item.ADD_NAME}}</text>
 						<text class="padding-left">{{item.ADD_PHONE}}</text>
 					</view>

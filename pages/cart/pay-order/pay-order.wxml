@@ -1,4 +1,4 @@
-<cu-custom bgColor="bg-gradual-white" isBack="{{true}}">
+<cu-custom bgColor="bg-gradual-main" isBack="{{true}}">
 	<view slot="backText">返回</view>
 	<view slot="content">确认订单</view>
 </cu-custom>
@@ -20,7 +20,7 @@
 			</view>
 			<view class="row-box">
 				<view class="row-label">配送时间</view>
-				<view class="right-text" bindtap="choseTime">请选择配送时间</view>
+				<view class="right-text" bindtap="choseTime">{{payOrderParam.O_DATE ? payOrderParam.O_DATE :"请选择配送时间"}}</view>
 			</view>
 		</view>
 		<view class="goods-list">
@@ -32,7 +32,8 @@
 				<view class="text-box">
 					<view class="arow arow01">
 						<view class="goods-name">{{item.G_NAME}}</view>
-						<view class="goods-price">¥ {{item.SH_MONEY}}</view>
+						<view class="goods-price" >¥ {{item.SH_MONEY}}</view>
+
 					</view>
 					<view class="arow">
 						<view class="goods-label">{{item.SPE_NAME}}({{item.DIN_NAME}})</view>
@@ -47,7 +48,8 @@
 				<view class="text-box">
 					<view class="arow arow01">
 						<view class="goods-name">{{buyNowInfoMem.detail.G_NAME}}</view>
-						<view class="goods-price">¥ {{buyNowInfoMem.amoney}}</view>
+						<view class="goods-price" wx:if="{{ buyNowInfoMem.detail.G_TRAFFIC == 1}}">¥ {{buyNowInfoMem.amoney}}</view>
+						<view class="goods-price" wx:if="{{ buyNowInfoMem.detail.G_TRAFFIC == 2}}">{{buyNowInfoMem.detail.G_YMONEY}}</view>
 					</view>
 					<view class="arow">
 						<view class="goods-label">{{buyNowInfoMem.specSelected}}</view>
@@ -56,7 +58,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="peisong-way"> 
+		<view class="peisong-way" style="margin-bottom:0"> 
 			<view class="row-box">
 				<view class="row-label">备注</view>
 				<view class="right-text">

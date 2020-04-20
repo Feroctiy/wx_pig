@@ -36,45 +36,7 @@ Page({
     weekdayName: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
     dayName: ["今天", "明天", "后天"],
 
-    items: [{
-        text: '今天',
-        children: [{
-          text: '18:00-19:00',
-          id: 1
-        }, {
-          text: '19:00-20:00',
-          id: 2
-        }]
-      },
-      {
-        text: '所有城市',
-        children: [{
-          text: '温州1',
-          id: 1
-        }, {
-          text: '杭州1',
-          id: 2
-        }]
-      }, {
-        text: '所有城市',
-        children: [{
-          text: '温州3',
-          id: 1
-        }, {
-          text: '杭州',
-          id: 2
-        }]
-      }, {
-        text: '所有城市',
-        children: [{
-          text: '温州1',
-          id: 1
-        }, {
-          text: '杭州2',
-          id: 2
-        }]
-      }
-    ],
+    items: [],
     mainActiveIndex: 0,
     activeId: [],
     max: 2
@@ -85,23 +47,42 @@ Page({
       show: false
     })
   },
-  onClickNav({ detail = {} }) {
-    console.log("*******",detail);
+  onClickNav({
+    detail = {}
+  }) {
+    console.log("*******", detail);
     this.setData({
       mainActiveIndex: detail.index || 0
     });
   },
 
-  onClickItem({  detail = {} }) {
-
-    const activeId = this.data.activeId === detail.id ? null : detail.id; 
-    this.setData({ activeId });
-    console.log(detail.text);
+  onClickItem({
+    detail = {}
+  }) {
+    const activeId = this.data.activeId === detail.id ? null : detail.id;
+    this.setData({
+      activeId
+    });
+    this.setData({
+      ['payOrderParam.O_DATE']: this.data.items[this.data.mainActiveIndex].name + detail.text,
+      show: false
+    })
   },
   onShow: function () {
     var that = this;
     var shopList = [];
-    that.initShippingAddress();
+
+    if (that.data.state == true) {
+      return false
+    } else {
+      console.log('addid', that.data.addId)
+      if (that.data.addId == '' || that.data.addId == null || that.data.addId == undefined) {
+        console.log('没有添加地址')
+      } else {
+        that.getAdd()
+      }
+    }
+
 
     //立即购买下单
     if ("buyNow" == that.data.orderType) {
@@ -136,13 +117,13 @@ Page({
       orderType: e.orderType,
       // shopcarlist:e.shoppingcartlist.split(',')
     });
+    that.initShippingAddress();
     if (e.orderType == "buyNow") {
       var buyNowInfoMem = wx.getStorageSync('orderParam');
       that.setData({
         buyNowInfoMem: buyNowInfoMem,
         "orderData.money": buyNowInfoMem.num * buyNowInfoMem.amoney
       })
-      console.log(buyNowInfoMem)
     } else {
       this.getOrderData();
     }
@@ -168,6 +149,38 @@ Page({
 
   },
 
+  getAdd: function () {
+    var that = this;
+    call.getData('/app/address/appshowoneadd', {
+      DB_ADDRESS_ID: that.data.addId
+    }, function (res) {
+      console.log(res);
+      if (res.state == "success") {
+        that.setData({
+          curAddressData: res.address,
+          ['payOrderParam.DB_ADDRESS_ID']: res.address.DB_ADDRESS_ID
+        });
+      }
+      // that.processYunfei();
+      console.log(res);
+    }, function () {})
+    // wx.request({
+    //   url: url + '/appaddcontroller/appshowoneadd.do',
+    //   data: {
+    //     DB_ADDRESS_ID: that.data.addId
+    //   },
+    //   header: {
+    //     'content-type': 'application/json' // 默认值
+    //   },
+    //   success: function (res) {
+    //     console.log('地址详情', res.data)
+    //     that.setData({
+    //       curAddressData: res.address,
+    //       ['payOrderParam.DB_ADDRESS_ID']: res.address.DB_ADDRESS_ID
+    //     });
+    //   }
+    // })
+  },
 
 
 
@@ -412,7 +425,7 @@ Page({
   },
   selectAddress: function () {
     wx.navigateTo({
-      url: "/pages/address/list/index"
+      url: "/pages/address/list/index?back=1"
     })
   },
   getMyCoupons: function () {
@@ -466,7 +479,7 @@ Page({
         DB_ADDRESS_ID: that.data.payOrderParam.DB_ADDRESS_ID, // 地址ID
         DB_USER_COU_ID: that.data.payOrderParam.DB_USER_COU_ID, // 优惠券ID
         O_NOTE: that.data.payOrderParam.O_NOTE, // 备注
-        O_DATE: that.data.payOrderParam.O_DATE || "04-18 10:00-12:00" // 时间
+        O_DATE: that.data.payOrderParam.O_DATE // 时间
       }, function (res) {
         if (res.state == "success") {
           console.log(res);
@@ -530,11 +543,13 @@ Page({
       if (i == 0) {
         item.push({
           text: dayStr,
+          name: newDay.getMonth() + 1 + "-" + newDay.getDate() + " ",
           children: this.getCurTime()
         })
       } else {
         item.push({
           text: dayStr,
+          name: newDay.getMonth() + 1 + "-" + newDay.getDate() + " ",
           children: this.getTimeRange()
         })
       }

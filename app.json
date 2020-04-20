@@ -1,9 +1,8 @@
 {
-  "pages": [ 
-    "pages/cart/pay-order/pay-order",
+  "pages": [  
     "pages/index/index",
     "pages/goods/search/search",
-    
+    "pages/cart/pay-order/pay-order",
     "pages/my/index/index",
     "pages/my/integral/index",
     "pages/my/integral/list", 
@@ -83,7 +82,8 @@
     "van-stepper": "/vant/lib/stepper/index",
     "van-tree-select": "/vant/lib/tree-select/index",
     "van-popup": "/vant/lib/popup/index",
-    "city-list": "/components/city-list/wx-index-list"
+    "city-list": "/components/city-list/wx-index-list",
+    "van-search": "/vant/lib/search/index"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

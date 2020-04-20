@@ -15,9 +15,12 @@
 			<text class="title">{{detail.G_NAME}}</text>
 			<text class="text-grey text-sm margin-top-xs text-right" style="max-width:100px;">分享</text>
 		</view>
-		<view class="price-box padding-top">
+		<view class="price-box padding-top" wx:if="{{ detail.G_TRAFFIC == 1}}">
 			<text class="price">¥{{detail.G_MONEY}}</text>
 			<text class="m-price">¥{{detail.G_YMONEY}}</text>
+		</view>
+		<view class="price-box padding-top" wx:if="{{ detail.G_TRAFFIC == 2}}">
+			<text class="price">{{detail.G_YMONEY}}</text>
 		</view>
 		<view class="bot-row">
 			<text>{{detail.G_ABSTRACT}}</text>
@@ -27,12 +30,12 @@
 		<view class="flex justify-between c-row b-b solid-bottom bg-white">
 			<view>
 				<text class="tit">运费</text>
-				<text>部分地区免运费</text>
+				<text>{{detail.G_POSTAGE}}</text>
 			</view>
 
 			<view class="view-grey text-right" style="max-width:100px;">已售{{detail.G_SALES}}</view>
 		</view>
-		<view class="c-row b-b solid-bottom bg-white">
+		<!-- <view class="c-row b-b solid-bottom bg-white">
 			<text class="tit">促销</text>
 			<view class="con-list">
 				<text>新人首单送20元无门槛代金券</text>
@@ -47,7 +50,7 @@
 				<text>7天无理由退换货 ·</text>
 				<text>假一赔十 ·</text>
 			</view>
-		</view>
+		</view> -->
 		<view class="c-row b-b bg-white flex justify-between" bindtap="toggleSpec">
 			<view>
 				<text class="tit">购买类型</text>
@@ -109,13 +112,13 @@
 	<view class="cu-bar bg-white tabbar border shop foot">
 		<button class="action" open-type="contact">
 			<view class="cuIcon-service text-green">
-				<view class="cu-tag badge"></view>
+
 			</view>
 			客服
 		</button>
 		<view class="action">
 			<view class="cuIcon-cart" bindtap="goCart">
-				<view class="cu-tag badge">99</view>
+				<view class="cu-tag badge">{{cartNum}}</view>
 			</view>
 			购物车
 		</view>
@@ -137,7 +140,8 @@
 				<image src="{{detail.G_IMG}}"></image>
 				<view class="right">
 					<text class="name text-df">{{detail.G_NAME}}</text>
-					<text class="price">¥{{smoney ? smoney : detail.G_MONEY}}</text>
+					<text class="price" wx:if="{{ detail.G_TRAFFIC == 1}}">¥{{smoney ? smoney : detail.G_MONEY}}</text>
+					<text class="price" wx:if="{{ detail.G_TRAFFIC == 2}}">{{detail.G_YMONEY}}</text>
 					<view class="selected">
 						已选：{{specSelected}}
 					</view>
@@ -146,7 +150,7 @@
 			<view class="attr-list">
 				<text class="text-black">规格</text>
 				<view class="item-list">
-					<text class="{{tabSize==index ? 'active' : ''}}" wx:for="{{detail.specif}}" wx:key catchtap="selectSpec" data-fid="{{item.DB_SPECIFICATION_ID}}" id="{{index}}" data-money="{{item.SPE_MONEY}}"> {{item.SPE_NAME}}({{item.DIN_NAME}}) </text> 
+					<text class="{{tabSize==index ? 'active' : ''}}" wx:for="{{detail.specif}}" wx:key catchtap="selectSpec" data-fid="{{item.DB_SPECIFICATION_ID}}" id="{{index}}" data-money="{{item.SPE_MONEY}}"> {{item.SPE_NAME}}({{item.DIN_NAME}}) </text>
 				</view>
 			</view>
 			<view class="cu-list menu text-left solid-top">
@@ -154,14 +158,14 @@
 					<view class="content">
 						<text class="text-black">数量</text>
 					</view>
-					<view class="action"> 
-						<van-stepper value="{{ num }}" bind:change="onChange" disable-input/>
+					<view class="action">
+						<van-stepper value="{{ num }}" bind:change="onChange" disable-input />
 					</view>
 				</view>
 			</view>
 			<view class="cu-bar btn-group">
 				<button class="cu-btn text-gray line-gray shadow round" bindtap="cancle">取消</button>
-				<button class="cu-btn bg-gradual-main shadow-blur round" bindtap="handleSub">确认</button> 
+				<button class="cu-btn bg-gradual-main shadow-blur round" bindtap="handleSub">确认</button>
 			</view>
 		</view>
 	</view>

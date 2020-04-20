@@ -306,18 +306,27 @@
 
    // 删除商品
    delCommodity(ev) {
+     console.log(ev);
+     var id = ev.currentTarget.dataset.id;
      let dataset = ev.currentTarget.dataset,
        shopIdx = dataset['shopidx'],
        commodityIdx = dataset['index'],
        commodities = [].slice.call(this.data.commodities);
-     commodities[shopIdx]['commodity'].splice(commodityIdx, 1);
-
+     commodities[shopIdx].store.shoplist.splice(commodityIdx, 1); 
      // 判断 店铺中是否还有商品
-     if (commodities[shopIdx]['commodity'].length <= 0) commodities.splice(shopIdx, 1);
+     if (commodities[shopIdx].store.shoplist.length <= 0) commodities.splice(shopIdx, 1);
 
      this.setData({
        commodities
      })
+    // 
+    call.getData('/app/shopcar/appdeleteshopcar', {
+      DB_SHOPCAR_ID: id
+    }, function (res) {
+      if (res.state == "success") {
+         
+      }
+    }, function () {})
 
    }
 

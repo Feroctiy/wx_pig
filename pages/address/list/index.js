@@ -8,57 +8,59 @@ Page({
    * 页面的初始数据
    */
   data: {
-    addressList: [{
-      "addressId": "03792f59034248fb9181a96886819a12",
-      "openid": "oc5cv4qjauhvztyq_tdemwpnvkd0",
-      "name": "吴系挂",
-      "phone": "13993282301",
-      "provice": "陕西省",
-      "city": "西安市",
-      "region": "雁塔区",
-      "add": "明德二路城南翡翠",
-      "state": 1,
-      "longitude": "108.983840",
-      "latitude": "34.236310",
-    }]
+    addressList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onShow: function(options) {
+  onShow: function (options) {
     this.getAddressList();
+  }, 
+   
+ 
+  toChoose: function(e) {
+    var that = this
+    var id = e.currentTarget.dataset.id
+    // if (back == 0) {
+    //   console.log('不返回')
+    // } else {
+      var pages = getCurrentPages(); // 获取页面栈
+      var currPage = pages[pages.length - 1]; // 当前页面
+      var prevPage = pages[pages.length - 2]; // 上一个页面
+      prevPage.setData({
+        state: false,
+        addId: id
+      })
+      wx.navigateBack({
+        delta: 1,
+      })
+    // }
   },
   /**
    * 添加地址
    */
-  addAddess: function() {
+  addAddess: function () {
     wx.navigateTo({
-      url: '/pages/address/add/index?type=add',
-    })
-  },
-  // 编辑地址
-  editAddress: function(e) {
-    wx.navigateTo({
-      url: '/pages/address/add/index?type=edit&id=' + e.currentTarget.dataset.id
+      url: '/pages/address/add/index',
     })
   },
   // 获取地址列表
-  getAddressList() {
+  getAddressList(){
     var _this = this;
-    call.getData('/app/address/appuseraddlist', {
-      OPENID: wx.getStorageSync('openid'),
-    }, function(res) {
+    call.getData('/app/address/appuseraddlist', { 
+      OPENID: wx.getStorageSync('openid'), 
+    }, function (res) {
       console.log(res);
-      if (res.state == "success") {
+      if (res.state == "success") { 
         _this.setData({
           addressList: res.address
         })
       }
-    }, function() {})
+    }, function () {})
   },
   //删除地址/app/address/appuserdeleteaddress
-  delAddress(e) {
+  delAddress(e){
     var that = this
     var num = e.currentTarget.dataset.id
     console.log(num)
@@ -70,20 +72,35 @@ Page({
           that.setData({
             hiddenLoading: false,
           })
-          call.getData('/app/address/appuserdeleteaddress', {
+          call.getData('/app/address/appuserdeleteaddress', { 
             OPENID: wx.getStorageSync('openid'),
-            DB_ADDRESS_ID: num
-          }, function(res) {
+              DB_ADDRESS_ID: num 
+          }, function (res) {
             console.log(res);
-            if (res.state == "success") {
+            if (res.state == "success") { 
               that.getAddressList();
             }
-          }, function() {})
-
+          }, function () {})
+          
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
       }
+    })
+  },
+  /**
+   * 添加地址
+   */
+  addAddess: function () {
+    wx.navigateTo({
+      url: '/pages/address/add/index?type="add"',
+    })
+  },
+
+  editAddress:function(e){
+    console.log(e)
+    wx.navigateTo({
+      url: '/pages/address/add/index?type="edit"',
     })
   }
 

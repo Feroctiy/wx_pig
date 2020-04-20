@@ -1,9 +1,9 @@
 <cu-custom bgColor="bg-gradual-main">
 	<view slot="content">购物车</view>
 </cu-custom>
-<view id="cart"> 
-	<block wx:if="openId"> 
-		<no-content wx:if="{{commodities.length == 0}}" types="cart" title="购物车里暂时还没有东西哦" subTitle="快去购买吧"></no-content> 
+<view id="cart">
+	<block wx:if="openId">
+		<no-content wx:if="{{commodities.length == 0}}" types="cart" title="购物车里暂时还没有东西哦" subTitle="快去购买吧"></no-content>
 		<block wx:else>
 			<block wx:for="{{commodities}}" wx:for-item="shop" wx:key="{{index}}">
 				<!-- 购物车商品 -->
@@ -35,7 +35,7 @@
 										<view class="commodity-price flex margin-top justify-between">
 											<view class="price text-normal"><text class="text-sm price">￥</text>{{commodity.good.G_MONEY}}</view>
 											<view class="btn-group">
-											<van-stepper value="{{ commodity.SH_NUM }}" bind:plus="onChange" data-id="{{commodity.DB_SHOPCAR_ID}}" bind:minus="onMin" data-index="{{idx}}" data-shopIdx="{{index}}"/>
+												<van-stepper value="{{ commodity.SH_NUM }}" bind:plus="onChange" data-id="{{commodity.DB_SHOPCAR_ID}}" bind:minus="onMin" data-index="{{idx}}" data-shopIdx="{{index}}" />
 												<!-- <view class="btn btn-decrease" data-shopidx="{{index}}" data-index="{{idx}}" data-event="{{'decrease'}}" catchtap="change">-</view>
 												<view class="btn btn-count text-normal">{{commodity.count}}</view>
 												<view class="btn btn-increase" data-shopidx="{{index}}" data-index="{{idx}}" data-event="{{'increase'}}" catchtap="change">+</view> -->
@@ -43,7 +43,7 @@
 										</view>
 									</view>
 								</view>
-								<view data-shopIdx="{{index}}" data-index="{{idx}}" class="btn-remove flex flex-center" catchtap="delCommodity">删除</view>
+								<view data-shopIdx="{{index}}" data-index="{{idx}}" data-id="{{commodity.DB_SHOPCAR_ID}}"  class="btn-remove flex flex-center" catchtap="delCommodity">删除</view>
 							</view>
 						</block>
 					</view>
@@ -65,7 +65,7 @@
 					<view class="balance text-lg text-fff" bindtap="cartPay">结算 ({{accountInfo.allCount}})</view>
 				</view>
 			</view>
-		</block> 
-	</block> 
+		</block>
+	</block>
 	<no-content wx:else types="cart" title="登录账号才能看到购物车哦" subTitle="登录失效" btn="马上登录"></no-content>
 </view>

@@ -40,6 +40,8 @@ Page({
         WxParse.wxParse('artice', 'html', artice, _this, 5);
       }
     }, function () {})
+
+    _this.getcartNum();
   },
  
   cancle() {
@@ -148,8 +150,24 @@ Page({
           _this.setData({
             showSpec: false
           })
+          _this.getcartNum();
         }
       }, function () {})
     }
+  },
+  // 购物车数量
+  getcartNum(){
+    // 
+    var _this = this;
+    call.getData('/app/shopcar/appusershopcarnum', { 
+      OPENID: wx.getStorageSync('openid')
+    }, function (res) {
+      console.log(res);
+      if (res.state == "success") {
+         _this.setData({
+          cartNum:res.ShopCarNum
+         })
+      }
+    }, function () {})
   }
 })

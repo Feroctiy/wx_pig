@@ -1,0 +1,45 @@
+<!--index.wxml-->
+<cu-custom bgColor="bg-gradual-main">
+	<view slot="content">烘焙工坊</view>
+</cu-custom>
+<view class="container bg-white">
+	<view class="cu-bar bg-gradual-main search">
+		<view class="action">
+			<text>西安</text>
+			<text class="cuIcon-triangledownfill padding-left"></text>
+		</view>
+		<view class="search-form radius">
+			<text class="cuIcon-search"></text>
+			<input type="text" placeholder="搜索你需要的商品热门关键词" confirm-type="search" disabled  bindtap="goSearch" ></input>
+		</view>
+	</view>
+	<view class="bg-gradual-main" style="height:200rpx">
+	</view>
+	<view class="con">
+		<swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}} margin-bottom" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+			<swiper-item wx:for="{{indexData.banner}}" wx:key data-id="{{item.DB_BANNER_ID}}" bindtap="goBanner">
+				<image src="{{item.B_IMG}}" mode="aspectFill"></image>
+				<!-- <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video> -->
+			</swiper-item>
+		</swiper>
+		<van-notice-bar text="{{indexData.notice.NO_NOTE}}" class="margin-top" wx:if="{{indexData.notice}}" bindtap="goNotice">
+		<text slot="left-icon">[公告]</text>
+		</van-notice-bar>
+
+		<view class="margin">
+			<image src="https://img.yzcdn.cn/upload_files/2020/03/15/FjoE4zV16BPAVjfmXmWDvDj7QlOQ.jpg!large.jpg" mode="widthFix" style="width:100%"></image>
+		</view>
+		<view class="bg-white padding">
+			<view class="grid col-2 margin-bottom text-center grid-square">
+				<view class="img" catchtap="goDetail" wx:for="{{indexData.hotlist}}" wx:key data-id="{{item.DB_GOODS_ID}}">
+					<image src="{{item.G_IMG}}"></image>
+					<view class="text-left">{{item.G_NAME}}</view>
+					<view class="flex justify-between margin-top-sm">
+						<text class="text-red">¥{{item.G_MONEY}}</text>
+						<text class="bg-red text-xs radius padding-xs-5">购买</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

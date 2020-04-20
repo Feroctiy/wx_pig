@@ -1,0 +1,45 @@
+<cu-custom bgColor="bg-gradual-main" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">商品搜索</view>
+</cu-custom>
+
+<form>
+  <view class="top_search">
+    <view class="search">
+      <icon type="search" size="17"></icon>
+      <input placeholder='搜索商品' name="inputValue" value="{{inputVal}}" bindinput='getinputVal' focus="{{stateFocus}}" confirm-type="search" bindconfirm="search"></input>
+    </view>
+    <button class="search_text" bindtap='search' size='mini'>搜索</button>
+  </view>
+</form>
+<view hidden="{{history==[]}}">
+  <view class="box" hidden="{{state==true && list!=[]}}">
+    <view class="cont_top">
+      <view>历史记录</view>
+      <image src="../img/del.png" mode="widthFix" bindtap='toDel'></image>
+    </view>
+    <view class="search_history">
+      <view wx:for="{{history}}" wx:key="" bindtap='clickHis' data-name="{{item.SE_NOTE}}">{{item.SE_NOTE}}</view>
+    </view>
+  </view>
+</view>
+
+<!-- 列表 -->
+<view class="box" wx:if="{{list.length!=0}}">
+  <view class="list" wx:for="{{list}}" wx:key="list" bindtap='todetail' data-id="{{item.DB_GOODS_ID}}">
+    <image class="logo" src="{{item.G_IMG}}"></image>
+    <view class="cont">
+      <view class="name">{{item.G_NAME}}</view>
+      <view class="bottom">
+        <view class="price">
+          ￥
+          <text style="font-size:28rpx;">{{item.G_MONEY}}</text>
+        </view>
+        <view class="num">已售{{item.G_SALES}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="null" wx:elif="{{isSearch==false && list.length==0 && stateFocus==false}}">
+  暂无相关内容
+</view>

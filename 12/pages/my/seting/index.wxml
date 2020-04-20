@@ -1,0 +1,21 @@
+<cu-custom bgColor="bg-gradual-main" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">账户与安全</view>
+</cu-custom>
+<view class="cu-list menu margin-top margin-bottom-xl shadow-lg">
+  <view class="cu-item arrow">
+    <view class="content">
+      <text class="text-black">手机号</text>
+    </view>
+  </view>
+  <view class="cu-item arrow">
+    <view class="content">
+      <text class="text-black">登录密码</text>
+    </view>
+  </view>
+  <view class="cu-item arrow">
+    <view class="content">
+      <text class="text-black">安全中心</text>
+    </view>
+  </view>
+</view>

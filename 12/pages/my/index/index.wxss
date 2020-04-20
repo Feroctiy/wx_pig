@@ -1,0 +1,30 @@
+/* pages/my/index/index.wxss */
+.cu-list.menu-avatar>.cu-item .content {
+  position: absolute;
+  left: 180rpx;
+  width: calc(100% - 220rpx);
+  line-height: 1.6em;
+}
+
+.cu-btn {
+  height: 45rpx;
+}
+
+.cu-list.menu>.cu-item .content>image {
+  width: 1.3em;
+  margin-right: 20rpx;
+}
+
+.cu-btn {
+  padding: 0 15rpx;
+  border-radius: 5rpx;
+}
+
+.cu-list.menu-avatar>.cu-item {
+  height: 188rpx;
+}
+
+.cu-list.menu>.cu-item.arrow {
+  padding-right: 70rpx;
+}
+

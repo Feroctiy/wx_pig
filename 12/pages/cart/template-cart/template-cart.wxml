@@ -1,0 +1,57 @@
+<template name="no-goods">
+	<view class="title-box">
+		<image class="box-none" src="../../../images/none/cart_empty.png"></image>
+		去添加点什么吧
+	</view>
+</template>
+
+<template name="cart-goods-list">
+	<view wx:for="{{list}}" wx:key="{{index}}"> 
+		<!-- <view class="cu-item">
+			<view class="content ">
+				<text class="cuIcon-btn"></text>
+				<text class="text-grey">烘焙工坊-高新店</text>
+			</view>
+			<view class="action">
+				<text hidden="{{!saveHidden}}" bindtap="editTap">编辑</text>
+				<text hidden="{{saveHidden}}" bindtap="saveTap">完成</text>
+			</view>
+		</view> -->
+		<!-- <view class="top-edit-btn" hidden="{{!saveHidden}}" bindtap="editTap">编辑</view>
+  <view class="top-edit-btn" hidden="{{saveHidden}}" bindtap="saveTap">完成</view> -->
+
+		<view class="goodsList">
+			<view class="a-gooods" wx:for="{{item.store.shoplist}}" wx:for-index="idx" wx:for-item="shop">
+				<view class="a-goods-conts {{item.active? 'active':''}}" bindtap="selectTap" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.left}}">
+					<view class="goods-info">
+						<view class="img-box">
+							<image src="{{shop.good.G_IMG}}" class="img" />
+						</view>
+						<view class="text-box">
+							<view class="goods-title">{{shop.good.G_NAME}}</view>
+							<view class="goods-label">{{shop.specif.SPE_NAME}}({{shop.specif.DIN_NAME}})</view>
+							<view class="goods-price">¥ {{shop.good.G_MONEY}}</view>
+							<van-stepper value="{{ 1 }}" bind:change="onChange" />
+							<!-- <view class="buy-num">
+								<view class="jian-btn {{shop.SH_NUM==1? 'disabled' : ''}}" catchtap="jianBtnTap" data-index="{{index}}">-</view>
+								<input type="number" value="{{shop.SH_NUM}}" disabled />
+								<view class="jia-btn {{shop.SH_NUM==10? 'disabled' : ''}}" catchtap="jiaBtnTap" data-index="{{index}}">+</view>
+							</view> -->
+						</view>
+					</view>
+					<view class="delete-btn" data-index="{{index}}" catchtap="delItem">
+						删除
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="jiesuan-box">
+		<view class="left-price">
+			<view class="all-selected  {{allSelect?'active':''}}" bindtap="bindAllSelect">全选</view>
+			<view class="total" hidden="{{noSelect}}">合计：Ұ {{totalPrice}}</view>
+		</view>
+		<view class="to-pay-btn {{noSelect?'no-select':''}}" hidden="{{!saveHidden}}" bindtap="toPayOrder">下单</view>
+		<view class="to-pay-btn {{noSelect?'no-select':''}}" hidden="{{saveHidden}}" bindtap="deleteSelected">删除</view>
+	</view>
+</template>

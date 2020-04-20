@@ -1,0 +1,4 @@
+/* pages/my/showcase/showcase.wxss */
+page{
+  background-color: #fff;
+}

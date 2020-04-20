@@ -1,0 +1,28 @@
+<cu-custom bgColor="bg-gradual-main" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">支付</view>
+</cu-custom>
+<view class="app">
+	<view class="price-box">
+		<text>支付金额</text>
+		<text class="price">{{money}}</text>
+	</view>
+
+	<view class="pay-type-list">
+
+		<view class="type-item b-b">
+			<text class="icon yticon icon-weixinzhifu"></text>
+			<view class="con">
+				<text class="tit">微信支付</text>
+				<text>推荐使用微信支付</text>
+			</view>
+			<label class="radio">
+				<radio value="" color="#b3e0f6" checked/> 
+			</label>
+		</view>
+
+		 
+	</view>
+
+	<text class="mix-btn bg-gradual-main" bindtap="confirm">确认支付</text>
+</view>

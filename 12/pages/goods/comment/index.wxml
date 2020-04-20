@@ -1,0 +1,62 @@
+<cu-custom bgColor="bg-gradual-main" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">用户评价</view>
+</cu-custom>
+<view> 
+  <view class="margin-top"> 
+    <view class="bg-white" style="padding-top:0;">
+      <view class="cu-card dynamic no-card">
+        <view class="cu-item shadow">
+          <view class="cu-list menu-avatar comment">
+            <view class="cu-item solid-bottom">
+              <view class="cu-avatar round" style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png);"></view>
+              <view class="content">
+                <view class="flex justify-between">
+                  <view class="text-block">莫甘娜</view>
+                  <view>
+                    <van-rate readonly value="2" bind:change="onChange" color="#ee0a24" />
+                  </view>
+                </view>
+                <view class="text-gray text-content text-sm">
+                  2018-09-18 08:00:00
+                </view>
+                <view class="radius margin-top-xs">
+                  <view class="flex">
+                    <view>凯尔：</view>
+                    <view class="flex-sub">妹妹，你在帮他们给黑暗找借口吗?</view>
+                  </view>
+                </view>
+                <view class="margin-top-xs flex justify-between">
+                  <view class="text-gray text-sm">2磅（约8英寸，6-8人餐）</view>
+                </view>
+              </view>
+            </view>
+            <view class="cu-item solid-bottom">
+              <view class="cu-avatar round" style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png);"></view>
+              <view class="content">
+                <view class="flex justify-between">
+                  <view class="text-block">莫甘娜</view>
+                  <view>
+                    <van-rate readonly value="5" bind:change="onChange" color="#ee0a24" />
+                  </view>
+                </view>
+                <view class="text-gray text-content text-sm">
+                  2018-09-18 08:00:00
+                </view>
+                <view class="radius margin-top-xs">
+                  <view class="flex">
+                    <view>凯尔：</view>
+                    <view class="flex-sub">妹妹，你在帮他们给黑暗找借口吗?</view>
+                  </view>
+                </view>
+                <view class="margin-top-xs flex justify-between">
+                  <view class="text-gray text-sm">2磅（约8英寸，6-8人餐）</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view> 
+</view>

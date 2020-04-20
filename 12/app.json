@@ -1,0 +1,90 @@
+{
+  "pages": [ 
+    "pages/cart/pay-order/pay-order",
+    "pages/index/index",
+    "pages/goods/search/search",
+    
+    "pages/my/index/index",
+    "pages/my/integral/index",
+    "pages/my/integral/list", 
+    "pages/address/list/index",
+    "pages/address/add/index", 
+    "pages/my/info/info", 
+    "pages/my/showcase/showcase", 
+    "pages/my/afterSaleList/afterSaleList",
+    "pages/my/afterSale/afterSale",
+    "pages/my/order/order",
+    "pages/my/evaluate/evaluate",
+    "pages/my/order-list/index",
+   
+    "pages/goods/detail/detail",
+    "pages/good/city/city",
+    "pages/cart/pay-money/pay-money",
+    "pages/cart/home/home", 
+    "pages/cart/pay-success/pay-success", 
+    "pages/notice/notice", 
+    "pages/goods/loop/loop", 
+    "pages/address/update/index",
+    "pages/login/login",
+    "pages/goods/index/index",
+    "pages/goods/comment/index", 
+    "pages/my/active/index",
+    "pages/my/seting/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "烘焙工坊",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#666",
+    "borderStyle": "white",
+    "list": [{
+        "selectedIconPath": "images/icon/home_fill_light.png",
+        "iconPath": "images/icon/home_light.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "images/icon/cart_fill_light.png",
+        "iconPath": "images/icon/cart_light.png",
+        "pagePath": "pages/cart/home/home",
+        "text": "购物车"
+      },
+      {
+        "selectedIconPath": "images/icon/hot_fill_light.png",
+        "iconPath": "images/icon/hot_light.png",
+        "pagePath": "pages/my/active/index",
+        "text": "活动"
+      },
+      {
+        "selectedIconPath": "images/icon/my_fill_light.png",
+        "iconPath": "images/icon/my_light.png",
+        "pagePath": "pages/my/index/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于获取附近加油/气站点位置"
+    }
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom",
+    "van-rate": "/vant/lib/rate/index",
+    "van-submit-bar": "/vant/lib/submit-bar/index",
+    "van-notice-bar": "/vant/lib/notice-bar/index",
+    "van-icon": "/vant/lib/icon/index",
+    "van-stepper": "/vant/lib/stepper/index",
+    "van-tree-select": "/vant/lib/tree-select/index",
+    "van-popup": "/vant/lib/popup/index",
+    "city-list": "/components/city-list/wx-index-list"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

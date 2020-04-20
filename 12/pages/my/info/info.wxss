@@ -1,0 +1,4 @@
+/* pages/my/info/info.wxss */
+input{
+  text-align: right
+}

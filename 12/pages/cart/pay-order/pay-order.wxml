@@ -1,0 +1,102 @@
+<cu-custom bgColor="bg-gradual-white" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">确认订单</view>
+</cu-custom>
+<view class="container">
+	<form bindsubmit="createOrder" report-submit="true">
+		<view class="address-box" wx:if="{{isNeedLogistics > 0}}">
+			<view class="add-address" hidden="{{curAddressData}}">
+				<view class="title" bindtap="addAddress">新增收货地址</view>
+			</view>
+			<view class="show-address" hidden="{{!curAddressData}}" bindtap="selectAddress">
+				<view class="name-tel">{{curAddressData.ADD_NAME}} {{curAddressData.ADD_PHONE}}</view>
+				<view class="addr-text">{{curAddressData.ADD_PROVICE + curAddressData.ADD_CITY + curAddressData.ADD_REGION + curAddressData.ADD_ADD }}</view>
+			</view>
+		</view>
+		<view class="peisong-way">
+			<view class="row-box" wx:if="{{isNeedLogistics > 0}}">
+				<view class="row-label">配送方式</view>
+				<view class="right-text">同城配送</view>
+			</view>
+			<view class="row-box">
+				<view class="row-label">配送时间</view>
+				<view class="right-text" bindtap="choseTime">请选择配送时间</view>
+			</view>
+		</view>
+		<view class="goods-list">
+			<view class="list-title">商品列表</view>
+			<view class="a-goods" wx:for-items="{{orderData.goodslist}}" wx:key="{{index}}">
+				<view class="img-box">
+					<image src="{{item.G_IMG}}" class="img" />
+				</view>
+				<view class="text-box">
+					<view class="arow arow01">
+						<view class="goods-name">{{item.G_NAME}}</view>
+						<view class="goods-price">¥ {{item.SH_MONEY}}</view>
+					</view>
+					<view class="arow">
+						<view class="goods-label">{{item.SPE_NAME}}({{item.DIN_NAME}})</view>
+						<view class="goods-num">x {{item.SH_NUM}}</view>
+					</view>
+				</view>
+			</view> 
+			<view class="a-goods">
+				<view class="img-box">
+					<image src="{{buyNowInfoMem.detail.G_IMG}}" class="img" />
+				</view>
+				<view class="text-box">
+					<view class="arow arow01">
+						<view class="goods-name">{{buyNowInfoMem.detail.G_NAME}}</view>
+						<view class="goods-price">¥ {{buyNowInfoMem.amoney}}</view>
+					</view>
+					<view class="arow">
+						<view class="goods-label">{{buyNowInfoMem.specSelected}}</view>
+						<view class="goods-num">x {{buyNowInfoMem.num}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="peisong-way"> 
+			<view class="row-box">
+				<view class="row-label">备注</view>
+				<view class="right-text">
+					<input name="remark" type="text" class="liuyan" placeholder="如需备注请输入" />
+				</view>
+			</view>
+		</view>
+		<view class="peisong-way" hidden="{{hasNoCoupons}}">
+			<view class="row-box" style="border-bottom:none;">
+				<view class="row-label">选择使用优惠券</view>
+			</view>
+			<view class="row-box" style="border-bottom:none;">
+				<picker-view indicator-style="height: 50rpx;" style="width: 100%; height: 150rpx;" value="0" bindchange="bindChangeCoupon">
+					<picker-view-column>
+						<view style="line-height: 50px">不使用优惠券</view>
+						<view wx:for="{{coupons}}" wx:key="id" style="line-height: 50px">{{item.money}}元 {{item.name}}</view>
+					</picker-view-column>
+				</picker-view>
+			</view>
+		</view>
+		<view class="goods-info">
+			<view class="row-box" wx:if="{{isNeedLogistics > 0}}">
+				<view class="row-label">商品金额</view>
+				<view class="right-text">¥ {{orderData.money}}</view>
+			</view>
+			<view class="row-box" wx:if="{{isNeedLogistics > 0 && yunPrice > 0}}">
+				<view class="row-label">运费</view>
+				<view class="right-text">+ ¥ {{yunPrice}}</view>
+			</view>
+			<view class="row-box" wx:if="{{!hasNoCoupons}}">
+				<view class="row-label">优惠券</view>
+				<view class="right-text">- ¥ {{youhuijine}}</view>
+			</view>
+		</view>
+
+		<van-submit-bar price="{{ orderData.money * 100 }}" button-text="提交订单" bind:submit="onSubmit" />
+
+		<van-popup show="{{ show }}" closeable round position="bottom" custom-style="height: 50%" bind:close="onClose" close-on-click-overlay>
+			<view style="height:50px;line-height:50px;" class="text-center">选择配送时间</view>
+      <van-tree-select items="{{ items }}" main-active-index="{{ mainActiveIndex }}" active-id="{{ activeId }}" max="{{ max }}" bind:click-nav="onClickNav" bind:click-item="onClickItem" class="padding-top"/>
+    </van-popup>
+	</form>
+</view>

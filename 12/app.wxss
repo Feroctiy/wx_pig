@@ -1,0 +1,52 @@
+@import "colorui/main.wxss";
+@import "colorui/icon.wxss";
+
+/* 表单按钮 */
+
+.padding-btn {
+  padding: 120rpx 30rpx;
+}
+
+.cu-btn[disabled] {
+  background-color: #d7d7d7 !important;
+  color: #fff !important;
+  opacity: 1 !important;
+}
+
+.next-btn-fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9;
+}
+
+.next-btn-fixed button {
+  border-radius: 0px;
+}
+
+.cu-form-group .title {
+  min-width: calc(4em + 30rpx);
+}
+
+.grid.col-2.grid-square>view {
+  padding-bottom: 20rpx;
+  height: auto;
+}
+
+.grid.col-2.grid-square>view.img image {
+  height: 300rpx;
+}
+
+.bg-gradual-main {
+  background-image: linear-gradient(45deg, #C8E7E9, #C8E7E9);
+  color: #fff;
+}
+
+.text-main {
+  color: #F5B1AA;
+}
+.bg-main{
+  background-color: #F5B1AA;
+  color: #fff;
+}

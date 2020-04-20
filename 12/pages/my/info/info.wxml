@@ -1,0 +1,31 @@
+<cu-custom bgColor="bg-gradual-main" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">个人信息</view>
+</cu-custom>
+<form>
+  <view class="cu-form-group">
+    <view class="title">姓名</view>
+    <input placeholder="请填写姓名" value='{{addressInfo.phone}}' type=""></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">性别</view>
+    <input placeholder="请填写性别" value='{{addressInfo.phone}}' type=""></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">电话</view>
+    <input placeholder="请填写电话" value='{{addressInfo.phone}}' type=""></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">生日</view>
+    <input placeholder="请填写生日" value='{{addressInfo.phone}}' type=""></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">现居地</view>
+    <input placeholder="请输入收货人姓名" value='{{addressInfo.userName}}' disabled></input>
+  </view>
+</form>
+<view class="padding-btn">
+  <button class="cu-btn block bg-gradual-main lg" bindtap='saveBasicInfo' disabled='{{disabled}}' style="width:100%">确认
+  </button>
+</view>
+

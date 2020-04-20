@@ -1,0 +1,8 @@
+<import src="../../../components/wxParse/wxParse.wxml" />
+<cu-custom bgColor="bg-gradual-main" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">轮播图详情</view>
+</cu-custom>
+<view class="padding bg-white" style="padding-top:0;padding-bottom:120rpx;">
+	<template is="wxParse" data="{{wxParseData:artice.nodes}}" />
+</view>

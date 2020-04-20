@@ -1,0 +1,18 @@
+<cu-custom bgColor="bg-gradual-main" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">通知</view>
+</cu-custom>
+<view>
+	<view class="notice-item" wx:for="{{notice}}" wx:key>
+		<text class="time">{{item.CREATEDATE}}</text>
+		<view class="notice-content">
+			<text class="title">{{item.NO_TITLE}}</text>
+			<!-- <view class="img-wrapper">
+				<image class="pic" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556465765776&di=57bb5ff70dc4f67dcdb856e5d123c9e7&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01fd015aa4d95fa801206d96069229.jpg%401280w_1l_2o_100sh.jpg"></image>
+			</view> -->
+			<text class="introduce">
+					 {{item.NO_NOTE}}
+				</text>
+		</view>
+	</view>
+</view>

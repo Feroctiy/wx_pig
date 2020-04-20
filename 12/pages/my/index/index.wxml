@@ -1,0 +1,90 @@
+<cu-custom bgColor="bg-gradual-main">
+	<view slot="content">我的</view>
+</cu-custom>
+<view>
+	<view class="cu-list menu-avatar">
+		<view class="cu-item cur  padding-top padding-bottom">
+			<view class="cu-avatar radius xl">
+
+			</view>
+			<view class="content">
+				<view>
+					<text class="text-cut">{{userInfo.U_NICKNAME}}</text>
+				</view>
+			</view>
+			<!-- <view class="action">会员码</view> -->
+		</view>
+	</view>
+	<view class="cu-list grid col-3 no-border">
+		<view class="cu-item" bindtap="goIntegral">
+			<view>{{userInfo.U_INTEGRAL}}</view>
+			<text>积分</text>
+		</view>
+		<view class="cu-item">
+			<view>0</view>
+			<text>优惠券/码</text>
+		</view>
+		<view class="cu-item">
+			<view>{{userInfo.U_BALANCE}}</view>
+			<text>余额</text>
+		</view>
+	</view>
+	<view class="cu-bar bg-white solid-bottom margin-top">
+		<view class="action"> 我的订单 </view>
+		<view class="action" bindtap="goOrder">
+			<text class="text-sm">查看更多</text>
+			<text class="cuIcon-right text-sm" style="font-size: 28rpx;"></text>
+		</view>
+	</view>
+	<view class="cu-list grid col-{{gridCol}} no-border">
+		<view class="cu-item" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}">
+			<view class="cuIcon-{{item.icon}} text-{{item.color}}" bindtap="goOrder"></view>
+			<text>{{item.name}}</text>
+		</view>
+	</view>
+	<view style="overflow: hidden;">
+		<image src="https://img.yzcdn.cn/upload_files/2019/09/20/FkqwrmpIeYzu7LPGbP4dEhOctnm2.png!large.png" mode="widthFix" style="width:100%;"></image>
+	</view>
+	<view class="cu-list grid col-4 no-border">
+		<view class="cu-item" bindtap="goInfo">
+			<view class="cuIcon-noticefill"></view>
+			<text>个人信息</text>
+		</view>
+		<view class="cu-item" bindtap="goAddress">
+			<view class="cuIcon-noticefill"></view>
+			<text>收货地址</text>
+		</view>
+		<view class="cu-item" bindtap="goShowCase" data-type="2">
+			<view class="cuIcon-noticefill"></view>
+			<text>下单指南</text>
+		</view>
+		<view class="cu-item">
+			<view class="cuIcon-noticefill"></view>
+			<text>关注店铺</text>
+		</view>
+		<view class="cu-item" bindtap="goShowCase" data-type="1">
+			<view class="cuIcon-noticefill"></view>
+			<text>关于我们</text>
+		</view>
+		<view class="cu-item" bindtap="goSetings">
+			<view class="cuIcon-noticefill"></view>
+			<text>账户与安全</text>
+		</view>
+		<view class="cu-item" bindtap="call">
+			<view class="cuIcon-noticefill"></view>
+			<text>拨打商家电话</text>
+		</view>
+	</view>
+	<view class="bg-white padding">
+		<view class="grid col-2 margin-bottom text-center grid-square">
+			<view class="img" bindtap="goDetail" wx:for="{{recomlist}}" wx:key data-id="{{item.DB_GOODS_ID}}">
+				<image src="{{item.G_IMG}}"></image>
+				<view class="text-left">{{item.G_NAME}}</view>
+				<view class="flex justify-between margin-top-sm">
+					<text class="text-red">¥{{item.G_MONEY}}</text>
+					<text class="bg-red text-xs radius padding-xs-5">强烈推荐</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

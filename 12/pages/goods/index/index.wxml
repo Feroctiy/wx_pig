@@ -1,0 +1,53 @@
+<cu-custom bgColor="bg-gradual-red" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">全部产品</view>
+</cu-custom>
+<view>
+  <view class="cu-bar bg-gradual-red search">
+    <view class="action">
+      <text>西安</text>
+      <text class="cuIcon-triangledownfill padding-left"></text>
+    </view>
+    <view class="search-form radius">
+      <text class="cuIcon-search"></text>
+      <input type="text" placeholder="搜索你需要的商品热门关键词" confirm-type="search"></input>
+    </view>
+  </view>
+  <swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+    <swiper-item wx:for="{{4}}" wx:key>
+      <image src="https://image.weilanwl.com/img/4x3-{{index+1}}.jpg" mode='aspectFill'></image>
+    </swiper-item>
+  </swiper>
+</view>
+
+<view class="VerticalBox">
+  <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - 475rpx)">
+    <view class="cu-item {{index==TabCur?'text-red cur':''}}" wx:for="{{list}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+      {{item.name}}
+    </view>
+  </scroll-view>
+  <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 475rpx)" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
+    <view class="padding-top padding-lr" wx:for="{{list}}" wx:key id="main-{{index}}">
+      <view class='cu-bar solid-bottom bg-white'>
+        <view class='action'>
+          <text class='cuIcon-title text-red'></text> {{item.name}} </view>
+      </view>
+      <view class="cu-list menu-avatar">
+        <view class="cu-item">
+          <view class="cu-avatar radius lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
+          <view class="content">
+            <view class="text-grey text-cut">鲜果奶油[小仙女最爱]</view>
+            <view class="text-gray text-sm flex">
+              <text class="text-cut text-red">
+									¥15.00
+              </text>
+            </view>
+          </view>
+          <view class="action">
+            <view class="text-grey text-xs">马上抢</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

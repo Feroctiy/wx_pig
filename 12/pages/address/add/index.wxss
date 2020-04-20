@@ -1,0 +1,4 @@
+/* pages/address/add/index.wxss */
+input{
+  text-align: right
+}

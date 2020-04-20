@@ -1,0 +1,149 @@
+/* pages/search/search.wxss */
+
+page {
+  background: #fff;
+}
+
+.top_search {
+  width: 92%;
+  padding: 35rpx 4%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #eee;
+}
+
+.search {
+  width: 80%;
+  padding: 0 3%;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 28rpx;
+  background: #f4f4f4;
+  color: #999;
+  display: flex;
+  justify-content: flex-start;
+  border-radius: 50rpx;
+}
+
+.search input {
+  width: 550rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin-left: 15rpx;
+}
+
+.search_text {
+  height: 70rpx;
+  line-height: 70rpx;
+}
+
+icon {
+  height: 30rpx;
+  margin-top: 20rpx;
+  margin-right: 10rpx;
+}
+
+button {
+  width: 120rpx;
+  font-size: 32rpx;
+}
+
+/* 历史记录 */
+
+.box {
+  width: 92%;
+  padding: 35rpx 4%;
+}
+
+.cont_top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cont_top image {
+  width: 35rpx;
+}
+
+/*  */
+
+.search_history {
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+  text-align: center;
+}
+
+.search_history view {
+  margin-right: 30rpx;
+  padding: 10rpx 20rpx;
+  background: #f4f4f4;
+  color: #999;
+  font-size: 28rpx;
+  margin-top: 30rpx;
+  border-radius: 50rpx;
+}
+
+/* 列表 */
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  position: relative;
+  z-index: 5;
+  transition: left 0.2s ease-in-out;
+  margin-bottom: 20rpx;
+}
+
+.logo {
+  width: 220rpx;
+  height: 150rpx;
+}
+
+.cont {
+  width: 450rpx;
+  padding-bottom: 35rpx;
+  border-bottom: 1rpx solid #ededed;
+}
+
+.name {
+  font-size: 28rpx;
+  width: 100%;
+  height: 90rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin-bottom: 10rpx;
+}
+
+.title {
+  height: 36rpx;
+  font-size: 24rpx;
+  color: #444;
+  overflow: hidden;
+  margin: 25rpx 0;
+}
+
+.price {
+  color: red;
+  font-size: 24rpx;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.num {
+  font-size: 24rpx;
+  color: #888;
+}
+
+.null {
+  text-align: center;
+  padding: 50rpx 0;
+  font-size: 28rpx;
+  color: #999;
+}

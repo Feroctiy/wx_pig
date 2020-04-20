@@ -1,0 +1,168 @@
+<import src="../../../components/wxParse/wxParse.wxml" />
+<cu-custom bgColor="bg-gradual-main" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">详情</view>
+</cu-custom>
+
+<view>
+	<swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+		<swiper-item wx:for="{{detail.banner}}" wx:key>
+			<image src="{{item.P_IMG}}" mode='aspectFill'></image>
+		</swiper-item>
+	</swiper>
+	<view class="introduce-section margin-top-sm">
+		<view class="flex justify-between">
+			<text class="title">{{detail.G_NAME}}</text>
+			<text class="text-grey text-sm margin-top-xs text-right" style="max-width:100px;">分享</text>
+		</view>
+		<view class="price-box padding-top">
+			<text class="price">¥{{detail.G_MONEY}}</text>
+			<text class="m-price">¥{{detail.G_YMONEY}}</text>
+		</view>
+		<view class="bot-row">
+			<text>{{detail.G_ABSTRACT}}</text>
+		</view>
+	</view>
+	<view class="c-list margin-top-sm">
+		<view class="flex justify-between c-row b-b solid-bottom bg-white">
+			<view>
+				<text class="tit">运费</text>
+				<text>部分地区免运费</text>
+			</view>
+
+			<view class="view-grey text-right" style="max-width:100px;">已售{{detail.G_SALES}}</view>
+		</view>
+		<view class="c-row b-b solid-bottom bg-white">
+			<text class="tit">促销</text>
+			<view class="con-list">
+				<text>新人首单送20元无门槛代金券</text>
+				<text>订单满50减10</text>
+				<text>订单满100减30</text>
+				<text>单笔购买满两件免邮费</text>
+			</view>
+		</view>
+		<view class="c-row b-b solid-bottom margin-top-sm bg-white justify-between">
+			<text class="tit">服务</text>
+			<view class="bz-list con">
+				<text>7天无理由退换货 ·</text>
+				<text>假一赔十 ·</text>
+			</view>
+		</view>
+		<view class="c-row b-b bg-white flex justify-between" bindtap="toggleSpec">
+			<view>
+				<text class="tit">购买类型</text>
+				<text>{{specSelected ? "已选：" + specSelected : "未选择"}}</text>
+			</view>
+			<view class="cuIcon-right lg text-gray"></view>
+		</view>
+	</view>
+	<view class="margin-top-sm" wx:if="{{detail.comments.length > 0}}">
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="text-black">用户评价</text>
+			</view>
+			<view class="action" bindtap="goComment">
+				<text>查看更多</text>
+			</view>
+		</view>
+		<view class="bg-white" style="padding-top:0;">
+			<view class="cu-card dynamic no-card">
+				<view class="cu-item shadow">
+					<view class="cu-list menu-avatar comment">
+						<view class="cu-item solid-bottom" wx:for="{{detail.comments}}" wx:key>
+							<view class="cu-avatar round" style="background-image:url({{item.U_IMG}});"></view>
+							<view class="content">
+								<view class="flex justify-between">
+									<view class="text-block">{{item.U_NICKNAME}}</view>
+									<view>
+										<van-rate readonly value="{{item.COM_NUM}}" bind:change="onChange" color="#ee0a24" />
+									</view>
+								</view>
+								<view class="text-gray text-content text-sm">
+									{{item.CREATEDATE}}
+								</view>
+								<view class="radius margin-top-xs">
+									<view class="flex">
+										<view class="flex-sub">{{item.COM_NOTE}}</view>
+									</view>
+								</view>
+								<view class="margin-top-xs flex justify-between">
+									<view class="text-gray text-sm">{{item.SPE_NAME}}（{{item.DIN_NAME}}）</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="margin-top-sm">
+		<view class="cu-bar bg-white">
+			<view class="action">
+				<text class="text-black">产品详情</text>
+			</view>
+		</view>
+		<view class="padding bg-white" style="padding-top:0;padding-bottom:120rpx;">
+			<template is="wxParse" data="{{wxParseData:artice.nodes}}" />
+		</view>
+	</view>
+	<view class="cu-bar bg-white tabbar border shop foot">
+		<button class="action" open-type="contact">
+			<view class="cuIcon-service text-green">
+				<view class="cu-tag badge"></view>
+			</view>
+			客服
+		</button>
+		<view class="action">
+			<view class="cuIcon-cart" bindtap="goCart">
+				<view class="cu-tag badge">99</view>
+			</view>
+			购物车
+		</view>
+		<view class="bg-orange submit" bindtap="joinCart">加入购物车</view>
+		<view class="bg-red submit" bindtap="submit">立即购买</view>
+	</view>
+
+
+
+
+
+
+	<!-- 规格-模态层弹窗 -->
+	<view class="popup spec" catchtap="stopPrevent" bindtap="toggleSpec" wx:if="{{ showSpec }}">
+		<!-- 遮罩层 -->
+		<view class="mask"></view>
+		<view class="layer attr-content" catchtap="stopPrevent">
+			<view class="a-t">
+				<image src="{{detail.G_IMG}}"></image>
+				<view class="right">
+					<text class="name text-df">{{detail.G_NAME}}</text>
+					<text class="price">¥{{smoney ? smoney : detail.G_MONEY}}</text>
+					<view class="selected">
+						已选：{{specSelected}}
+					</view>
+				</view>
+			</view>
+			<view class="attr-list">
+				<text class="text-black">规格</text>
+				<view class="item-list">
+					<text class="{{tabSize==index ? 'active' : ''}}" wx:for="{{detail.specif}}" wx:key catchtap="selectSpec" data-fid="{{item.DB_SPECIFICATION_ID}}" id="{{index}}" data-money="{{item.SPE_MONEY}}"> {{item.SPE_NAME}}({{item.DIN_NAME}}) </text> 
+				</view>
+			</view>
+			<view class="cu-list menu text-left solid-top">
+				<view class="cu-item" style="padding:0">
+					<view class="content">
+						<text class="text-black">数量</text>
+					</view>
+					<view class="action"> 
+						<van-stepper value="{{ num }}" bind:change="onChange" disable-input/>
+					</view>
+				</view>
+			</view>
+			<view class="cu-bar btn-group">
+				<button class="cu-btn text-gray line-gray shadow round" bindtap="cancle">取消</button>
+				<button class="cu-btn bg-gradual-main shadow-blur round" bindtap="handleSub">确认</button> 
+			</view>
+		</view>
+	</view>
+</view>

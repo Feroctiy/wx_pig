@@ -1,0 +1,39 @@
+<cu-custom bgColor="bg-gradual-main" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">收货地址</view>
+</cu-custom>
+<view class="container">
+	<view class="address-list">
+		<view class="padding margin-bottom-sm solid-bottom padding bg-white" wx:for-items="{{addressList}}" wx:key="{{index}}">
+			<view>
+				<view class="left-text {{item.state == '1'? 'active':''}}" bindtap="selectTap" data-id="{{item.id}}">
+					<view class="name-tel">
+						 
+						<text>{{item.ADD_NAME}}</text>
+						<text class="padding-left">{{item.ADD_PHONE}}</text>
+					</view>
+					<view class="address-box padding-top-sm solid-bottom padding-bottom-sm">
+						{{item.ADD_PROVICE}}{{item.ADD_CITY}}{{item.ADD_REGION?item.ADD_REGION:""}}{{item.add}}
+					</view>
+				</view>
+			</view>
+			<view class="flex justify-between padding-top-sm">
+				<view>设为默认地址</view>
+				<view>
+					<text class="padding-right" data-id="{{item.DB_ADDRESS_ID}}" bindtap="delAddress">删除</text>
+					<text>编辑</text>
+				</view>
+			</view>
+		</view>
+
+	</view>
+	<view hidden="{{addressList.length > 0 ? true : false}}" class="no-more-goods">
+		<image src="/images/none/address_empty.png" class="no-order-img"></image>
+		<view class="text">还没有添加地址呢</view>
+	</view>
+	<view class="bottom-box" bindtap="addAddess">
+		<image src="/images/address_add.png"></image>
+		新增地址
+	</view>
+
+</view>

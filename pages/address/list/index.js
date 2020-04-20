@@ -28,7 +28,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onShow: function (options) {
     this.getAddressList();
   }, 
   /**
@@ -36,7 +36,14 @@ Page({
    */
   addAddess: function () {
     wx.navigateTo({
-      url: '/pages/address/add/index',
+      url: '/pages/address/add/index?type="add"',
+    })
+  },
+
+  editAddress:function(e){
+    console.log(e)
+    wx.navigateTo({
+      url: '/pages/address/add/index?type="edit"',
     })
   },
   // 获取地址列表

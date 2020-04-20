@@ -93,14 +93,14 @@ Page({
    */
   addAddess: function () {
     wx.navigateTo({
-      url: '/pages/address/add/index?type="add"',
+      url: '/pages/address/add/index?type=add',
     })
   },
 
   editAddress:function(e){
     console.log(e)
     wx.navigateTo({
-      url: '/pages/address/add/index?type="edit"',
+      url: '/pages/address/add/index?type=edit&id=' + e.currentTarget.dataset.id
     })
   }
 

@@ -15,7 +15,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     switch (options.type) {
       case 'add':
         this.setData({
@@ -36,7 +36,7 @@ Page({
     var that = this
     call.getData("/app/address/appshowoneadd", {
       DB_ADDRESS_ID: value
-    }, function(res) {
+    }, function (res) {
       if (res.state == "success") {
         that.setData({
           addressInfo: res.address,
@@ -47,7 +47,7 @@ Page({
     })
   },
   //参数检验
-  validtioan: function(e) {
+  validtioan: function (e) {
     var that = this;
     if (Utils.isEmpty(e.detail.value.ADD_NAME)) {
       Utils.showMessage("请输入收货人姓名");
@@ -87,7 +87,7 @@ Page({
       return
     }
     var that = this;
-    call.getData(this.data.isEdit ? '/app/address/appeditaddress':'/app/address/appaddaddress', {
+    call.getData(this.data.isEdit ? '/app/address/appeditaddress' : '/app/address/appaddaddress', {
       DB_ADDRESS_ID: this.data.id,
       ADD_LATITUDE: '123',
       ADD_LONGITUDE: "4555",
@@ -98,7 +98,7 @@ Page({
       ADD_PROVICE: that.data.region[0], //省；
       ADD_CITY: that.data.region[1], //市；
       ADD_REGION: that.data.region[2] //区
-    }, function(res) {
+    }, function (res) {
       if (res.state == "success") {
         wx.showToast({
           title: '添加成功',
@@ -110,7 +110,7 @@ Page({
         })
       }
       console.log(res);
-    }, function() {})
+    }, function () { })
     // ADD_OPENID：openid    ADD_NAME：收货人     ADD_PHONE：联系电话    ADD_PROVICE：省
     //    ADD_CITY：市    ADD_REGION：区域     ADD_ADD：详细地址     ADD_LONGITUDE：经度     
     //     ADD_LATITUDE：纬度

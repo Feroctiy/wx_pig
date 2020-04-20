@@ -16,8 +16,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options)
+    switch (options.type) {
+      case 'add':
+        break
+      case 'edit':
+        this.getDetlais(options.id)
+        break
+    }
   },
+  // 获取信息
+  getDetlais(value) {
+    var that = this
+    call.getData("/app/address/appshowoneadd",{
+      DB_ADDRESS_ID:value
+    },function(res){
+      if (res.state == "success"){
+        that.setData({
+          addressInfo:res.address,
+          region: res.address.a,
+          state:false
+        })
+      }
+    })
+  },
+  //参数检验
   validtioan: function(e) {
     var that = this;
     if (Utils.isEmpty(e.detail.value.ADD_NAME)) {

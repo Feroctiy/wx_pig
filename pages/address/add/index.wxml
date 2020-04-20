@@ -5,11 +5,11 @@
 <form bindsubmit='formsubmit'>
 	<view class="cu-form-group">
 		<view class="title">收货人</view>
-		<input placeholder="请输入收货人姓名" value='{{addressInfo.name}}' maxlength="10" name="ADD_NAME"></input>
+		<input placeholder="请输入收货人姓名" value='{{addressInfo.ADD_NAME}}' maxlength="10" name="ADD_NAME"></input>
 	</view>
 	<view class="cu-form-group">
 		<view class="title">手机号码</view>
-		<input placeholder="请输入收货人手机号码" value='{{addressInfo.phone}}' type="number" name="ADD_PHONE"></input>
+		<input placeholder="请输入收货人手机号码" value='{{addressInfo.ADD_PHONE}}' type="number" name="ADD_PHONE"></input>
 	</view>
 	<view class="cu-form-group">
 		<view class="title">所在地区</view>

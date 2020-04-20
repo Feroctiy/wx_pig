@@ -18,8 +18,15 @@ Page({
   onLoad: function(options) {
     switch (options.type) {
       case 'add':
+        this.setData({
+          isEdit: false
+        })
         break
       case 'edit':
+        this.setData({
+          isEdit: true,
+          id: options.id
+        })
         this.getDetlais(options.id)
         break
     }
@@ -27,14 +34,14 @@ Page({
   // 获取信息
   getDetlais(value) {
     var that = this
-    call.getData("/app/address/appshowoneadd",{
-      DB_ADDRESS_ID:value
-    },function(res){
-      if (res.state == "success"){
+    call.getData("/app/address/appshowoneadd", {
+      DB_ADDRESS_ID: value
+    }, function(res) {
+      if (res.state == "success") {
         that.setData({
-          addressInfo:res.address,
+          addressInfo: res.address,
           region: res.address.a,
-          state:false
+          state: false
         })
       }
     })
@@ -80,7 +87,8 @@ Page({
       return
     }
     var that = this;
-    call.getData('/app/address/appaddaddress', {
+    call.getData(this.data.isEdit ? '/app/address/appeditaddress':'/app/address/appaddaddress', {
+      DB_ADDRESS_ID: this.data.id,
       ADD_LATITUDE: '123',
       ADD_LONGITUDE: "4555",
       ADD_OPENID: wx.getStorageSync('openid'),

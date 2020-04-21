@@ -1,0 +1,30 @@
+var filter = {
+  // 积分类型
+  getInterType: function (i) {
+    if (!i) return
+    var _txt = ''
+    switch (i) {
+      case 3:
+        _txt = '评论'
+        break
+      case 1:
+        _txt = '签到'
+        break
+      case 2:
+        _txt = '信息完善'
+        break
+      case 4:
+        _txt = '商品购买'
+        break
+      case 5:
+        _txt = '兑换'
+        break
+    }
+    return _txt
+  }
+
+
+}
+module.exports = {
+  getInterType: filter.getInterType
+}

@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list:[],
+    list: [],
     isHideLoadMore: false,
     pageNum: 0,
     pageSize: 10,
@@ -35,63 +35,47 @@ Page({
 
   },
 
-  getList:function(){
+  getList: function () {
     var _this = this;
     call.getData('/app/user/appgetuserintegral', {
       OPENID: wx.getStorageSync('openid'),
       PULLNUM: this.data.pageNum
     }, function (res) {
+      var listArr = _this.data.list;
       if (res.state == "success") {
-        _this.setData({
-          list: res.integra
-        })
+        for (var i = 0; i < res.integra.length; i++) {
+          listArr.push(res.integra[i])
+        }
+        if (_this.data.pageNum == 0) {
+          _this.setData({
+            list: res.integra,
+          })
+        } else {
+          _this.setData({
+            list: listArr,
+          })
+        }
+        if (res.integra.length < 10) {
+          _this.setData({
+            load_h: true,
+            line_h: false
+          })
+        }
       }
       console.log(res);
-    }, function () { })
+    }, function () {})
   },
-  //到达底部
-  scrollToLower: function (e) {
-    if (!this.data.loading) {
-      this.setData({
-        loading: true,
-        pageNum: this.data.pageNum + 1
-      })
-      this.getData(true);
-    }
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-    this.getList()
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
   onReachBottom: function () {
-    this.getList()
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    var that = this;
+    if (!this.data.line_h) {
+      return;
+    }
+    that.setData({
+      load_h: false
+    })
+    this.setData({
+      pageNum: this.data.pageNum + 1
+    });
+    this.getList();
   }
 })

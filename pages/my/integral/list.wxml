@@ -1,19 +1,20 @@
+<wxs module="filter" src="../../../utils/util.wxs"></wxs>
 <cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
 	<view slot="content">积分记录</view>
 </cu-custom> 
-<scroll-view scroll-y lower-threshold="100" bindscrolltolower="scrollToLower" style="height: 100vh;">
-<view class="cu-list menu">
+<!-- <scroll-view scroll-y lower-threshold="100" bindscrolltolower="scrollToLower" style="height: 100vh;"> -->
+<view class="cu-list menu margin-top" >
 	<view class="cu-item" wx:for="{{list}}" wx:for-index="idx" wx:for-item="item" wx:key="item.orderNo">
 		<view class="content padding-tb-sm">
 			<view>{{item.CREATEDATE}}</view>
-			<view class="text-gray text-sm"> 商品消费</view>
+			<view class="text-gray text-df">{{filter.getInterType(item.INT_TYPE)}}</view>
 		</view>
 		<view class="action text-red">
-			+{{item.IN_INTEGRAL}}
+			{{item.IN_SATTE == 1 ? '+':'-'}}{{item.IN_INTEGRAL}}
 		</view>
 	</view>
 </view>
-</scroll-view>
+<!-- </scroll-view> -->
 
 
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
@@ -25,5 +26,5 @@
 	<view class="weui-loadmore__tips">正在加载...</view>
 </view>
 
-<view class="line" wx:if="{{pageNum == 1 && list.length == 0}}" hidden="{{line_h}}"> 暂无数据 </view>
+<view class="line" wx:if="{{pageNum == 0 && list.length == 0}}"  hidden="{{line_h}}"> 暂无数据 </view>
 <view class="line" wx:else hidden="{{line_h}}">-- 我是有底线的 --</view>

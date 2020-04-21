@@ -26,9 +26,9 @@
 		</view>
 		<view class="bg-white padding">
 			<view class='nav-list'>
-				<navigator open-type="navigate" hover-class='none' class="nav-li bg-main">
-					<view class="nav-title">20元</view>
-					<view class="nav-name">满20元可用</view> 
+				<navigator open-type="navigate" hover-class='none' class="nav-li bg-main" wx:for="{{couponslist}}" wx:key bindtap="goCouDetail" data-id="{{item.DB_COUPONS_ID}}">
+					<view class="nav-title">{{item.COU_MONEY}}元</view>
+					<view class="nav-name">满{{item.COU_MAN}}元可用</view> 
 				</navigator> 
 			</view>
 		</view>

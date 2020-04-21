@@ -4,8 +4,9 @@
 <view>
 	<view class="cu-list menu-avatar" style="background: url(../../../images/userbg.png);">
 		<view class="cu-item cur  padding-top padding-bottom" style="background-color:transparent;">
-			<view class="cu-avatar radius xl" style="background-color:transparent;">
-				<image src="../../../images/1.png" mode="widthFix" style="width:200rpx;"></image>
+			<view class="cu-avatar round xl" style="background-color:transparent;">
+				<image src="{{userInfo.U_IMG}}" class="round" mode="widthFix" style="width:200rpx;" wx:if="{{ userInfo.U_IMG }}"></image>
+				<image src="../../../images/1.png" mode="widthFix" style="width:200rpx;" wx:if="{{ !userInfo.U_IMG }}"></image>
 			</view>
 			<view class="content">
 				<view>
@@ -38,7 +39,7 @@
 	</view>
 	<view class="cu-list grid col-{{gridCol}} no-border">
 		<view class="cu-item" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}" bindtap="goOrder">
-			<view >
+			<view>
 				<image src="../../../images/{{item.url}}" style="width:50rpx;height:50rpx"></image>
 			</view>
 			<text>{{item.name}}</text>

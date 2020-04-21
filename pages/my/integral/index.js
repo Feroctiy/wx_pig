@@ -10,6 +10,7 @@ Page({
    */
   data: {
     goods: []
+    
   },
 
 
@@ -48,6 +49,11 @@ Page({
   goDetail(e) {
     wx.navigateTo({
       url: '/pages/goods/detail/detail?id=' + e.currentTarget.dataset.id
+    })
+  },
+  goCouDetail(e){
+    wx.navigateTo({
+      url: '/pages/my/coupons/detail?id=' + e.currentTarget.dataset.id
     })
   },
   // 积分兑换优惠券

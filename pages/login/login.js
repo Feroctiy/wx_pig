@@ -41,6 +41,9 @@ Page({
                   }, function (res) {
                     console.log(res);
                     wx.setStorageSync('openid', res)
+                    wx.navigateBack({
+                      delta: 1
+                    });
 
                   }, function () {})
                 }, function () {})

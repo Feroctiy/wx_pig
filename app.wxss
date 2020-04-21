@@ -50,3 +50,6 @@
   background-color: #F5B1AA;
   color: #fff;
 }
+.bg-gradual-main-top{
+  background-image: linear-gradient(45deg, #fff, #fff);
+}

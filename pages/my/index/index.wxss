@@ -13,6 +13,7 @@
 .cu-list.menu>.cu-item .content>image {
   width: 1.3em;
   margin-right: 20rpx;
+  
 }
 
 .cu-btn {

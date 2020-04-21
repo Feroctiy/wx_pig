@@ -1,5 +1,5 @@
 <import src="../../../components/wxParse/wxParse.wxml" />
-<cu-custom bgColor="bg-gradual-main" isBack="{{true}}">
+<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
 	<view slot="backText">返回</view>
 	<view slot="content">详情</view>
 </cu-custom>

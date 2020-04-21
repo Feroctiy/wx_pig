@@ -141,8 +141,7 @@ page {
     align-items: center;
 }
 .balance {
-    padding: 30rpx 60rpx;
-    background: #f50;
+    padding: 30rpx 60rpx; 
 }
 .decimal {
     font-size: 24rpx;

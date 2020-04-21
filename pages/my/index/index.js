@@ -8,28 +8,34 @@ Page({
   data: {
     userInfo:{},
     iconList: [{
+      url:"sale1.png",
       icon: 'cardboardfill',
       color: 'red',
       name: '待付款'
     }, {
+      url:"sale2.png",
       icon: 'recordfill',
       color: 'orange',
       name: '待发货'
     }, {
+      url:"sale3.png",
       icon: 'picfill',
       color: 'yellow',
       name: '待收货'
     }, {
+      url:"sale4.png",
       icon: 'noticefill',
       color: 'olive',
       name: '评价'
     }, {
+      url:"sale5.png",
       icon: 'noticefill',
       color: 'olive',
       name: '退款/售后'
     }],
     gridCol: 5,
-    recomlist:[]
+    recomlist:[],
+    openid:''
   },
 
   /**
@@ -51,6 +57,9 @@ Page({
    */
   onShow: function() {
     if(wx.getStorageSync('openid')){
+      this.setData({
+        openid:wx.getStorageSync('openid')
+      })
       this.getUserInfo();
     }
   },
@@ -74,6 +83,13 @@ Page({
    * 我的订单
    */
   goOrder: function() {
+    if (!wx.getStorageSync('openid')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+        url: `/pages/login/login?from=${this.route}&tab=true`,
+      })
+      return;
+    }
     wx.navigateTo({
       url: '/pages/my/order/order',
     })
@@ -83,6 +99,16 @@ Page({
    * 个人信息
    */
   goInfo: function() {
+    if (!wx.getStorageSync('openid')) {
+      if (!wx.getStorageSync('openid')) {
+        wx.navigateTo({
+          url: '/pages/login/login',
+          url: `/pages/login/login?from=${this.route}&tab=true`,
+        })
+        return;
+      }
+      return;
+    }
     wx.navigateTo({
       url: '/pages/my/info/info',
     })
@@ -91,6 +117,16 @@ Page({
    * 收货地址
    */
   goAddress: function () {
+    if (!wx.getStorageSync('openid')) {
+      if (!wx.getStorageSync('openid')) {
+        wx.navigateTo({
+          url: '/pages/login/login',
+          url: `/pages/login/login?from=${this.route}&tab=true`,
+        })
+        return;
+      }
+      return;
+    }
     wx.navigateTo({
       url: '/pages/address/list/index',
     })
@@ -103,6 +139,16 @@ Page({
   },
   // 账户与安全
   goSetings:function(){
+    if (!wx.getStorageSync('openid')) {
+      if (!wx.getStorageSync('openid')) {
+        wx.navigateTo({
+          url: '/pages/login/login',
+          url: `/pages/login/login?from=${this.route}&tab=true`,
+        })
+        return;
+      }
+      return;
+    }
     wx.navigateTo({
       url: '/pages/my/seting/index',
     })
@@ -129,11 +175,31 @@ Page({
     }, function () {})
   },
   goDetail(e) {
+    if (!wx.getStorageSync('openid')) {
+      if (!wx.getStorageSync('openid')) {
+        wx.navigateTo({
+          url: '/pages/login/login',
+          url: `/pages/login/login?from=${this.route}&tab=true`,
+        })
+        return;
+      }
+      return;
+    }
     wx.navigateTo({
       url: '/pages/goods/detail/detail?id='+e.currentTarget.dataset.id
     })
   },
   goIntegral(e) {
+    if (!wx.getStorageSync('openid')) {
+      if (!wx.getStorageSync('openid')) {
+        wx.navigateTo({
+          url: '/pages/login/login',
+          url: `/pages/login/login?from=${this.route}&tab=true`,
+        })
+        return;
+      }
+      return;
+    }
     wx.navigateTo({
       url: '/pages/my/integral/index?num='+this.data.userInfo.U_INTEGRAL
     })

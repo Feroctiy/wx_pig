@@ -25,7 +25,7 @@ Page({
   onLoad: function (options) {
     var _this = this;
     call.getData('/app/goods/appgoodsdatile', {
-      DB_GOODS_ID: options.id || "285d9014bffa4e878fa8c3c84f64843a",
+      DB_GOODS_ID: options.id ,
       OPENID: wx.getStorageSync('openid')
     }, function (res) {
       console.log(res);

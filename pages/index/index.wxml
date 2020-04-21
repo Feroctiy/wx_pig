@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<cu-custom bgColor="bg-gradual-main">
+<cu-custom bgColor="bg-gradual-main-top">
 	<view slot="content">烘焙工坊</view>
 </cu-custom>
 <view class="container bg-white">

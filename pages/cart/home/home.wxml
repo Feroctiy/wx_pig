@@ -1,4 +1,4 @@
-<cu-custom bgColor="bg-gradual-main">
+<cu-custom bgColor="bg-gradual-main-top">
 	<view slot="content">购物车</view>
 </cu-custom>
 <view id="cart">
@@ -62,7 +62,7 @@
 				<view class="account flex">
 					<text class="text-normal">合计：</text>
 					<view class="price">{{accountInfo.allAccount}}.<text class="decimal">00</text></view>
-					<view class="balance text-lg text-fff" bindtap="cartPay">结算 ({{accountInfo.allCount}})</view>
+					<view class="balance text-lg text-fff bg-red" bindtap="cartPay">结算 ({{accountInfo.allCount}})</view>
 				</view>
 			</view>
 		</block>

@@ -1,6 +1,7 @@
 <cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
 	<view slot="content">积分记录</view>
 </cu-custom> 
+<scroll-view scroll-y lower-threshold="100" bindscrolltolower="scrollToLower" style="height: 100vh;">
 <view class="cu-list menu">
 	<view class="cu-item" wx:for="{{list}}" wx:for-index="idx" wx:for-item="item" wx:key="item.orderNo">
 		<view class="content padding-tb-sm">
@@ -12,6 +13,7 @@
 		</view>
 	</view>
 </view>
+</scroll-view>
 
 
 <view class='cu-load load-modal' wx:if="{{loadModal}}">

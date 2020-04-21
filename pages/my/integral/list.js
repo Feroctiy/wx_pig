@@ -8,7 +8,7 @@ Page({
   data: {
     list:[],
     isHideLoadMore: false,
-    pageNum: 1,
+    pageNum: 0,
     pageSize: 10,
     load_h: true,
     line_h: true
@@ -39,7 +39,7 @@ Page({
     var _this = this;
     call.getData('/app/user/appgetuserintegral', {
       OPENID: wx.getStorageSync('openid'),
-      PULLNUM:0
+      PULLNUM: this.data.pageNum
     }, function (res) {
       if (res.state == "success") {
         _this.setData({
@@ -48,6 +48,16 @@ Page({
       }
       console.log(res);
     }, function () { })
+  },
+  //到达底部
+  scrollToLower: function (e) {
+    if (!this.data.loading) {
+      this.setData({
+        loading: true,
+        pageNum: this.data.pageNum + 1
+      })
+      this.getData(true);
+    }
   },
 
   /**

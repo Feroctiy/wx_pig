@@ -5,9 +5,9 @@
 <view class="container">
 	<view class="address-list">
 		<view class="padding margin-bottom-sm solid-bottom padding bg-white" wx:for-items="{{addressList}}" wx:key="{{index}}">
-			<view bindtap='toChoose' data-id="{{item.DB_ADDRESS_ID}}" >
+			<view bindtap='toChoose' data-id="{{item.DB_ADDRESS_ID}}">
 				<view class="left-text {{item.state == '1'? 'active':''}}">
-					<view class="name-tel"> 
+					<view class="name-tel">
 						<text>{{item.ADD_NAME}}</text>
 						<text class="padding-left">{{item.ADD_PHONE}}</text>
 					</view>
@@ -16,11 +16,19 @@
 					</view>
 				</view>
 			</view>
-			<view class="flex justify-between padding-top-sm">
-				<view bindtap="defaultAddress" data-id="{{item.DB_ADDRESS_ID}}">设为默认地址</view>
+			<view class="flex justify-between padding-top-sm"> 
+				<view wx:if="{{item.ADD_STATE == '1'}}">
+				  <text class="cuIcon-roundcheckfill lg text-red"></text> 设为默认地址
+				</view>
+				<view wx:if="{{item.ADD_STATE == '2'}}" bindtap="defaultAddress" data-id="{{item.DB_ADDRESS_ID}}">
+				  <text class="cuIcon-round lg text-gray"></text> 设为默认地址
+				</view> 
 				<view>
-					<text class="padding-right" data-id="{{item.DB_ADDRESS_ID}}" bindtap="delAddress">删除</text>
-					<text bindtap="editAddress" data-id="{{item.DB_ADDRESS_ID}}">编辑</text>
+					<view class="padding-right" data-id="{{item.DB_ADDRESS_ID}}" bindtap="delAddress" style="display:inline-block;">
+						<text class="cuIcon-delete lg text-gray"></text> 删除
+					</view>
+					<view bindtap="editAddress" data-id="{{item.DB_ADDRESS_ID}}" style="display:inline-block;">
+						<text class="cuIcon-edit lg text-gray"></text>编辑</view>
 				</view>
 			</view>
 		</view>

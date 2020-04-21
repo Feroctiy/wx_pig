@@ -19,63 +19,28 @@ Page({
   onLoad: function (options) {
     var _this = this;
     call.getData('/app/integralgoods/appcoupons', {
-      DB_COUPONS_ID: options.id || "e19a5364b63d4a059be7c138e797332a"
+      DB_COUPONS_ID: options.id 
     }, function (res) {
       console.log(res);
       if (res.state == "success") {
         _this.setData({
-          coupons: res.goods
+          coupons: res.coupons
         })
       }
     }, function () {})
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+    useCoupons:function(e){
+      var _this = this;
+      call.getData('/app/integralgoods/appsavecoupons', {
+        DB_COUPONS_ID: this.data.coupons.DB_COUPONS_ID,
+        OPENID: wx.getStorageSync('openid')
+      }, function (res) {
+        if (res.state == "success") {
+          util.showMessage("兑换成功")
+          wx.navigateTo({
+            url: '/pages/my/coupons/list',
+          })
+        }
+      }, function () { })
+    }
 })

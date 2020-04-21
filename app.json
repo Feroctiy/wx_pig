@@ -1,31 +1,38 @@
 {
-  "pages": [  
+  "pages": [
     "pages/index/index",
+    "pages/my/coupons/list",
+    "pages/my/index/index",
+    
+    "pages/my/integral/index",
+    "pages/my/integral/list",
+    "pages/my/coupons/detail",
+
+
     "pages/goods/search/search",
     "pages/cart/pay-order/pay-order",
-    "pages/my/index/index",
-    "pages/my/integral/index",
-    "pages/my/integral/list", 
+
+
     "pages/address/list/index",
-    "pages/address/add/index", 
-    "pages/my/info/info", 
-    "pages/my/showcase/showcase", 
+    "pages/address/add/index",
+    "pages/my/info/info",
+    "pages/my/showcase/showcase",
     "pages/my/afterSaleList/afterSaleList",
     "pages/my/afterSale/afterSale",
     "pages/my/order/order",
     "pages/my/evaluate/evaluate",
     "pages/my/order-list/index",
-   
+
     "pages/goods/detail/detail",
     "pages/good/city/city",
     "pages/cart/pay-money/pay-money",
-    "pages/cart/home/home", 
-    "pages/cart/pay-success/pay-success", 
-    "pages/notice/notice", 
-    "pages/goods/loop/loop", 
+    "pages/cart/home/home",
+    "pages/cart/pay-success/pay-success",
+    "pages/notice/notice",
+    "pages/goods/loop/loop",
     "pages/login/login",
     "pages/goods/index/index",
-    "pages/goods/comment/index", 
+    "pages/goods/comment/index",
     "pages/my/active/index",
     "pages/my/seting/index",
     "pages/logs/logs"
@@ -82,7 +89,9 @@
     "van-tree-select": "/vant/lib/tree-select/index",
     "van-popup": "/vant/lib/popup/index",
     "city-list": "/components/city-list/wx-index-list",
-    "van-search": "/vant/lib/search/index"
+    "van-search": "/vant/lib/search/index",
+    "van-tab": "/vant/lib/tab/index",
+    "van-tabs": "/vant/lib/tabs/index"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

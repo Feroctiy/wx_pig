@@ -1,0 +1,75 @@
+<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">优惠券</view>
+</cu-custom>
+<van-tabs animated>
+	<van-tab title="全部">
+		<view class="sub-list valid"> 
+			<view class="row"> 
+				<view class="carrier">
+					<view class="left">
+						<view class="title margin-bottom">
+							 烦烦烦
+						</view>
+						<view class="term">
+							2020-03-23 12:00 ~ 	2020-03-23 12:00
+						</view>
+						<view class="gap-top"></view>
+						<view class="gap-bottom"></view>
+					</view>
+					<view class="right">
+						<view class="ticket">
+							<view class="num">
+								12
+							</view>
+							<view class="unit">
+								元
+							</view>
+						</view>
+						<view class="criteria">
+							33
+						</view>
+						<view class="use">
+							去使用
+						</view>
+					</view>
+				</view>
+			</view>
+      <view class="row"> 
+				<view class="carrier">
+					<view class="left">
+						<view class="title margin-bottom">
+							 烦烦烦
+						</view>
+						<view class="term">
+							2020-03-23 12:00 ~ 	2020-03-23 12:00
+						</view>
+						<view class="gap-top"></view>
+						<view class="gap-bottom"></view>
+					</view>
+					<view class="right invalid">
+						<view class="ticket">
+							<view class="num">
+								12
+							</view>
+							<view class="unit">
+								元
+							</view>
+						</view>
+						<view class="criteria">
+							33
+						</view>
+						<view class="use">
+							已失效
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+     
+
+	</van-tab>
+	<van-tab title="未使用">内容 2</van-tab>
+	<van-tab title="已使用">内容 3</van-tab>
+	<van-tab title="已过期">内容 4</van-tab>
+</van-tabs>

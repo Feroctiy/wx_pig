@@ -13,7 +13,7 @@
 			<view class="flex flex-sub flex-direction solid-right">
 				<view>积分：{{num}}</view>
 			</view>
-			<view class="flex flex-sub flex-direction solid-right">
+			<view class="flex flex-sub flex-direction solid-right" bindtap="goList">
 				<view>积分记录</view>
 			</view>
 		</view> 

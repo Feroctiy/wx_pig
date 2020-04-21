@@ -65,6 +65,11 @@ Page({
         })
       }
     }, function () {})
+  },
+  goList(){
+    wx.navigateTo({
+      url: '/pages/my/integral/list',
+    })
   }
 
 })

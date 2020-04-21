@@ -141,7 +141,7 @@
 			</view>
       <view class="price-box" wx:if="{{item.O_STATE == 4}}">
 				<view class="btn-box" style="width:100%;">  
-					<view class="btn topay-btn" catchtap="payOrder" data-id="{{item.DB_ORDER_ID}}" data-money="{{item.O_ALL_MONEY}}">立即评价</view>
+					<view class="btn topay-btn" catchtap="evaluate" data-id="{{item.DB_ORDER_ID}}" data-money="{{item.O_ALL_MONEY}}">立即评价</view>
 				</view>
 			</view>
 		</view>

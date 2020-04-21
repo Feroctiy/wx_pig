@@ -1,16 +1,11 @@
-// pages/my/integral/list.js
+// pages/my/integral/sign.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list:[{},{}],
-    isHideLoadMore: false,
-    pageNum: 1,
-    pageSize: 10,
-    load_h: true,
-    line_h: true
+
   },
 
   /**

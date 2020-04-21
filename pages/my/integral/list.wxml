@@ -1,2 +1,27 @@
-<!--pages/my/integral/list.wxml-->
-<text>pages/my/integral/list.wxml</text>
+<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
+	<view slot="content">积分记录</view>
+</cu-custom> 
+<view class="cu-list menu">
+	<view class="cu-item" wx:for="{{list}}" wx:for-index="idx" wx:for-item="item" wx:key="item.orderNo">
+		<view class="content padding-tb-sm">
+			<view>2020-03-23 23：00</view>
+			<view class="text-gray text-sm"> 商品消费</view>
+		</view>
+		<view class="action text-red">
+			+23
+		</view>
+	</view>
+</view>
+
+
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+	<image src='/images/logo1.png' class='png' mode='aspectFit'></image>
+	<view class='gray-text'>加载中...</view>
+</view>
+<view class="weui-loadmore" hidden="{{load_h}}">
+	<view class="weui-loading"></view>
+	<view class="weui-loadmore__tips">正在加载...</view>
+</view>
+
+<view class="line" wx:if="{{pageNum == 1 && list.length == 0}}" hidden="{{line_h}}"> 暂无数据 </view>
+<view class="line" wx:else hidden="{{line_h}}">-- 我是有底线的 --</view>

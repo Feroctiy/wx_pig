@@ -150,6 +150,12 @@ Page({
     wx.navigateTo({
       url: '/pages/my/afterSale/afterSale?id='+id,
     })
+  },
+  evaluate(e){
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/my/evaluate/evaluate?id='+id,
+    })
   }
 
 })

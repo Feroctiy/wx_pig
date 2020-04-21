@@ -1,0 +1,10 @@
+<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">签到</view>
+</cu-custom>
+<van-calendar
+  title="日历"
+  poppable="{{ false }}"
+  show-confirm="{{ false }}"
+  class="calendar"
+/>

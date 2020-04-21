@@ -9,7 +9,12 @@
   </view>
   <view class="cu-form-group">
     <view class="title">性别</view>
-    <input placeholder="请填写性别" name="U_GENDER" value='{{personInfo.U_GENDER}}' type=""></input>
+    <!-- <input placeholder="请填写性别" name="U_GENDER" value='{{personInfo.U_GENDER}}' type=""></input> -->
+    <radio-group class="radio-group" bindchange="radioChange">
+      <radio class="radio" wx:for-items="{{sex}}" wx:key="name" value="{{item.name}}" checked="{{item.checked}}">
+        <text>{{item.value}}</text>
+      </radio>
+    </radio-group>
   </view>
   <view class="cu-form-group">
     <view class="title">电话</view>
@@ -17,7 +22,10 @@
   </view>
   <view class="cu-form-group">
     <view class="title">生日</view>
-    <input placeholder="请填写生日" name="U_BIRTHDAY" value='{{personInfo.U_BIRTHDAY}}' type=""></input>
+    <picker mode="date" value="{{date}}" start="1907-01-01" end="2050-01-01" bindchange="bindDateChange">
+      <view wx:if="{{state}}" style="color:#888885;font-size:28rpx;" class="text-right picker">请选择出生日期</view>
+      <view class="picker" wx:else>{{date}}</view>
+    </picker>
   </view>
   <view class="cu-form-group">
     <view class="title">现居地</view>

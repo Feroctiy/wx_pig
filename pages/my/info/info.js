@@ -7,7 +7,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-    personInfo: {}
+    personInfo: {},
+    date: '',
+    state: true,
+    sex: [{
+        name: '1',
+        value: '男'
+      },
+      {
+        name: '2',
+        value: '女',
+        checked: 'true'
+      },
+    ],
+    gender:''
   },
 
   /**
@@ -18,28 +31,47 @@ Page({
   },
 
   /**
- * 生命周期函数--监听页面初次渲染完成
- */
-  onReady: function () {
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
+  // 时间选择器
+  bindDateChange: function(e) {
+    this.setData({
+      date: e.detail.value,
+      state: false
+    })
+  },
+  // 性别选择
+  radioChange: function(e) {
+    console.log('radio发生change事件，携带value值为：', e.detail.value)
+     this.setData({
+      gender:e.detail.value,
+    })
+
+  },
+
   // 获取详情
-  getInfo:function(){
+  getInfo: function() {
     var that = this
     call.getData("/app/user/appgetuser", {
       OPENID: wx.getStorageSync('openid')
-    }, function (res) {
+    }, function(res) {
       if (res.state == "success") {
         that.setData({
           personInfo: res.user,
-          id: res.user.DB_USER_ID
+          id: res.user.DB_USER_ID,
+          date: res.user.U_BIRTHDAY,
+          state: false,
+          gender: res.user.U_GENDER
         })
       }
     })
@@ -47,22 +79,21 @@ Page({
 
   //参数检验
   validtioan: function(e) {
-    console.log(e)
     var that = this;
     if (Utils.isEmpty(e.detail.value.U_NICKNAME)) {
       Utils.showMessage("请填写姓名");
       return false
     }
-    if (Utils.isEmpty(e.detail.value.U_GENDER)) {
-      Utils.showMessage("请填写性别");
+    if (Utils.isEmpty(that.data.gender)) {
+      Utils.showMessage("请选择性别");
       return false
     }
     if (Utils.isEmpty(e.detail.value.U_PHONE)) {
       Utils.showMessage("请填写电话");
       return false
     }
-    if (Utils.isEmpty(e.detail.value.U_BIRTHDAY)) {
-      Utils.showMessage("请填写生日");
+    if (Utils.isEmpty(that.data.date)) {
+      Utils.showMessage("请选择出生日期");
       return false
     }
     if (Utils.isEmpty(e.detail.value.U_ADDRESS)) {
@@ -72,19 +103,19 @@ Page({
     return true;
   },
 
+  //完善信息
   formsubmit(e) {
-    console.log(2222)
-    console.log(e)
     if (!this.validtioan(e)) {
       return
     }
+    var that = this;
     call.getData('/app/user/appuserperfect', {
       DB_USER_ID: this.data.id,
       OPENID: wx.getStorageSync('openid'),
       U_NAME: e.detail.value.U_NICKNAME,
-      U_GENDER: e.detail.value.U_GENDER,
+      U_GENDER: that.data.gender,
       U_PHONE: e.detail.value.U_PHONE,
-      U_BIRTHDAY: e.detail.value.U_BIRTHDAY,
+      U_BIRTHDAY: that.data.date,
       U_ADDRESS: e.detail.value.U_ADDRESS
     }, function(res) {
       if (res.state == "success") {
@@ -93,7 +124,6 @@ Page({
           delta: 1
         })
       }
-      console.log(res);
     }, function() {})
   }
 })

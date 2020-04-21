@@ -2,3 +2,16 @@
 input{
   text-align: right
 }
+/* 默认背景样式*/
+radio .wx-radio-input{
+  width: 30rpx;
+  height: 30rpx;
+}
+
+/* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+radio .wx-radio-input.wx-radio-input-checked{
+  width: 30rpx; /* 选中后对勾大小，不要超过背景的尺寸 */
+  height: 30rpx; /* 选中后对勾大小，不要超过背景的尺寸 */
+  border: none;
+  background: #E1C371;
+}

@@ -16,13 +16,13 @@
 					</view>
 				</view>
 			</view>
-			<view class="flex justify-between padding-top-sm">
+			<view class="flex justify-between padding-top-sm"> 
 				<view wx:if="{{item.ADD_STATE == '1'}}">
 				  <text class="cuIcon-roundcheckfill lg text-red"></text> 设为默认地址
 				</view>
-				<view wx:if="{{item.ADD_STATE == '2'}}">
+				<view wx:if="{{item.ADD_STATE == '2'}}" bindtap="defaultAddress" data-id="{{item.DB_ADDRESS_ID}}">
 				  <text class="cuIcon-round lg text-gray"></text> 设为默认地址
-				</view>
+				</view> 
 				<view>
 					<view class="padding-right" data-id="{{item.DB_ADDRESS_ID}}" bindtap="delAddress" style="display:inline-block;">
 						<text class="cuIcon-delete lg text-gray"></text> 删除

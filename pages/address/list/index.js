@@ -2,6 +2,7 @@
 
 const app = getApp();
 var call = require("../../../utils/request.js");
+var Utils = require("../../../utils/util.js");
 Page({
 
   /**
@@ -102,6 +103,19 @@ Page({
     wx.navigateTo({
       url: '/pages/address/add/index?type=edit&id=' + e.currentTarget.dataset.id
     })
+  },
+  defaultAddress:function(e){
+    var that = this
+    call.getData('/app/address/appsetdefaultaddress', {
+      OPENID: wx.getStorageSync('openid'),
+      DB_ADDRESS_ID: e.currentTarget.dataset.id
+    }, function (res) {
+      if (res.state == "success") {
+        Utils.showMessage("设置成功");
+        that.getAddressList();
+      }
+    }, function () { })
+
   }
 
 })

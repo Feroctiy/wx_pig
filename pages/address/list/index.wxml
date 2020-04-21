@@ -17,7 +17,7 @@
 				</view>
 			</view>
 			<view class="flex justify-between padding-top-sm">
-				<view>设为默认地址</view>
+				<view bindtap="defaultAddress" data-id="{{item.DB_ADDRESS_ID}}">设为默认地址</view>
 				<view>
 					<text class="padding-right" data-id="{{item.DB_ADDRESS_ID}}" bindtap="delAddress">删除</text>
 					<text bindtap="editAddress" data-id="{{item.DB_ADDRESS_ID}}">编辑</text>

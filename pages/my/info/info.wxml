@@ -2,30 +2,29 @@
   <view slot="backText">返回</view>
   <view slot="content">个人信息</view>
 </cu-custom>
-<form>
+<form bindsubmit='formsubmit'>
   <view class="cu-form-group">
     <view class="title">姓名</view>
-    <input placeholder="请填写姓名" value='{{addressInfo.phone}}' type=""></input>
+    <input placeholder="请填写姓名" name="U_NICKNAME" value='{{personInfo.U_NICKNAME}}' maxlength="10"></input>
   </view>
   <view class="cu-form-group">
     <view class="title">性别</view>
-    <input placeholder="请填写性别" value='{{addressInfo.phone}}' type=""></input>
+    <input placeholder="请填写性别" name="U_GENDER" value='{{personInfo.U_GENDER}}' type=""></input>
   </view>
   <view class="cu-form-group">
     <view class="title">电话</view>
-    <input placeholder="请填写电话" value='{{addressInfo.phone}}' type=""></input>
+    <input placeholder="请填写电话" name="U_PHONE" value='{{personInfo.U_PHONE}}' type="number"></input>
   </view>
   <view class="cu-form-group">
     <view class="title">生日</view>
-    <input placeholder="请填写生日" value='{{addressInfo.phone}}' type=""></input>
+    <input placeholder="请填写生日" name="U_BIRTHDAY" value='{{personInfo.U_BIRTHDAY}}' type=""></input>
   </view>
   <view class="cu-form-group">
     <view class="title">现居地</view>
-    <input placeholder="请输入收货人姓名" value='{{addressInfo.userName}}' disabled></input>
+    <input placeholder="请填写现居地" name="U_ADDRESS" value='{{personInfo.U_ADDRESS}}'></input>
+  </view>
+  <view class="padding-btn">
+    <button class="cu-btn block bg-gradual-main lg" form-type='submit' disabled='{{disabled}}' style="width:100%">确认
+    </button>
   </view>
 </form>
-<view class="padding-btn">
-  <button class="cu-btn block bg-gradual-main lg" bindtap='saveBasicInfo' disabled='{{disabled}}' style="width:100%">确认
-  </button>
-</view>
-

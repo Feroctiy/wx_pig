@@ -23,7 +23,6 @@
     "pages/cart/pay-success/pay-success", 
     "pages/notice/notice", 
     "pages/goods/loop/loop", 
-    "pages/address/update/index",
     "pages/login/login",
     "pages/goods/index/index",
     "pages/goods/comment/index", 

@@ -1,3 +1,5 @@
+var util = require("../../../utils/util.js")
+var call = require("../../../utils/request.js")
 var app = getApp();
 Page({
   data: {
@@ -8,9 +10,11 @@ Page({
     curMonth: 0,
     daysCountArr: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
     weekArr: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
-    dateList: []
+    dateList: [],
+    isSgin: false
   },
-  onShow: function () {
+  onShow: function() {
+    this.getSign()
     var today = new Date(); //当前时间  
     var y = today.getFullYear(); //年  
     var mon = today.getMonth() + 1; //月  
@@ -25,7 +29,7 @@ Page({
     });
     this.getDateList(y, mon - 1);
   },
-  getDateList: function (y, mon) {
+  getDateList: function(y, mon) {
     var vm = this;
     var daysCountArr = this.data.daysCountArr;
     if (y % 4 == 0 && y % 100 != 0) {
@@ -61,7 +65,7 @@ Page({
         // }
         dateList[weekIndex].unshift(dateItem);
       } else {
-        var v = y + '-' + (mon + 1) + '-' + add0((i + 1)); 
+        var v = y + '-' + (mon + 1) + '-' + add0((i + 1));
         var dateItem = {
           value: (y + '-' + (mon + 1) + '-' + add0((i + 1))).replace(/-/g, "/"),
           date: i + 1,
@@ -78,21 +82,39 @@ Page({
         // }
         dateList[weekIndex].push(dateItem);
       }
-    } 
+    }
     vm.setData({
       dateList: dateList
     });
   },
-  // 商品点击事件
-  selectList: function (e) {
-    var dataId = e.currentTarget.dataset.index;
-    var vid = e.currentTarget.dataset.vid;
-    this.setData({
-      curHdIndex: dataId
-    });
-    this.addSuborder(vid);
+  // 签到
+  singin: function(e) {
+    var _this = this;
+    call.getData('/app/user/appsign', {
+      OPENID: wx.getStorageSync('openid')
+    }, function(res) {
+      if (res.state == "success") {
+        util.showMessage("签到成功")
+      }
+      console.log(res);
+    }, function() {})
+
   },
-  preMonth: function () {
+  //查询签到
+  getSign: function() {
+    var _this = this;
+    call.getData('/app/user/appgetusersign', {
+      OPENID: wx.getStorageSync('openid')
+    }, function(res) {
+      if (res.state == "success") {
+        _this.setData({
+          isSgin: res.message == 'Y' ? true : false
+        })
+      }
+      console.log(res);
+    }, function() {})
+  },
+  preMonth: function() {
     // 上个月
     var vm = this;
     var curYear = vm.data.curYear;
@@ -106,7 +128,7 @@ Page({
 
     vm.getDateList(curYear, curMonth - 1);
   },
-  nextMonth: function () {
+  nextMonth: function() {
     // 下个月
     var vm = this;
     var curYear = vm.data.curYear;

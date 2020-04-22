@@ -1,8 +1,11 @@
 {
   "pages": [
+    
     "pages/index/index",
-    "pages/my/coupons/list",
     "pages/my/index/index",
+    "pages/my/coupons/list",
+    "pages/my/integral/sign",
+    
     
     "pages/my/integral/index",
     "pages/my/integral/list",

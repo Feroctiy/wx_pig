@@ -40,7 +40,10 @@ Page({
           wx.navigateTo({
             url: '/pages/my/coupons/list',
           })
+        }else{
+          util.showMessage("积分不足")
         }
+
       }, function () { })
     }
 })

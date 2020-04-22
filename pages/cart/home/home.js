@@ -21,10 +21,11 @@
          url: `/pages/login/login?from=${this.route}&tab=true`,
        })
      }
+     this.getCommodities();
    },
 
    onShow: function () {
-     this.getCommodities();
+     
      call.getData('/app/shopcar/appusershopcarnum', {
        OPENID: wx.getStorageSync('openid')
      }, function (res) {

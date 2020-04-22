@@ -125,6 +125,9 @@ Page({
         "orderData.money": buyNowInfoMem.num * buyNowInfoMem.amoney
       })
     } else {
+      that.setData({
+        shopcarlist:e.shoppingcartlist.split(',')
+      })
       this.getOrderData();
     }
 
@@ -500,7 +503,9 @@ Page({
         O_DATE: that.data.payOrderParam.O_DATE || "04-18 10:00-12:00" // 时间
       }, function (res) {
         if (res.state == "success") {
-
+          wx.navigateTo({
+            url: '/pages/cart/pay-money/pay-money?money=' + that.data.orderData.money + '&O_PLAY_Z_ID=' + res.O_PLAY_Z_ID
+          })
         }
         console.log(res);
       }, function () {})

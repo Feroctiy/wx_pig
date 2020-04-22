@@ -1,1 +1,319 @@
-/* pages/my/integral/sign.wxss */
+/* pages/others/calendar/calendar.wxss */
+.bg {
+  height: 100vh;
+  background: radial-gradient(circle, rgba(253, 242, 246, 1), rgba(253, 234, 238, 1), rgba(249, 207, 217, 1));
+  background-size: contain;
+}
+
+page {
+  background: radial-gradient(circle, rgba(253, 242, 246, 1), rgba(253, 234, 238, 1), rgba(249, 207, 217, 1));
+  background-size: contain;
+
+}
+
+.calendar {
+  width: 95%;
+  margin: auto;
+  border-radius: 15px;
+  margin-top: 70%;
+  position: relative;
+}
+
+.text_center {
+  text-align: center;
+}
+
+.selected_date {
+  padding: 20rpx;
+  overflow: hidden;
+  background: #C8E7E9;
+}
+
+.current_date {
+  background: radial-gradient(circle, rgba(253, 242, 246, 1), rgba(253, 234, 238, 1), rgba(249, 207, 217, 1));
+  border-radius: 100px;
+  color: #333;
+}
+
+.prev {
+  border-radius: 100px;
+  color: #fff;
+  background: #c8c8c8;
+}
+
+.next {
+  border-radius: 100px;
+  color: #fff;
+  background: #f9e9d2;
+}
+
+.selected_date>view {
+  width: 33.3%;
+  float: left;
+}
+
+.text_center {
+  font-family: PingFangSC-Regular;
+  font-size: 16px;
+  color: #1a1a1a;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.nextMonth {
+  background-image: linear-gradient(-135deg, #f6de8a 0%, #c89a5d 100%);
+  border-radius: 100px;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #fff;
+  letter-spacing: 0.18px;
+  text-align: center;
+  display: inline-block;
+  padding: 5rpx 20rpx;
+}
+
+.preMonth {
+  background: #f2f2f2;
+  border-radius: 100px;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #666;
+  letter-spacing: 0.18px;
+  text-align: center;
+  display: inline-block;
+  padding: 5rpx 20rpx;
+}
+
+.calendar_panel {
+  width: 100%;
+  height: auto;
+}
+
+.calendar_box {
+  width: 100%;
+  background: #fff;
+  overflow: hidden;
+  /* border-bottom: 1rpx solid #ececec; */
+}
+
+.weekday_label {
+  width: 14.28%;
+  float: left;
+  display: block;
+  text-align: center;
+  font-size: 26rpx;
+  padding: 10rpx 0;
+}
+
+.weekday_label>text {
+  width: 50rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  display: inline-block;
+}
+
+.select_icon {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.active_date {
+  background: #148447;
+  color: #fff;
+  border-radius: 50%;
+}
+
+.show_box {
+  padding: 20rpx;
+  font-size: 26rpx;
+}
+
+.calendar_box:nth-child(2) .weekday_label {
+  float: right;
+}
+
+/* pages/regular_purchase/regular_purchase/regular_purchase.wxss */
+
+.contain {
+  min-height: calc(100% - 40px);
+  background: #fff;
+  padding-bottom: 60px;
+}
+
+
+
+.tablet {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* pages/index1/index1.wxss */
+
+.og-calendar {
+  background-color: #fff;
+  color: #fff;
+  font-size: 12px;
+}
+
+.og-calendar .header {
+  position: relative;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 35rpx;
+  text-align: center;
+  color: #232323;
+  padding: 15px 0;
+  background: #fff;
+}
+
+.og-calendar .header .date-info {
+  font-family: PingFangSC-Regular;
+  font-size: 16px;
+  color: #1a1a1a;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.og-calendar .header .month-pre,
+.og-calendar .header .month-next {
+  position: absolute;
+  top: 15px;
+  width: 120rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  background: #f2f2f2;
+  border-radius: 100px;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #666;
+  letter-spacing: 0.18px;
+  text-align: center;
+}
+
+.og-calendar .header .month-next {
+  background-image: linear-gradient(-135deg, #f6de8a 0%, #c89a5d 100%);
+  color: #fff;
+}
+
+.og-calendar .header .btn:active {
+  background: #d64343;
+}
+
+.og-calendar .header .month-pre {
+  left: 0;
+}
+
+.og-calendar .header .month-next {
+  right: 0;
+}
+
+.og-calendar .header .month-pre image,
+.og-calendar .header .month-next image {
+  margin-top: 30rpx;
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.og-calendar .col {
+  width: 14.28571428571429%;
+  display: inline-flex;
+  justify-content: center;
+  text-align: center;
+  padding: 5rpx 0;
+}
+
+.og-calendar .col text {
+  display: block;
+  width: 60rpx;
+  height: 60rpx;
+  font-size: 14px;
+  line-height: 60rpx;
+  border: 2rpx solid transparent;
+  color: #232323;
+}
+
+.og-calendar .week .col text {
+  font-family: PingFangSC-Regular;
+  font-size: 13px;
+  color: #c8c8c8;
+  letter-spacing: 0;
+}
+
+.og-calendar .body .col text {
+  border-radius: 50%;
+}
+
+.og-calendar .body .col.active text {
+  border-color: #f6de8a;
+}
+
+.og-calendar .body .col.old text {
+  color: #ccc;
+}
+
+.og-calendar .body .col.current text,
+.og-calendar .body .col text:active {
+  background-image: linear-gradient(-135deg, #f6de8a 0%, #c89a5d 100%);
+  color: #fff;
+}
+
+.tis {
+  background: #f7f7f7;
+  line-height: 40px;
+  margin: 5px 0;
+}
+
+.tis view {
+  text-align: center;
+  width: 50%;
+  font-family: PingFangSC-Light;
+  font-size: 12px;
+  color: #212121;
+  letter-spacing: 0;
+}
+
+.tis .icon {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-image: linear-gradient(-134deg, #ffe29f 0%, #c28638 100%);
+}
+
+.tis .icon.icon1 {
+  background: #f9e9d2;
+}
+
+.tis1 {
+  padding: 15px;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #1a1a1a;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.tis1 .b {
+  background: #f2f2f2;
+  border-radius: 100px;
+  padding: 5px 10px;
+}
+
+
+.sign {
+  position: absolute;
+  right: 5%;
+  top: -160rpx;
+  z-index: 9999;
+  width:150rpx;
+  height:150rpx;
+  line-height: 150rpx;
+  color: #B18D6D;
+  background:radial-gradient(circle,rgba(253,242,246,1),rgba(253,234,238,1),rgba(249,207,217,1));
+  border-radius:50%;
+  text-align: center;
+  font-size: 34rpx;
+  box-shadow: 1px 1px 0px 13px #C8E7E9;
+  
+}

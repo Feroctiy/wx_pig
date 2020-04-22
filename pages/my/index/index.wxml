@@ -18,15 +18,15 @@
 	</view>
 	<view class="cu-list grid col-3 no-border">
 		<view class="cu-item" bindtap="goIntegral">
-			<view>{{openid ? userInfo.U_INTEGRAL:0}}</view>
+			<view class="text-lg">{{openid ? userInfo.U_INTEGRAL:0}}</view>
 			<text>积分</text>
 		</view>
 		<view class="cu-item" bindtap="goCoupon">
-			<view>0</view>
+			<view class="text-lg">0</view>
 			<text>优惠券/码</text>
 		</view>
 		<view class="cu-item">
-			<view>{{openid? userInfo.U_BALANCE : 0}}</view>
+			<view class="text-lg">{{openid? userInfo.U_BALANCE : 0}}</view>
 			<text>余额</text>
 		</view>
 	</view>

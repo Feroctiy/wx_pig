@@ -65,8 +65,8 @@
   padding-top: 3vw;
   width: 90%;
   margin: 0 5%;
-  font-size: 19px;
-  margin-bottom: 15px;
+  font-size: 16px;
+  margin-bottom: 30rpx;
 
 }
 
@@ -175,7 +175,7 @@
 }
 
 .sub-list .row .carrier .right .use {
-  width: 50%;
+  width: 60%;
   height: 22px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;

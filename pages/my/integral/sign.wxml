@@ -1,10 +1,41 @@
-<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
-	<view slot="backText">返回</view>
-	<view slot="content">签到</view>
-</cu-custom>
-<van-calendar
-  title="日历"
-  poppable="{{ false }}"
-  show-confirm="{{ false }}"
-  class="calendar"
-/>
+<view class="bg" style="background: url(../../../images/sign.jpg) no-repeat center center;background-size: contain;">
+	<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
+		<view slot="backText">返回</view>
+		<view slot="content">签到</view>
+	</cu-custom>
+	<view class="calendar">
+		<view class="selected_date">
+			<view bindtap="preMonth">
+				<text class='preMonth'>上个月</text>
+			</view>
+			<view class="text_center">{{curYear+'年'+curMonth+'月'}}</view>
+			<view style="text-align:right;" bindtap="nextMonth">
+				<text class='nextMonth'>下个月</text>
+			</view>
+		</view>
+		<view class="calendar_panel">
+			<view class="calendar_box">
+				<view class="weekday_label">日</view>
+				<view class="weekday_label">一</view>
+				<view class="weekday_label">二</view>
+				<view class="weekday_label">三</view>
+				<view class="weekday_label">四</view>
+				<view class="weekday_label">五</view>
+				<view class="weekday_label">六</view>
+			</view>
+			<view class="calendar_box" wx:for="{{dateList}}" wx:for-item="week">
+				<view class="weekday_label" wx:for="{{week}}">
+					<text class="{{item.value==selectedDate?'active_date':''}} {{item.value==currentDate?'current_date':''}}" bindtap="selectDate" data-date="{{item}}" wx:if="{{item.state==''}}">{{item.date}}</text>
+					<text class="{{item.value==selectedDate?'active_date':''}} {{item.value==currentDate?'current_date':''}} {{item.state==0?'prev':'next'}}" bindtap="selectDate" data-date="{{item}}" wx:else>{{item.date}}</text>
+				</view>
+			</view>
+		</view>
+		<view class="sign">
+			立即签到
+		</view>
+	</view>
+</view>
+
+
+
+<!-- <van-calendar title="日历" poppable="{{ false }}" show-confirm="{{ false }}" class="calendar" /> -->

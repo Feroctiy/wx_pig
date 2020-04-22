@@ -4,7 +4,7 @@
 </cu-custom>
 <view>
 	<view class="bg-gradual-main padding" style="height: 200rpx;">
-		<view class="" style="line-height: 100rpx;">
+		<view class="text-lg" style="line-height: 100rpx;">
 			积分兑好礼
 		</view>
 	</view>
@@ -16,7 +16,7 @@
 			<view class="flex flex-sub flex-direction solid-right" bindtap="goList">
 				<view>积分记录</view>
 			</view>
-		</view> 
+		</view>
 		<view class="cu-bar bg-white solid-bottom margin-top">
 			<view class="action"> 积分兑换优惠券 </view>
 			<!-- <view class="action" bindtap="goOrder">
@@ -26,10 +26,10 @@
 		</view>
 		<view class="bg-white padding">
 			<view class='nav-list'>
-				<navigator open-type="navigate" hover-class='none' class="nav-li bg-main" wx:for="{{couponslist}}" wx:key bindtap="goCouDetail" data-id="{{item.DB_COUPONS_ID}}">
+				<navigator open-type="navigate" hover-class='none' class="nav-li bg-red" wx:for="{{couponslist}}" wx:key bindtap="goCouDetail" data-id="{{item.DB_COUPONS_ID}}">
 					<view class="nav-title">{{item.COU_MONEY}}元</view>
-					<view class="nav-name">满{{item.COU_MAN}}元可用</view> 
-				</navigator> 
+					<view class="nav-name">满{{item.COU_MAN}}元可用</view>
+				</navigator>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom ">
@@ -48,7 +48,7 @@
 						<text class="text-red">{{item.G_YMONEY}}</text>
 						<text class="bg-red text-xs radius padding-xs-5">立即兑换</text>
 					</view>
-				</view>  
+				</view>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom ">
@@ -64,7 +64,9 @@
 					</view>
 				</view>
 				<view class="action" style="width: 200rpx;">
-					<button class="cu-btn round line-red" size='mini'>去签到</button>
+					<navigator url="/pages/my/integral/sign">
+						<button class="cu-btn round line-red" size='mini'>去签到</button>
+					</navigator>
 				</view>
 			</view>
 			<view class="cu-item">
@@ -76,9 +78,11 @@
 					</view>
 				</view>
 				<view class="action" style="width: 200rpx;">
-					<button class="cu-btn round line-red" size='mini'>去下单</button>
+					<navigator url="/pages/index/index" open-type="switchTab">
+						<button class="cu-btn round line-red" size='mini'>去下单</button>
+					</navigator> 
 				</view>
 			</view>
 		</view>
-	</view> 
+	</view>
 </view>

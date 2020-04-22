@@ -1,75 +1,47 @@
 <cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
-	<view slot="backText">返回</view>
-	<view slot="content">优惠券</view>
+  <view slot="backText">返回</view>
+  <view slot="content">优惠券</view>
 </cu-custom>
-<van-tabs animated>
-	<van-tab title="全部">
-		<view class="sub-list valid"> 
-			<view class="row"> 
-				<view class="carrier">
-					<view class="left">
-						<view class="title margin-bottom">
-							 烦烦烦
-						</view>
-						<view class="term">
-							2020-03-23 12:00 ~ 	2020-03-23 12:00
-						</view>
-						<view class="gap-top"></view>
-						<view class="gap-bottom"></view>
-					</view>
-					<view class="right">
-						<view class="ticket">
-							<view class="num">
-								12
-							</view>
-							<view class="unit">
-								元
-							</view>
-						</view>
-						<view class="criteria">
-							33
-						</view>
-						<view class="use">
-							去使用
-						</view>
-					</view>
-				</view>
-			</view>
-      <view class="row"> 
-				<view class="carrier">
-					<view class="left">
-						<view class="title margin-bottom">
-							 烦烦烦
-						</view>
-						<view class="term">
-							2020-03-23 12:00 ~ 	2020-03-23 12:00
-						</view>
-						<view class="gap-top"></view>
-						<view class="gap-bottom"></view>
-					</view>
-					<view class="right invalid">
-						<view class="ticket">
-							<view class="num">
-								12
-							</view>
-							<view class="unit">
-								元
-							</view>
-						</view>
-						<view class="criteria">
-							33
-						</view>
-						<view class="use">
-							已失效
-						</view>
-					</view>
-				</view>
-			</view>
+<view class="container">
+	<view class="status-box">
+		<view bindtap="statusTap" class="status-label {{index == currentType ? 'active' : ''}}" wx:for-items="{{tabs}}" wx:key="{{index}}" data-index="{{index}}">
+			{{item}}
+			<view class="{{tabClass[index]}}"></view>
 		</view>
-     
-
-	</van-tab>
-	<van-tab title="未使用">内容 2</van-tab>
-	<van-tab title="已使用">内容 3</van-tab>
-	<van-tab title="已过期">内容 4</van-tab>
-</van-tabs>
+	</view>
+</view>
+  <view class="sub-list valid">
+      <view class="row" wx:for="{{list}}" wx:for-index="idx" wx:for-item="item" wx:key="item.UC_COUPONS_ID">
+        <view class="carrier">
+          <view class="left">
+            <view class="title margin-bottom">
+              {{item.COU_NAME}}
+            </view>
+            <view class="term">
+              {{item.COU_STARTDATE}} ~ {{item.COU_ENDDATE}}
+            </view>
+            <view class="gap-top"></view>
+            <view class="gap-bottom"></view>
+          </view>
+          <view class="right">
+            <view class="ticket">
+              <view class="num">
+                {{item.COU_MONEY}}
+              </view>
+              <view class="unit">
+                元
+              </view>
+            </view>
+            <view class="criteria">
+              {{item.COU_MAN}}
+            </view>
+            <view class="use" wx:if="item.UC_TYPE == 1" bindtap="touse" data-id="{{item.UC_COUPONS_ID}}">去使用
+            </view>
+            <view class="use" wx:elif="item.UC_TYPE == 2">已失效
+            </view>
+            <view class="use" wx:else>已过期
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>

@@ -24,7 +24,8 @@ page{
 }
 .con{
   position: absolute;
-  top: 240rpx;
+  /* top: 240rpx; */
+  top:133px;
   width: 100%;
 
 }

@@ -22,20 +22,19 @@ Page({
     empty: false
   }, 
   onLoad: function (options) {
-
+    this.getOrderList(0);
   }, 
   onReady: function () {
 
   }, 
   onShow: function () {
-    // wx.showLoading();
-    // var that = this;
-    // that.setData({
-    //   orderList: [{}, {}]
-    // });
-    this.getOrderList();
+    
+    
   },
   statusTap: function (e) {
+    this.setData({
+      list: []
+    })
     var obj = e;
     var count = 0;
     for (var key in obj) {
@@ -50,7 +49,7 @@ Page({
     this.setData({
       currentType: curType
     });
-    this.onShow();
+    this.getOrderList(this.data.currentType);
   }, 
   receiptHandle(e){ 
     var id = e.currentTarget.dataset.id;
@@ -131,12 +130,14 @@ Page({
   },
   getOrderList: function (type, currentPage) {
     var _this = this;
+    wx.showLoading(); 
     call.getData('/app/order/apporderdestate', {
       OPENID: wx.getStorageSync('openid'),
-      O_STATE: 0,
+      O_STATE: type,
       PULLNUM: 0
     }, function (res) {
       console.log(res);
+      wx.hideLoading();
       if (res.state == "success") {
         _this.setData({
           list: res.orderlist

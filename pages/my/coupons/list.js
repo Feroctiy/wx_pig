@@ -72,7 +72,7 @@ Page({
     }, function() {})
   },
  touse:function(e){
-   wx.redirectTo({
+   wx.switchTab({
      url: '/pages/index/index',
    })
  },

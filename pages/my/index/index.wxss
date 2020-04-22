@@ -28,4 +28,7 @@
 .cu-list.menu>.cu-item.arrow {
   padding-right: 70rpx;
 }
+.cu-list.grid>.cu-item text.text-black{
+  color: #333;
+}
 

@@ -15,15 +15,14 @@
 	</view>
 	<view class="bg-gradual-main" style="height:200rpx">
 	</view>
-	<view class="con">
+	<view class="con" style="top:{{customBar + 55}}px">
 		<swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}} margin-bottom" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
 			<swiper-item wx:for="{{indexData.banner}}" wx:key data-id="{{item.DB_BANNER_ID}}" bindtap="goBanner">
 				<image src="{{item.B_IMG}}" mode="aspectFill"></image>
-				<!-- <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video> -->
 			</swiper-item>
 		</swiper>
 		<van-notice-bar text="{{indexData.notice.NO_NOTE}}" class="margin-top" wx:if="{{indexData.notice}}" bindtap="goNotice">
-		<text slot="left-icon">[公告]</text>
+		<text slot="left-icon" class="padding-right">[公告]</text>
 		</van-notice-bar>
 
 		<view class="margin">

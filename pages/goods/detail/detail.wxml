@@ -122,8 +122,8 @@
 			</view>
 			购物车
 		</view>
-		<view class="bg-orange submit" bindtap="joinCart">加入购物车</view>
-		<view class="bg-red submit" bindtap="submit">立即购买</view>
+		<view class="bg-orange submit round" bindtap="joinCart">加入购物车</view>
+		<view class="bg-red submit round" bindtap="submit">立即购买</view>
 	</view>
 
 
@@ -159,7 +159,7 @@
 						<text class="text-black">数量</text>
 					</view>
 					<view class="action">
-						<van-stepper value="{{ num }}" bind:change="onChange" disable-input />
+						<van-stepper value="{{ num }}" bind:change="onChange" />
 					</view>
 				</view>
 			</view>

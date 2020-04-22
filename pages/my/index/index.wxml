@@ -42,7 +42,7 @@
 			<view>
 				<image src="../../../images/{{item.url}}" style="width:50rpx;height:50rpx"></image>
 			</view>
-			<text>{{item.name}}</text>
+			<text class="text-black">{{item.name}}</text>
 		</view>
 	</view>
 	<view style="overflow: hidden;margin: auto;" class="bg-white text-center">
@@ -53,37 +53,37 @@
 			<view class="margin-top">
 				<image src="../../../images/user1.png" style="width:40rpx;height:40rpx;"></image>
 			</view>
-			<text>个人信息</text>
+			<text class="text-black">个人信息</text>
 		</view>
 		<view class="cu-item" bindtap="goAddress">
 			<view class="margin-top">
 				<image src="../../../images/user2.png" mode="widthFix" style="width:40rpx;height:40rpx;"></image>
 			</view>
-			<text>收货地址</text>
+			<text class="text-black">收货地址</text>
 		</view>
 		<view class="cu-item" bindtap="goShowCase" data-type="2">
 			<view class="margin-top">
 				<image src="../../../images/user3.png" style="width:40rpx;height:40rpx;"></image>
 			</view>
-			<text>下单指南</text>
+			<text class="text-black">下单指南</text>
 		</view>
 		<view class="cu-item">
 			<view class="margin-top">
 				<image src="../../../images/user4.png" mode="widthFix" style="width:40rpx;height:40rpx;"></image>
 			</view>
-			<text>关注店铺</text>
+			<text class="text-black">关注店铺</text>
 		</view>
 		<view class="cu-item" bindtap="goShowCase" data-type="1">
 			<view class="margin-top">
 				<image src="../../../images/user5.png" mode="widthFix" style="width:40rpx;height:40rpx;"></image>
 			</view>
-			<text>关于我们</text>
+			<text class="text-black">关于我们</text>
 		</view>
 		<view class="cu-item" bindtap="goSetings">
 			<view class="margin-top">
 				<image src="../../../images/user6.png" mode="widthFix" style="width:40rpx;height:40rpx;"></image>
 			</view>
-			<text>账户与安全</text>
+			<text class="text-black">账户与安全</text>
 		</view>
 		<!-- <view class="cu-item" bindtap="call">
 			<view class="margin-top">

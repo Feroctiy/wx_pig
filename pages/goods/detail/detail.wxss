@@ -298,3 +298,9 @@
     transform: translateY(120%);
   }
 }
+
+.cu-bar.tabbar .submit{
+  align-self: auto;
+  margin-right:30rpx;
+  line-height: 60rpx;
+}

@@ -42,6 +42,6 @@
 	</view>
 </view>
 <view class="padding-btn">
-	<button class="cu-btn block bg-gradual-main lg" bindtap='handleAfterSale' style="width:100%" form-type='submit'>确认
+	<button class="cu-btn block bg-gradual-main lg" bindtap='handle' style="width:100%" form-type='submit'>确认
 	</button>
 </view>

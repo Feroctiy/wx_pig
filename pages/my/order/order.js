@@ -2,7 +2,7 @@ var call = require("../../../utils/request.js")
 var util = require("../../../utils/util.js")
 
 const app = getApp(),
-  pageStart = 1; 
+  pageStart = 1;
 Page({
 
   data: {
@@ -20,18 +20,18 @@ Page({
     refreshSize: 0,
     bottomSize: 0,
     empty: false
-  }, 
-  onLoad: function (options) {
-    this.getOrderList(0);
-  }, 
-  onReady: function () {
-
-  }, 
-  onShow: function () {
-    
-    
   },
-  statusTap: function (e) {
+  onLoad: function(options) {
+    this.getOrderList(0);
+  },
+  onReady: function() {
+
+  },
+  onShow: function() {
+
+
+  },
+  statusTap: function(e) {
     this.setData({
       list: []
     })
@@ -50,8 +50,15 @@ Page({
       currentType: curType
     });
     this.getOrderList(this.data.currentType);
-  }, 
-  receiptHandle(e){ 
+  },
+  // 订单详情
+  orderDetail: function(e) {
+    console.log(e)
+    wx.navigateTo({
+      url: '/pages/cart/pay-order-detail/pay-order-detail?id=' + e.currentTarget.dataset.id,
+    })
+  },
+  receiptHandle(e) {
     var id = e.currentTarget.dataset.id;
     var _this = this;
     wx.showModal({
@@ -61,12 +68,12 @@ Page({
         if (res.confirm) {
           call.getData('/app/order/usereditorder', {
             DB_ORDER_ID: id
-          }, function (res) {
+          }, function(res) {
             console.log(res);
             if (res.state == "success") {
-      
+
             }
-          }, function () {})
+          }, function() {})
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
@@ -94,12 +101,12 @@ Page({
     var _this = this;
     call.getData('/app/order/appDeleteOrder', {
       DB_ORDER_ID: id
-    }, function (res) {
+    }, function(res) {
       console.log(res);
       if (res.state == "success") {
 
       }
-    }, function () {})
+    }, function() {})
   },
   payOrder(e) {
     var id = e.currentTarget.dataset.id;
@@ -117,25 +124,25 @@ Page({
     })
     wx.showNavigationBarLoading();
     this.getShopServiceOrder(type, currentPage);
-  }, 
+  },
   refresh() {
     this.getList('refresh', pageStart);
     this.setData({
       empty: false,
       endStatus: false
     })
-  }, 
+  },
   more() {
     this.getList('more', '10');
   },
-  getOrderList: function (type, currentPage) {
+  getOrderList: function(type, currentPage) {
     var _this = this;
-    wx.showLoading(); 
+    wx.showLoading();
     call.getData('/app/order/apporderdestate', {
       OPENID: wx.getStorageSync('openid'),
       O_STATE: type,
       PULLNUM: 0
-    }, function (res) {
+    }, function(res) {
       console.log(res);
       wx.hideLoading();
       if (res.state == "success") {
@@ -143,26 +150,19 @@ Page({
           list: res.orderlist
         })
       }
-    }, function () {})
+    }, function() {})
   },
-  goAfterSale(e){
+  goAfterSale(e) {
     var id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/my/afterSale/afterSale?id='+id,
+      url: '/pages/my/afterSale/afterSale?id=' + id,
     })
   },
-  evaluate(e){
+  evaluate(e) {
     var id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/my/evaluate/evaluate?id='+id,
+      url: '/pages/my/evaluate/evaluate?id=' + id,
     })
   }
 
 })
-
-
-
-
-
-
- 

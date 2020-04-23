@@ -15,14 +15,14 @@
 	</view>
 	<view class="order-list" hidden="{{list.length > 0 ? false : true}}">
 		<view class="a-order" wx:for-items="{{list}}" wx:key="{{index}}">
-			<view class="order-date" bindtap="orderDetail" data-id="{{item.id}}">
+			<view class="order-date" bindtap="orderDetail" data-id="{{item.DB_ORDER_ID}}">
 				<view class="date-box">{{item.store.ST_NAME}}</view>
 				<view class="status text-red" wx:if="{{item.O_STATE == 1}}">待支付</view>
 				<view class="status text-red" wx:if="{{item.O_STATE == 2}}">待发货 </view>
         <view class="status text-red" wx:if="{{item.O_STATE == 3}}">待收货 </view>
         <view class="status text-red" wx:if="{{item.O_STATE == 4}}">待评价 </view>
 			</view>
-			<view bindtap="orderDetail" data-id="{{item.id}}" class="solid-bottom">
+			<view bindtap="orderDetail" data-id="{{item.DB_ORDER_ID}}" class="solid-bottom">
 				<view class="a-goods" wx:for="{{item.shop}}" wx:for-index="idx" wx:for-item="itemName">
 					<view class="img-box">
 						<image src="{{itemName.goods.G_IMG}}" class="img" />

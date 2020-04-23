@@ -1,32 +1,27 @@
 {
   "pages": [
-    
-    
     "pages/index/index",
+    "pages/cart/pay-order-detail/pay-order-detail",
+    
+    "pages/my/seting/index", 
     "pages/my/index/index",
     "pages/my/coupons/list",
     "pages/my/integral/sign",
     "pages/my/info/info",
-    "pages/cart/pay-order-detail/pay-order-detail",
+    
     "pages/my/integral/index",
     "pages/my/integral/list",
-    "pages/my/coupons/detail",
-
-
+    "pages/my/coupons/detail", 
     "pages/goods/search/search",
-    "pages/cart/pay-order/pay-order",
-
-
+    "pages/cart/pay-order/pay-order", 
     "pages/address/list/index",
-    "pages/address/add/index",
-    
+    "pages/address/add/index", 
     "pages/my/showcase/showcase",
     "pages/my/afterSaleList/afterSaleList",
     "pages/my/afterSale/afterSale",
     "pages/my/order/order",
     "pages/my/evaluate/evaluate",
-    "pages/my/order-list/index",
-
+    "pages/my/order-list/index", 
     "pages/goods/detail/detail",
     "pages/good/city/city",
     "pages/cart/pay-money/pay-money",
@@ -37,8 +32,7 @@
     "pages/login/login",
     "pages/goods/index/index",
     "pages/goods/comment/index",
-    "pages/my/active/index",
-    "pages/my/seting/index",
+    "pages/my/active/index", 
     "pages/logs/logs"
   ],
   "window": {

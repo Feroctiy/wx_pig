@@ -142,7 +142,6 @@ Page({
         _this.setData({
           list: res.orderlist
         })
-        console.log(_this.data);
       }
     }, function () {})
   },

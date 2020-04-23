@@ -1,5 +1,4 @@
-// pages/my/active/index.js
-
+// pages/cart/pay-order-detail/pay-order-detail.js
 Page({
 
   /**

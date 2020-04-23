@@ -78,6 +78,7 @@ Page({
       console.log('addid', that.data.addId)
       if (that.data.addId == '' || that.data.addId == null || that.data.addId == undefined) {
         console.log('没有添加地址')
+        that.initShippingAddress();
       } else {
         that.getAdd()
       }
@@ -423,7 +424,7 @@ Page({
   },
   addAddress: function () {
     wx.navigateTo({
-      url: "/pages/address/add/index"
+      url: "/pages/address/add/index?type=add"
     })
   },
   selectAddress: function () {

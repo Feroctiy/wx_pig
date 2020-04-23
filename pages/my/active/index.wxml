@@ -1,2 +1,3 @@
-<!--pages/my/active/index.wxml-->
-<text>pages/my/active/index.wxml</text>
+<cu-custom bgColor="bg-gradual-main-top"> 
+	<view slot="content">活动</view>
+</cu-custom>

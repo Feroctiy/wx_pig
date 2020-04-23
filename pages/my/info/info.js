@@ -114,7 +114,7 @@ Page({
       OPENID: wx.getStorageSync('openid'),
       U_NAME: e.detail.value.U_NICKNAME,
       U_GENDER: that.data.gender,
-      U_PHONE: e.detail.value.U_PHONE,
+      U_PHONE: '',
       U_BIRTHDAY: that.data.date,
       U_ADDRESS: e.detail.value.U_ADDRESS
     }, function(res) {

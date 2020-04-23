@@ -2,7 +2,7 @@
 	<view slot="content">我的</view>
 </cu-custom>
 <view>
-	<view class="cu-list menu-avatar" style="background: url(../../../images/userbg.png);">
+	<view class="cu-list menu-avatar" style="background: url(https://lxk.jiafh.com/bg/userbg.png);">
 		<view class="cu-item cur  padding-top padding-bottom" style="background-color:transparent;">
 			<view class="cu-avatar round xl" style="background-color:transparent;">
 				<image src="{{userInfo.U_IMG}}" class="round" mode="widthFix" style="width:200rpx;" wx:if="{{ userInfo.U_IMG }}"></image>

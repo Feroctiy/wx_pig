@@ -100,11 +100,14 @@ Page({
       ADD_REGION: that.data.region[2] //区
     }, function(res) {
       if (res.state == "success") {
-        wx.showToast({
-          title: this.data.isEdit ? '编辑成功' : '添加成功',
-          icon: 'none',
-          duration: 1500
-        })
+         
+          wx.showToast({
+            title: that.data.isEdit ? '编辑成功' : '添加成功',
+            icon: 'none',
+            duration: 1500
+          })
+         
+       
         wx.navigateBack({
           delta: 1
         })

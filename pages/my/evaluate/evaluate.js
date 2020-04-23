@@ -7,7 +7,8 @@ Page({
    */
   data: {
     value: 3,
-    imgList:[]
+    imgList:[],
+    remark:''
   },
 
   /**
@@ -19,6 +20,12 @@ Page({
     })
 
   },
+  textareaBInput: function (e) { 
+     
+    this.setData({ 
+      remark: e.detail.value
+    });
+  },
   onChange(event) {
     this.setData({
       value: event.detail
@@ -27,8 +34,9 @@ Page({
   handle(){
     var _this = this;
     call.getData('/app/comments/appsavecomment', {
-      DB_SHOPCAR_ID: options.id,
-      COM_NOTE:'',
+      OPENID:wx.getStorageSync('openid'),
+      DB_SHOPCAR_ID: _this.data.DB_SHOPCAR_ID,
+      COM_NOTE:_this.data.remark,
       COM_NUM:_this.data.value
     }, function (res) {
       console.log(res);

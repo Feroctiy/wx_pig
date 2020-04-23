@@ -9,10 +9,10 @@
 			<view class="{{tabClass[index]}}"></view>
 		</view>
 	</view>
-	<!-- <view class="no-order" hidden="{{orderList ? true : false}}" style="height: {{bodyHeight}}px;">
+	<view class="no-order" hidden="{{list.length > 0 ? true : false}}" style="height: {{bodyHeight}}px;">
 		<image src="/images/none/empty_order.png" class="no-order-img"></image>
 		<view class="text">还没有订单呢</view>
-	</view> -->
+	</view>
 
 	<!-- </view>
 <scroll id="scroll" requesting="{{requesting}}" empty-show="{{emptyShow}}" end="{{endStatus}}" listCount="{{orderList.length}}" has-top="{{hasTop}}" enable-back-to-top="{{enableBackToTop}}" refresh-size="{{refreshSize}}" bottom-size="{{bottomSize}}" color="{{color}}" bind:refresh="refresh" bind:more="more">
@@ -141,7 +141,7 @@
 			</view>
       <view class="price-box" wx:if="{{item.O_STATE == 4}}">
 				<view class="btn-box" style="width:100%;">  
-					<view class="btn topay-btn" catchtap="evaluate" data-id="{{item.DB_ORDER_ID}}" data-money="{{item.O_ALL_MONEY}}">立即评价</view>
+					<view class="btn topay-btn" catchtap="evaluate" data-id="{{item.shop[0].DB_SHOPCAR_ID}}" data-money="{{item.O_ALL_MONEY}}">立即评价</view>
 				</view>
 			</view>
 		</view>
@@ -150,81 +150,8 @@
 
 
 
-
-
-	<!-- <wxs module="filter" src="../../../utils/util.wxs"></wxs>
-<view class='bg-white time-opt-fixed padding-top-sm padding-bottom-sm'> -->
-	<!-- <view class="grid col-2 text-center bg-white ">
-    <view class="padding-top-xs padding-bottom-xs padding-left-sm padding-right-sm solid-right">
-      <picker mode="date" value="{{beginDate}}" start="{{start}}" end="{{end}}" bindchange="beginDateChange">
-        <view class="flex justify-between">
-          <view class="picker">{{beginDate}}</view>
-          <view>
-            <text class='cuIcon-triangledownfill lg text-gray text-xxl' style='font-size:20px;'></text>
-          </view>
-        </view>
-      </picker>
-    </view>
-    <view class="padding-top-xs padding-bottom-xs padding-left-sm padding-right-sm">
-      <picker mode="date" value="{{endDate}}" start="{{start}}" end="{{end}}" bindchange="endDateChange">
-        <view class="flex justify-between">
-          <view class="picker">{{endDate}}</view>
-          <view>
-            <text class='cuIcon-triangledownfill lg text-gray text-xxl' style='font-size:20px;'></text>
-          </view>
-        </view>
-      </picker>
-    </view>
-  </view> -->
-	<!-- </view> -->
-
-	<!-- 
-<scroll id="scroll" requesting="{{requesting}}" empty-show="{{emptyShow}}" end="{{endStatus}}" listCount="{{shopList.length}}" has-top="{{hasTop}}" enable-back-to-top="{{enableBackToTop}}" refresh-size="{{refreshSize}}" bottom-size="{{bottomSize}}" color="{{color}}"
-  bind:refresh="refresh" bind:more="more">
-  <view class="cells" wx:for="{{shopList}}" wx:key="{{index}}">
-    <navigator url='../consumedetail/consumedetail?orderNo={{item.orderNo}}'>
-      <view class="bg-white padding-sm item" style="margin-bottom:10px;">
-        <view class="flex justify-between">
-          <view>{{item.payTime}}</view>
-          <view>[{{filter.getAccountType(item.amountType)}}]</view>
-        </view>
-        <view class="flex justify-between">
-          <view class="orderNo">{{item.stationName}}</view>
-          <view class="money">
-            <text>{{item.payAmount}}</text>
-          </view>
-        </view>
-        <view class="flex justify-between">
-          <view>{{item.payMethod}} </view>
-          <view>{{filter.getCardAcountStatus(item.orderStatus)}}</view>
-        </view>
-      </view>
-    </navigator>
-  </view>
-</scroll> -->
-
-
-
-	<!-- <view class='list'>
-  <navigator url='../consumedetail/consumedetail?orderNo={{item.orderNo}}' 
-  wx:for="{{shopList}}" wx:for-index="idx" wx:for-item="item" wx:key="item.orderNo">
-    <view class="bg-white padding-sm item" style="margin-bottom:10px;">
-      <view class="flex justify-between">
-        <view>{{item.payTime}}</view>
-        <view>[{{filter.getAccountType(item.amountType)}}]</view>
-      </view>
-      <view class="flex justify-between">
-        <view class="orderNo">{{item.stationName}}</view>
-        <view class="money"><text>{{item.payAmount}}</text></view>
-      </view>
-       <view class="flex justify-between">
-        <view>{{item.payMethod}} </view>
-        <view>{{filter.getCardAcountStatus(item.orderStatus)}}</view>
-      </view>
-    </view>
-  </navigator>
-</view>
-<view class='cu-load load-modal' wx:if="{{loadModal}}">
+ 
+<!-- <view class='cu-load load-modal' wx:if="{{loadModal}}">
   <image src='/images/logo1.png' class='png' mode='aspectFit'></image>
   <view class='gray-text'>加载中...</view>
 </view>
@@ -233,4 +160,4 @@
   <view class="weui-loadmore__tips">正在加载...</view>
 </view>
 <view class="line" wx:if="{{pageNum == 1 && shopList.length == 0}}" hidden="{{line_h}}"> 暂无数据 </view>
-<view class="line" wx:else hidden="{{line_h}}">-- 我是有底线的 --</view> -->
+<view class="line" wx:else hidden="{{line_h}}">-- 我是有底线的 --</view> --> 

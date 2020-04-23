@@ -18,7 +18,7 @@
 </view>
 <view class="cu-form-group align-start solid-bottom">
 	<view class="title">备注</view>
-	<textarea maxlength="-1" bindinput="textareaBInput" placeholder="对商品有什么心得，可以写在这里哦"></textarea>
+	<textarea maxlength="-1" bindinput="textareaBInput" placeholder="对商品有什么心得，可以写在这里哦" value="{{remark}}"></textarea>
 </view>
 <view class="cu-bar bg-white solid-top">
 	<view class="action">

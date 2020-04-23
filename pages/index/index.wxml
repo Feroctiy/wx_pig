@@ -26,7 +26,7 @@
 		</van-notice-bar>
 
 		<view class="margin">
-			<image src="https://img.yzcdn.cn/upload_files/2020/03/15/FjoE4zV16BPAVjfmXmWDvDj7QlOQ.jpg!large.jpg" mode="widthFix" style="width:100%"></image>
+			<image src="../../images/userbanner.png" mode="widthFix" style="width:100%"></image>
 		</view>
 		<view class="bg-white padding">
 			<view class="grid col-2 margin-bottom text-center grid-square">

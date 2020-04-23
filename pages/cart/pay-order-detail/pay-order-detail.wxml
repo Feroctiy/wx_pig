@@ -1,0 +1,78 @@
+<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">订单详情</view>
+</cu-custom>
+
+<!-- 收货地址 -->
+<view class="address-box">
+	<view class="show-address">
+		<view class="name-tel">姓名 手机号</view>
+		<view class="addr-text">地址</view>
+	</view>
+</view>
+<!-- 商品列表 -->
+<view bindtap="orderDetail" data-id="{{item.id}}" class="solid-bottom">
+	<view class="a-goods" wx:for="{{item.shop}}" wx:for-index="idx" wx:for-item="itemName">
+		<view class="img-box">
+			<image src="{{itemName.goods.G_IMG}}" class="img" />
+		</view>
+		<view class="text-box">
+			<view class="arow arow01">
+				<view class="goods-name">{{itemName.goods.G_NAME}}</view>
+				<view class="goods-price">¥ {{itemName.SH_MONEY}}</view>
+			</view>
+			<view class="arow">
+				<view class="goods-label">{{itemName.specif.SPE_NAME}}({{itemName.specif.DIN_NAME}})</view>
+				<view class="goods-num">x {{itemName.SH_NUM}}</view>
+			</view>
+		</view>
+	</view>
+</view>
+<!-- 配送方式 -->
+<view class="cu-list menu">
+	<view class="cu-item">
+		<view class="content">
+			<text class="text-grey">配送方式</text>
+		</view>
+		<view class="action">
+			同城配送
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<text class="text-grey">配送时间</text>
+		</view>
+		<view class="action">
+
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<text class="text-grey">留言</text>
+		</view>
+		<view class="action">
+			<text class="text-grey">小目标还没有实现！</text>
+		</view>
+	</view>
+	<view class="cu-item margin-top">
+		<view class="content">
+			<text class="text-grey">商品金额</text>
+		</view>
+		<view class="action">
+			<text class="text-grey">小目标还没有实现！</text>
+		</view>
+
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<text class="text-grey">运费</text>
+		</view>
+		<view class="action">
+			<text class="text-grey">小目标还没有实现！</text>
+		</view>
+
+	</view>
+</view>
+<!-- 商家金额 -->
+
+<!-- 按钮 -->

@@ -42,7 +42,12 @@ Page({
                     console.log(res);
                     wx.setStorageSync('openid', res)
                     wx.navigateBack({
-                      delta: 1
+                      delta: 1,
+                      fail:function(){
+                        wx.switchTab({
+                          url: '/pages/index/index',
+                        })
+                      }
                     });
 
                   }, function () {})

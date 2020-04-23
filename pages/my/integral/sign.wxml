@@ -1,4 +1,4 @@
-<view class="bg" style="background: url(../../../images/sign.jpg) no-repeat center center;background-size: contain;">
+<view class="bg" style="background: url(https://lxk.jiafh.com/bg/sign.jpg) no-repeat center center;background-size: contain;">
 	<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
 		<view slot="backText">返回</view>
 		<view slot="content">签到</view>

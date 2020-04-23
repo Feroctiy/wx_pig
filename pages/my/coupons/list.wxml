@@ -1,6 +1,6 @@
 <cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
-  <view slot="backText">返回</view>
-  <view slot="content">优惠券</view>
+	<view slot="backText">返回</view>
+	<view slot="content">优惠券</view>
 </cu-custom>
 <view class="container">
 	<view class="status-box">
@@ -10,38 +10,43 @@
 		</view>
 	</view>
 </view>
-  <view class="sub-list valid">
-      <view class="row" wx:for="{{list}}" wx:for-index="idx" wx:for-item="item" wx:key="item.UC_COUPONS_ID">
-        <view class="carrier">
-          <view class="left">
-            <view class="title margin-bottom">
-              {{item.COU_NAME}}
-            </view>
-            <view class="term">
-              {{item.COU_STARTDATE}} ~ {{item.COU_ENDDATE}}
-            </view>
-            <view class="gap-top"></view>
-            <view class="gap-bottom"></view>
-          </view>
-          <view class="right">
-            <view class="ticket">
-              <view class="num">
-                {{item.COU_MONEY}}
-              </view>
-              <view class="unit">
-                元
-              </view>
-            </view>
-            <view class="criteria">
-              {{item.COU_MAN}}
-            </view>
-            <view class="use" wx:if="item.UC_TYPE == 1" bindtap="touse" data-id="{{item.UC_COUPONS_ID}}">去使用
-            </view>
-            <view class="use" wx:elif="item.UC_TYPE == 2">已失效
-            </view>
-            <view class="use" wx:else>已过期
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
+<view class="sub-list valid">
+	<view class="row" wx:for="{{list}}" wx:for-index="idx" wx:for-item="item" wx:key="item.UC_COUPONS_ID">
+		<view class="carrier">
+			<view class="left">
+				<view class="title margin-bottom">
+					{{item.COU_NAME}}
+				</view>
+				<view class="term">
+					{{item.COU_STARTDATE}} ~ {{item.COU_ENDDATE}}
+				</view>
+				<view class="gap-top"></view>
+				<view class="gap-bottom"></view>
+			</view>
+			<view class="right">
+				<view class="ticket">
+					<view class="num">
+						{{item.COU_MONEY}}
+					</view>
+					<view class="unit">
+						元
+					</view>
+				</view>
+				<view class="criteria">
+					{{item.COU_MAN}}
+				</view>
+				<view class="use" wx:if="item.UC_TYPE == 1" bindtap="touse" data-id="{{item.UC_COUPONS_ID}}">去使用
+				</view>
+				<view class="use" wx:elif="item.UC_TYPE == 2">已失效
+				</view>
+				<view class="use" wx:else>已过期
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+
+	<view hidden="{{list.length > 0 ? true : false}}" class="no-more-goods">
+		<image src="/images/none/address_empty.png" class="no-order-img"></image>
+		<view class="text">暂无优惠券</view>
+	</view>

@@ -1,1 +1,12 @@
-/* pages/my/seting/index.wxss */
+.btn{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.btn button:not([size='mini']) {
+  width:100%;
+  padding: 16px 24px;
+
+}

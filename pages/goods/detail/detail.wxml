@@ -116,8 +116,8 @@
 			</view>
 			客服
 		</button>
-		<view class="action">
-			<view class="cuIcon-cart" bindtap="goCart">
+		<view class="action" bindtap="goCart">
+			<view class="cuIcon-cart">
 				<view class="cu-tag badge">{{cartNum}}</view>
 			</view>
 			购物车

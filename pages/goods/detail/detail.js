@@ -85,8 +85,9 @@ Page({
       url: '/pages/goods/comment/index',
     })
   },
+  // 购物车跳转
   goCart: function () {
-    wx.redirectTo({
+    wx.switchTab({
       url: '/pages/cart/home/home',
     })
   },

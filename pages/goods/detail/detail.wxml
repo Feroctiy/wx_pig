@@ -116,7 +116,7 @@
 				<text class="margin-right-sm line-red solid opt" size="mini">进店逛逛</text>
 			</view>
 		</view>
-		<view class="solid-bottom bg-white flex padding-left padding-right justify-between padding-bottom">
+		<view class="solid-bottom bg-white flex padding-left padding-right padding-bottom">
 			<text class="cuIcon-location" style="margin-top: 8rpx;"></text>
 			<text class="text-cut">{{store.ST_ADDRESS}}</text>
 		</view>

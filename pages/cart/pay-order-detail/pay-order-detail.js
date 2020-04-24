@@ -43,7 +43,47 @@ Page({
       } 
 
     }, function () { })
-  }
+  },
 
+  // 取消订单
+  cancleOrder(e) {
+    console.log(e);
+    var id = e.currentTarget.dataset.id;
+    var _this = this;
+    wx.showModal({
+      title: '提示',
+      content: '是否要取消订单？',
+      success(res) {
+        if (res.confirm) {
+          _this.handleCancle(id);
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  handleCancle(id) {
+    console.log(id);
+    var _this = this;
+    call.getData('/app/order/appDeleteOrder', {
+      DB_ORDER_ID: id
+    }, function (res) {
+      console.log(res);
+      if (res.state == "success") {
+        wx.navigateBack({
+          url:'/pages/my/order/order'
+        })
+      }
+    }, function () { })
+  },
+
+  // 支付
+  payOrder(e) {
+    var id = e.currentTarget.dataset.id;
+    var money = e.currentTarget.dataset.money;
+    wx.navigateTo({
+      url: '/pages/cart/pay-money/pay-money?id=' + id + '&money=' + money,
+    })
+  },
 
 })

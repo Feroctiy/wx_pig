@@ -21,14 +21,10 @@ Page({
     bottomSize: 0,
     empty: false
   },
-  onLoad: function(options) {
+  onShow: function(options) {
     this.getOrderList(0);
   },
   onReady: function() {
-
-  },
-  onShow: function() {
-
 
   },
   statusTap: function(e) {

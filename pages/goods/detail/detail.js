@@ -2,6 +2,7 @@
 var WxParse = require('../../../components/wxParse/wxParse.js');
 const app = getApp();
 var call = require("../../../utils/request.js");
+var util = require("../../../utils/util.js")
 Page({
 
   /**
@@ -16,19 +17,26 @@ Page({
     specId: '',
     type: 1,
     num: 1,
-    smoney:"",
-    store:{}
+    smoney: "",
+    store: {},
+    id:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
+    this.setData({
+      id:options.id
+    })
+    this.getDetail()
+  },
+  getDetail: function() {
     var _this = this;
     call.getData('/app/goods/appgoodsdatile', {
-      DB_GOODS_ID: options.id ,
+      DB_GOODS_ID: _this.data.id,
       OPENID: wx.getStorageSync('openid')
-    }, function (res) {
+    }, function(res) {
       console.log(res);
       if (res.state == "success") {
         _this.setData({
@@ -41,17 +49,40 @@ Page({
         var artice = res.goods.G_NOTE;
         WxParse.wxParse('artice', 'html', artice, _this, 5);
       }
-    }, function () {})
+    }, function() {})
 
     _this.getcartNum();
   },
- 
+
+  // 关注店铺
+  giveStateH: function(e) {
+    console.log(e)
+    var _this = this;
+    call.getData('/app/share/appusersavegive', {
+      OPENID: wx.getStorageSync('openid'),
+      DB_STORE_ID: e.currentTarget.dataset.id
+    }, function(res) {
+      console.log(res);
+      if (res.state == "success") {
+        var message = ( res.message == "CANCEL" ) ? "取消成功" : "关注成功"
+        util.showMessage(message)
+        _this.getDetail()
+      }
+    }, function() {})
+  },
+  //进店逛逛
+  gotoStore: function(e) {
+    wx.switchTab({
+      url: '/pages/index/index',
+    })
+  },
+
   cancle() {
     this.setData({
       showSpec: false
     })
   },
-  selectSpec: function (e) {
+  selectSpec: function(e) {
     var that = this
     var idx = e.currentTarget.id
     that.setData({
@@ -82,13 +113,13 @@ Page({
   /**
    * 全部评论页面
    */
-  goComment: function () {
+  goComment: function() {
     wx.navigateTo({
       url: '/pages/goods/comment/index',
     })
   },
   // 购物车跳转
-  goCart: function () {
+  goCart: function() {
     wx.switchTab({
       url: '/pages/cart/home/home',
     })
@@ -124,11 +155,11 @@ Page({
       // 立即购买
       console.log("立即购买")
       var orderParam = {
-        detail:_this.data.detail,
-        specSelected:_this.data.specSelected,
-        num:_this.data.num,
-        amoney:_this.data.smoney,
-        specId:_this.data.specId
+        detail: _this.data.detail,
+        specSelected: _this.data.specSelected,
+        num: _this.data.num,
+        amoney: _this.data.smoney,
+        specId: _this.data.specId
       }
       wx.setStorageSync('orderParam', orderParam)
       wx.navigateTo({
@@ -142,7 +173,7 @@ Page({
         DB_SPECIFICATION_ID: _this.data.specId,
         OPENID: wx.getStorageSync('openid'),
         NUM: _this.data.num
-      }, function (res) {
+      }, function(res) {
         console.log(res);
         if (res.state == "success") {
           wx.showToast({
@@ -155,22 +186,22 @@ Page({
           })
           _this.getcartNum();
         }
-      }, function () {})
+      }, function() {})
     }
   },
   // 购物车数量
-  getcartNum(){
+  getcartNum() {
     // 
     var _this = this;
-    call.getData('/app/shopcar/appusershopcarnum', { 
+    call.getData('/app/shopcar/appusershopcarnum', {
       OPENID: wx.getStorageSync('openid')
-    }, function (res) {
+    }, function(res) {
       console.log(res);
       if (res.state == "success") {
-         _this.setData({
-          cartNum:res.ShopCarNum
-         })
+        _this.setData({
+          cartNum: res.ShopCarNum
+        })
       }
-    }, function () {})
+    }, function() {})
   }
 })

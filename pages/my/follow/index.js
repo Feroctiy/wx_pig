@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    shopList: []
+    givelist: []
   },
 
   /**
@@ -24,7 +24,7 @@ Page({
       console.log(res);
       if (res.state == "success") {
         _this.setData({
-          shopList: res.give.givelist
+          givelist: res.give
         })
       }
     }, function () { })
@@ -41,13 +41,14 @@ Page({
      console.log(res);
      if (res.state == "success") {
        util.showMessage("取消成功")
+       _this.getList()
      }
    }, function () { })
  },
  // 进店逛逛
   gotoShop:function(e){
-    wx.navigateTo({
-      url: '/pages/my/follow/index?id=' + e.currentTarget.dataset.id,
+    wx.switchTab({
+      url: '/pages/index/index',
     })
   }
 

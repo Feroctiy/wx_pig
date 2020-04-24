@@ -1,51 +1,49 @@
 <cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
-	<view slot="backText">返回</view>
-	<view slot="content">我的关注</view>
-</cu-custom> 
-<view class="cu-list menu-avatar">
-	<view class="cu-item">
-		<view class="cu-avatar lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
-		<view class="content">
-			<view class="text-grey">
-				<text class="text-cut">姐姐斤斤计较斤斤计较斤斤计较姐姐斤斤计较斤斤计较斤斤计较姐姐斤斤计较斤斤计较斤斤计较 </text>
-			</view>
-			<view class="text-gray text-sm flex">
-				<text class="text-cut">签到1次可获得2积分</text>
-			</view>
-		</view>
-		<view class="action">
-			<text class="margin-right-sm line-black solid" size="mini">取消关注</text>
-			<text class="line-black solid" size="mini">进店逛逛</text> 
-		</view>
-	</view>
+  <view slot="backText">返回</view>
+  <view slot="content">我的关注</view>
+</cu-custom>
+<view class="cu-list menu-avatar" wx:for="{{shopList}}" wx:for-index="idx" wx:for-item="item" wx:key="item.DB_STORE_ID">
+  <view class="cu-item">
+    <view class="cu-avatar lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
+    <view class="content">
+      <view class="text-grey">
+        <text class="text-cut">姐姐斤斤计较斤斤计较斤斤计较姐姐斤斤计较斤斤计较斤斤计较姐姐斤斤计较斤斤计较斤斤计较 </text>
+      </view>
+      <view class="text-gray text-sm flex">
+        <text class="text-cut">签到1次可获得2积分</text>
+      </view>
+    </view>
+    <view class="action">
+      <text class="margin-right-sm line-black solid" size="mini">取消关注</text>
+      <text class="line-black solid" size="mini">进店逛逛</text>
+    </view>
+  </view>
   <view class="solid-bottom bg-white flex padding-bottom padding-left padding-right justify-between">
     <view>
-      <text class="cuIcon-location"></text>
-      呜呜呜呜呜呜呜
+      <text class="cuIcon-location"></text> 呜呜呜呜呜呜呜
     </view>
     <view class="">100米</view>
   </view>
 </view>
 <view class="cu-list menu-avatar">
-	<view class="cu-item">
-		<view class="cu-avatar lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
-		<view class="content">
-			<view class="text-grey">
-				<text class="text-cut">姐姐斤斤计较斤斤计较斤斤计较姐姐斤斤计较斤斤计较斤斤计较姐姐斤斤计较斤斤计较斤斤计较 </text>
-			</view>
-			<view class="text-gray text-sm flex">
-				<text class="text-cut">签到1次可获得2积分</text>
-			</view>
-		</view>
-		<view class="action">
-			<text class="margin-right-sm line-black solid" size="mini">取消关注</text>
-			<text class="line-black solid" size="mini">进店逛逛</text> 
-		</view>
-	</view>
+  <view class="cu-item">
+    <view class="cu-avatar lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
+    <view class="content">
+      <view class="text-grey">
+        <text class="text-cut">姐姐斤斤计较斤斤计较斤斤计较姐姐斤斤计较斤斤计较斤斤计较姐姐斤斤计较斤斤计较斤斤计较 </text>
+      </view>
+      <view class="text-gray text-sm flex">
+        <text class="text-cut">签到1次可获得2积分</text>
+      </view>
+    </view>
+    <view class="action">
+      <text bindtap="cancelgive" data-id="{{item.DB_STORE_ID}}" class="margin-right-sm line-black solid" size="mini">取消关注</text>
+      <text class="line-black solid" size="mini" bindtap="gotoShop" data-id="{{item.DB_STORE_ID}}">进店逛逛</text>
+    </view>
+  </view>
   <view class="solid-bottom bg-white flex padding-bottom padding-left padding-right justify-between">
     <view>
-      <text class="cuIcon-location"></text>
-      呜呜呜呜呜呜呜
+      <text class="cuIcon-location"></text> 呜呜呜呜呜呜呜
     </view>
     <view class="">100米</view>
   </view>

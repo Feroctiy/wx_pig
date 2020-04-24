@@ -102,10 +102,10 @@
 	<!-- 店铺信息 -->
 	<view class="cu-list menu-avatar margin-top">
 		<view class="cu-item">
-			<view class="cu-avatar lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
+			<view class="cu-avatar lg" style="background-image:url({{store.ST_IMG}});"></view>
 			<view class="content">
 				<view class="text-grey">
-					<text class="text-cut">姐姐斤斤计较斤斤计较斤斤计较姐姐斤斤计较斤斤计较斤斤计较姐姐斤斤计较斤斤计较斤斤计较 </text>
+					<text class="text-cut">{{store.ST_NAME}} </text>
 				</view>
 				<view class="text-gray text-sm flex">
 					<text class="text-cut">企</text>
@@ -118,7 +118,7 @@
 		</view>
 		<view class="solid-bottom bg-white flex padding-left padding-right justify-between padding-bottom">
 			<text class="cuIcon-location" style="margin-top: 8rpx;"></text>
-			<text class="text-cut">店铺地址店铺地址店铺地址店铺地址店铺地址店铺地址店铺地址店铺地址店铺地址店铺地址店铺地址店铺地址店铺地址</text>
+			<text class="text-cut">{{store.ST_ADDRESS}}</text>
 		</view>
 	</view>
 	<view class="cu-bar bg-white solid-bottom">

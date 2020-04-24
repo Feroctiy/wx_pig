@@ -52,7 +52,7 @@ Page({
   },
   // 性别选择
   radioChange: function(e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
+    console.log('radio发生change事件，携带value值为：', e)
      this.setData({
       gender:e.detail.value,
     })
@@ -88,10 +88,10 @@ Page({
       Utils.showMessage("请选择性别");
       return false
     }
-    if (Utils.isEmpty(e.detail.value.U_PHONE)) {
-      Utils.showMessage("请填写电话");
-      return false
-    }
+    // if (Utils.isEmpty(e.detail.value.U_PHONE)) {
+    //   Utils.showMessage("请填写电话");
+    //   return false
+    // }
     if (Utils.isEmpty(that.data.date)) {
       Utils.showMessage("请选择出生日期");
       return false

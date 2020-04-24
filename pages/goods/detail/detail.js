@@ -16,7 +16,8 @@ Page({
     specId: '',
     type: 1,
     num: 1,
-    smoney:""
+    smoney:"",
+    store:{}
   },
 
   /**
@@ -34,7 +35,8 @@ Page({
           detail: res.goods,
           specSelected: res.goods.specif[0].SPE_NAME + "(" + res.goods.specif[0].DIN_NAME + ")",
           specId: res.goods.specif[0].DB_SPECIFICATION_ID,
-          smoney: res.goods.specif[0].SPE_MONEY
+          smoney: res.goods.specif[0].SPE_MONEY,
+          store: res.goods.store
         })
         var artice = res.goods.G_NOTE;
         WxParse.wxParse('artice', 'html', artice, _this, 5);

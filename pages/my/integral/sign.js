@@ -11,7 +11,8 @@ Page({
     daysCountArr: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
     weekArr: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
     dateList: [],
-    isSgin: false
+    isSgin: false,
+    signState:["2020-04-23","2020-04-24"]
   },
   onShow: function() {
     this.getSign()
@@ -55,14 +56,6 @@ Page({
           week: week,
           state: "" // 0 已过去 1 未到来
         }
-        // if (v == vm.data.currentDate) {
-        //   dateItem = {
-        //     value: (y + '-' + (mon + 1) + '-' + add0((i + 1))).replace(/-/g, "/"),
-        //     date: "今",
-        //     week: week,
-        //     state: ""
-        //   }
-        // }
         dateList[weekIndex].unshift(dateItem);
       } else {
         var v = y + '-' + (mon + 1) + '-' + add0((i + 1));
@@ -70,19 +63,19 @@ Page({
           value: (y + '-' + (mon + 1) + '-' + add0((i + 1))).replace(/-/g, "/"),
           date: i + 1,
           week: week,
-          state: ""
+          state: "1"
         }
-        // if (v == vm.data.currentDate) {
-        //   dateItem = {
-        //     value: (y + '-' + (mon + 1) + '-' + add0((i + 1))).replace(/-/g, "/"),
-        //     date: "今",
-        //     week: week,
-        //     state: ""
-        //   }
-        // }
         dateList[weekIndex].push(dateItem);
       }
     }
+    for (var i = 0; i < dateList.length; i++) {
+      for (var y = 0; y < dateList[i].length; y++) {
+        for (var x = 0; x < vm.data.signState.length; x++) {
+           console.log(x);
+        }
+      }
+    }
+    console.log(dateList);
     vm.setData({
       dateList: dateList
     });

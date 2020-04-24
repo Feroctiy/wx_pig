@@ -18,12 +18,12 @@
 	</view>
 	<view class="cu-list grid col-3 no-border">
 		<view class="cu-item" bindtap="goIntegral">
-			<view class="text-lg">{{openid ? userInfo.U_INTEGRAL:0}}</view>
+			<view class="text-lg">{{openid ? userInfo.U_INTEGRAL : 0}}</view>
 			<text>积分</text>
 		</view>
 		<view class="cu-item" bindtap="goCoupon">
-			<view class="text-lg">0</view>
-			<text>优惠券/码</text>
+			<view class="text-lg">{{openid ? userInfo.coupons : 0 }}</view>
+			<text>优惠券</text>
 		</view>
 		<view class="cu-item">
 			<view class="text-lg">{{openid? userInfo.U_BALANCE : 0}}</view>
@@ -67,7 +67,7 @@
 			</view>
 			<text class="text-black">下单指南</text>
 		</view>
-		<view class="cu-item">
+		<view class="cu-item" bindtap="goFollow">
 			<view class="margin-top">
 				<image src="../../../images/user4.png" mode="widthFix" style="width:40rpx;height:40rpx;"></image>
 			</view>

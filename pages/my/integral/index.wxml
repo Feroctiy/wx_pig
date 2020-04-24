@@ -65,7 +65,7 @@
 				</view>
 				<view class="action" style="width: 200rpx;">
 					<navigator url="/pages/my/integral/sign">
-						<button class="cu-btn round line-red" size='mini'>去签到</button>
+						<text class="cu-btn round line-red" size='mini'>去签到</text>
 					</navigator>
 				</view>
 			</view>
@@ -79,7 +79,7 @@
 				</view>
 				<view class="action" style="width: 200rpx;">
 					<navigator url="/pages/index/index" open-type="switchTab">
-						<button class="cu-btn round line-red" size='mini'>去下单</button>
+						<text class="cu-btn round line-red" size='mini'>去下单</text>
 					</navigator> 
 				</view>
 			</view>

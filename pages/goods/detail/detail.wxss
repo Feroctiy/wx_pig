@@ -304,3 +304,21 @@
   margin-right:30rpx;
   line-height: 60rpx;
 }
+.cu-list.menu-avatar>.cu-item .content {
+  position: absolute;
+  left: 146rpx;
+  width: calc(100% - 450rpx);
+  line-height: 1.6em; 
+}
+
+.cu-list.menu-avatar>.cu-item .action {
+  width: auto;
+  text-align: center;
+}
+.opt{
+  display:inline-block;
+  padding: 5rpx;
+  border-radius: 10rpx;
+}
+  
+ 

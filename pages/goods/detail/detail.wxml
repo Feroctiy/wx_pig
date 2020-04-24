@@ -99,6 +99,36 @@
 			</view>
 		</view>
 	</view>
+	<!-- 店铺信息 -->
+	<view class="cu-list menu-avatar margin-top">
+		<view class="cu-item">
+			<view class="cu-avatar lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
+			<view class="content">
+				<view class="text-grey">
+					<text class="text-cut">姐姐斤斤计较斤斤计较斤斤计较姐姐斤斤计较斤斤计较斤斤计较姐姐斤斤计较斤斤计较斤斤计较 </text>
+				</view>
+				<view class="text-gray text-sm flex">
+					<text class="text-cut">企</text>
+				</view>
+			</view>
+			<view class="action">
+				<text class="margin-right-sm line-black solid opt" size="mini">关注店铺</text>
+				<text class="margin-right-sm line-red solid opt" size="mini">进店逛逛</text>
+			</view>
+		</view>
+		<view class="solid-bottom bg-white flex padding-left padding-right justify-between padding-bottom">
+			<text class="cuIcon-location" style="margin-top: 8rpx;"></text>
+			<text class="text-cut">店铺地址店铺地址店铺地址店铺地址店铺地址店铺地址店铺地址店铺地址店铺地址店铺地址店铺地址店铺地址店铺地址</text>
+		</view>
+	</view>
+	<view class="cu-bar bg-white solid-bottom">
+		<view class="action">
+			<text class="text-black">其他分店</text>
+		</view>
+		<view class="action" bindtap="goComment">
+			<text class="cuIcon-right lg text-gray"></text>
+		</view>
+	</view>
 	<view class="margin-top-sm">
 		<view class="cu-bar bg-white">
 			<view class="action">
@@ -111,9 +141,7 @@
 	</view>
 	<view class="cu-bar bg-white tabbar border shop foot">
 		<button class="action" open-type="contact">
-			<view class="cuIcon-service text-green">
-
-			</view>
+			<view class="cuIcon-service text-green"></view>
 			客服
 		</button>
 		<view class="action" bindtap="goCart">
@@ -125,12 +153,6 @@
 		<view class="bg-orange submit round" bindtap="joinCart">加入购物车</view>
 		<view class="bg-red submit round" bindtap="submit">立即购买</view>
 	</view>
-
-
-
-
-
-
 	<!-- 规格-模态层弹窗 -->
 	<view class="popup spec" catchtap="stopPrevent" bindtap="toggleSpec" wx:if="{{ showSpec }}">
 		<!-- 遮罩层 -->
@@ -170,3 +192,32 @@
 		</view>
 	</view>
 </view>
+
+
+
+<!-- <view class="show-share" hidden="{{sharebox}}">
+  <view class="show-close-share" bindtap="closeshare"></view>
+  <view class="show-share-box">
+    <view class="show-share-title">把商品分享给好友</view>
+    <view class="show-share-btn-box">
+      <view class="show-share-share">
+        <image src="../../images/kanjia/share_user.png" />
+        <text>分享给好友</text>
+        <button class="pop-box-btn" open-type="share"></button>
+      </view>
+      <view class="show-share-code" bindtap="getcode">
+        <image src="../../images/kanjia/share_img.png" />
+        <text>生成二维码</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="show-share" hidden="{{sharecode}}">
+  <view class="show-close-share" bindtap="closeshare"></view>
+  <view class="show-code-box">
+    <view class="show-code-re">
+      <image src="{{codeimg}}" />
+      <view class="show-code-btn" bindtap="savecode">保存商品二维码</view>
+    </view>
+  </view>
+</view> -->

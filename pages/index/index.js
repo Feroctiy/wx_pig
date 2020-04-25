@@ -20,9 +20,8 @@ Page({
       LON: "108.93984"
     }, function (res) {
       console.log(res);
-      _this.setData({
-        store:res.store[0]
-      })
+      _this.setData({ store:res.store[0] })
+      wx.setStorageSync('store',res.store[0])
       wx.setStorageSync('DB_STORE_ID',res.store[0].DB_STORE_ID)
       if (res.status == "success") {
         call.getData('/app/user/appgetplat', {
@@ -36,6 +35,12 @@ Page({
       }
     }, function () {})
 
+  },
+  onShow(){
+    if(wx.getStorageSync('store')){
+      var store = wx.getStorageSync('store');
+      this.setData({ store:store })
+    }
   },
   pos: function () {
     console.log("呼呼呼呼呼")

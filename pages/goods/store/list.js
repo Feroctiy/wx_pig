@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    storeList:[]
   },
 
   /**
@@ -17,9 +17,21 @@ Page({
   },
   // /app/user/appgetstoreHome
   getstoreHome() {
+    var _this = this;
     call.getData('/app/user/appgetstoreHome', {}, function (res) {
       console.log(res);
+      if (res.status == "success") {
+        _this.setData({
+          storeList: res.store
+        })
+      }
     }, function () {})
+  },
+  gotoStore:function(e){
+    wx.setStorageSync('store', e.currentTarget.dataset.store)
+    wx.switchTab({
+      url: '/pages/index/index',
+    })
   }
 
 })

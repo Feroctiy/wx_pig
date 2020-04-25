@@ -1,7 +1,10 @@
 {
   "pages": [
+    
     "pages/index/index",
     "pages/cart/pay-order-detail/pay-order-detail",
+    "pages/goods/store/list",
+    
     
     "pages/my/seting/index", 
     "pages/my/index/index",

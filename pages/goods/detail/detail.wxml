@@ -121,7 +121,7 @@
 			<text class="text-cut">{{store.ST_ADDRESS}}</text>
 		</view>
 	</view>
-	<view class="cu-bar bg-white solid-bottom">
+	<view class="cu-bar bg-white solid-bottom" bindtap="otherShop">
 		<view class="action">
 			<text class="text-black">其他分店</text>
 		</view>

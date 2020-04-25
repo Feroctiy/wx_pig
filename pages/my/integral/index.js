@@ -76,6 +76,12 @@ Page({
     wx.navigateTo({
       url: '/pages/my/integral/list',
     })
+  },
+  goOrder:function(){
+    console.log("兑换又换卷")
+  },
+  goStore:function(){
+    console.log("兑换商品")
   }
 
 })

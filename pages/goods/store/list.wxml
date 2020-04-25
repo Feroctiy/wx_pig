@@ -7,16 +7,16 @@
 		请选择要进入的店：
 	</view>
 </view>
- <view class="cu-list menu">
-    <view class="cu-item">
-      <view class="content padding-tb-sm">
-        <view>
-          <text class="cuIcon-clothesfill text-blue margin-right-xs"></text> 店铺名称</view>
-        <view class="text-gray text-sm">
-          <text class="cuIcon-infofill margin-right-xs"></text>店铺地址</view>
+<view class="cu-list menu">
+	<view class="cu-item">
+		<view class="content padding-tb-sm">
+			<view>
+				<text class="cuIcon-shop text-gray margin-right-xs"></text> 店铺名称
       </view>
-      <view class="action">
-        <text class="cuIcon-right lg text-gray"></text>
-      </view>
-    </view>
-  </view>
+			<view class="text-gray text-sm">店铺地址</view>
+		</view>
+		<view class="action">
+			<text class="cuIcon-right lg text-gray"></text>
+		</view>
+	</view>
+</view>

@@ -21,9 +21,9 @@ Page({
     bottomSize: 0,
     empty: false
   },
-  onLoad: function (options){
+  onLoad: function(options) {
     this.setData({
-      currentType: options.type
+      currentType: util.isEmpty(options.type) ? 0 : options.type
     })
     this.getOrderList(this.data.currentType);
   },

@@ -32,7 +32,7 @@
 	</view>
 	<view class="cu-bar bg-white solid-bottom margin-top">
 		<view class="action"> 我的订单 </view>
-		<view class="action" bindtap="goOrder">
+		<view class="action" bindtap="goOrder" data-type="0">
 			<text class="text-sm">查看更多</text>
 			<text class="cuIcon-right text-sm" style="font-size: 28rpx;"></text>
 		</view>

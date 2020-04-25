@@ -78,10 +78,14 @@ Page({
     })
   },
   goOrder:function(){
-    console.log("兑换又换卷")
+    wx.navigateTo({
+      url: "/pages/my/integral/coupons"
+    })
   },
   goStore:function(){
-    console.log("兑换商品")
+    wx.navigateTo({
+      url: "/pages/my/integral/good"
+    })
   }
 
 })

@@ -32,7 +32,11 @@ Page({
       }
     }, function () {})
   },
-
+  goCouDetail(e) {
+    wx.navigateTo({
+      url: '/pages/my/coupons/detail?id=' + e.currentTarget.dataset.id
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */

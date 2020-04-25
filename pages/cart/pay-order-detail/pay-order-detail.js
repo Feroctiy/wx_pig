@@ -44,7 +44,43 @@ Page({
 
     }, function () { })
   },
+  // 退款
+  goAfterSale(e) {
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/my/afterSale/afterSale?id=' + id,
+    })
+  },
+  // 评价
+  evaluate(e) {
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/my/evaluate/evaluate?id=' + id,
+    })
+  },
+  // 确认收货
+  receiptHandle(e) {
+    var id = e.currentTarget.dataset.id;
+    var _this = this;
+    wx.showModal({
+      title: '提示',
+      content: '是否要确认收货？',
+      success(res) {
+        if (res.confirm) {
+          call.getData('/app/order/usereditorder', {
+            DB_ORDER_ID: id
+          }, function (res) {
+            console.log(res);
+            if (res.state == "success") {
 
+            }
+          }, function () { })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
   // 取消订单
   cancleOrder(e) {
     console.log(e);

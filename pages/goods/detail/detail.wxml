@@ -113,7 +113,7 @@
 			</view>
 			<view class="action">
 				    <text class="margin-right-sm line-black solid opt" size="mini" bindtap="giveStateH"  data-id="{{store.DB_STORE_ID}}">{{store.givestate == 2  ? '取消关注' : '关注店铺'}} </text>
-				<text class=" margin-right-sm line-red solid opt " size="mini " bindtap="gotoStore " data-id="{{store.DB_STORE_ID}} ">进店逛逛</text>
+				<text class=" margin-right-sm line-red solid opt " size="mini " bindtap="gotoStore" data-id="{{store.DB_STORE_ID}} ">进店逛逛</text>
 			</view>
 		</view>
 		<view class="solid-bottom bg-white flex padding-left padding-right padding-bottom">

@@ -1,0 +1,18 @@
+<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">积分商品</view>
+</cu-custom>
+<view>
+	<view class="bg-white padding">
+		<view class="grid col-2 margin-bottom text-center grid-square">
+			<view class="img" catchtap="goDetail" wx:for="{{goods}}" wx:key data-id="{{item.DB_GOODS_ID}}">
+				<image src="{{item.G_IMG}}"></image>
+				<view class="text-left">{{item.G_NAME}}</view>
+				<view class="flex justify-between margin-top-sm">
+					<text class="text-red">{{item.G_YMONEY}}</text>
+					<text class="bg-red text-xs radius padding-xs-5">立即兑换</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

@@ -1,6 +1,9 @@
 {
   "pages": [
     
+    "pages/my/integral/good",
+    "pages/my/integral/coupons",
+    
     "pages/index/index",
     "pages/cart/pay-order-detail/pay-order-detail",
     "pages/goods/store/list",

@@ -1,0 +1,15 @@
+<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">积分兑换优惠券</view>
+</cu-custom>
+<view>
+	 
+ <view class="bg-white padding">
+			<view class='nav-list'>
+				<navigator open-type="navigate" hover-class='none' class="nav-li bg-red" wx:for="{{couponslist}}" wx:key bindtap="goCouDetail" data-id="{{item.DB_COUPONS_ID}}">
+					<view class="nav-title">{{item.COU_MONEY}}元</view>
+					<view class="nav-name">满{{item.COU_MAN}}元可用</view>
+				</navigator>
+			</view>
+		</view>
+</view>

@@ -7,6 +7,10 @@
 <view class="address-box">
   <view class="show-address">
     <view class="name-tel">{{orderDetail.O_ADD_NAME}} {{orderDetail.O_ADD_PHONE}}</view>
+    <view class="" wx:if="{{orderDetail.O_STATE == 1}}">订单状态:待支付</view>
+    <view class="" wx:if="{{orderDetail.O_STATE == 2}}">订单状态:待发货 </view>
+    <view class="" wx:if="{{orderDetail.O_STATE == 3}}">订单状态:待收货 </view>
+    <view class="" wx:if="{{orderDetail.O_STATE == 4}}">订单状态:待评价 </view>
     <view class="addr-text">地址:{{orderDetail.O_ADD_ADD}}</view>
   </view>
 </view>
@@ -43,7 +47,7 @@
       <text class="text-grey">配送时间</text>
     </view>
     <view class="action">
-    {{orderDetail.O_DATE}}
+      {{orderDetail.O_DATE}}
     </view>
   </view>
   <view class="cu-item">
@@ -74,9 +78,9 @@
 
 <!-- 待支付 -->
 <view class="fixed text-right">
-  <button  wx:if="{{orderDetail.O_STATE == 1}}" bindtap="cancleOrder" data-id="{{orderDetail.DB_ORDER_ID}}" class="cu-btn bg-gray round shadow-blur margin-right" size='mini'>取消订单</button>
+  <button wx:if="{{orderDetail.O_STATE == 1}}" bindtap="cancleOrder" data-id="{{orderDetail.DB_ORDER_ID}}" class="cu-btn bg-gray round shadow-blur margin-right" size='mini'>取消订单</button>
   <button wx:if="{{orderDetail.O_STATE == 1}}" bindtap="payOrder" data-id="{{orderDetail.DB_ORDER_ID}}" data-money="{{orderDetail.O_ALL_MONEY}}" class="cu-btn bg-red round shadow-blur margin-right" size='mini'>去支付</button>
-    <button  wx:if="{{orderDetail.O_STATE == 2}}" bindtap="goAfterSale" data-money="{{item.O_ALL_MONEY}}" data-id="{{orderDetail.DB_ORDER_ID}}" class="cu-btn bg-gray round shadow-blur margin-right" size='mini'>申请退款</button>
+  <button wx:if="{{orderDetail.O_STATE == 2}}" bindtap="goAfterSale" data-money="{{item.O_ALL_MONEY}}" data-id="{{orderDetail.DB_ORDER_ID}}" class="cu-btn bg-gray round shadow-blur margin-right" size='mini'>申请退款</button>
   <button wx:if="{{orderDetail.O_STATE == 3}}" bindtap="receiptHandle" data-id="{{orderDetail.DB_ORDER_ID}}" data-money="{{orderDetail.O_ALL_MONEY}}" class="cu-btn bg-red round shadow-blur margin-right" size='mini'>确认收货</button>
   <button wx:if="{{orderDetail.O_STATE == 4}}" bindtap="evaluate" data-id="{{orderDetail.DB_ORDER_ID}}" class="cu-btn bg-red round shadow-blur margin-right" size='mini'>立即评价</button>
 </view>

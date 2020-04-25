@@ -121,6 +121,13 @@ Page({
     })
   },
 
+  // 分店信息
+  otherShop:function(){
+    wx.navigateTo({
+      url: '/pages/goods/store/list',
+    })
+  },
+
   // 关注店铺
   giveStateH: function(e) {
     console.log(e)

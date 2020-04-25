@@ -105,9 +105,9 @@ Page({
 
   //完善信息
   formsubmit(e) {
-    if (!this.validtioan(e)) {
-      return
-    }
+    // if (!this.validtioan(e)) {
+    //   return
+    // }
     var that = this;
     call.getData('/app/user/appuserperfect', {
       DB_USER_ID: this.data.id,

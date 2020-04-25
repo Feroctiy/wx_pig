@@ -19,7 +19,9 @@ Page({
     num: 1,
     smoney: "",
     store: {},
-    id:""
+    id:"",
+    sharecode: true,
+    sharebox: true,
   },
 
   /**
@@ -30,6 +32,9 @@ Page({
       id:options.id
     })
     this.getDetail()
+  },
+  getShareBox(){
+    this.setData({sharebox: false})
   },
   getDetail: function() {
     var _this = this;
@@ -52,6 +57,68 @@ Page({
     }, function() {})
 
     _this.getcartNum();
+  },
+
+  getcode: function () {
+    var that = this;
+    wx.showLoading({
+      title: '生成中...',
+    })
+    // /app/share/appgetshare
+
+    var _this = this;
+    call.getData('/app/share/appgetshare', {}, function(res) {
+      console.log(res);
+      if (res.state == "success") {
+         
+      }
+    }, function() {})
+
+    // wx.request({
+    //   url: app.globalData.urls + '/qrcode/wxa/unlimit',
+    //   data: {
+    //     scene: "i=" + that.data.goodsDetail.basicInfo.id + ",u=" + app.globalData.uid + ",s=1",
+    //     page: "pages/goods-detail/goods-detail",
+    //     expireHours:1
+    //   },
+    //   success: function (res) {
+    //     if (res.data.code == 0) {
+    //       wx.downloadFile({
+    //         url: res.data.data,
+    //         success: function (res) {
+    //           wx.hideLoading()
+    //           that.setData({
+    //             codeimg: res.tempFilePath,
+    //             sharecode: false,
+    //             sharebox: true
+    //           });
+    //         }
+    //       })
+    //     }
+    //   }
+    // });
+  },
+  savecode: function () {
+    var that = this;
+    wx.saveImageToPhotosAlbum({
+      filePath: that.data.codeimg,
+      success(res) {
+        wx.showToast({
+          title: '保存成功',
+          icon: 'success',
+          duration: 2000
+        })
+      }
+    })
+    that.setData({
+      sharecode: true,
+    })
+  },
+  closeshare: function () {
+    this.setData({
+      sharebox: true,
+      sharecode: true
+    })
   },
 
   // 关注店铺

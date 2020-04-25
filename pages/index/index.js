@@ -8,7 +8,8 @@ Page({
     gridCol: 5,
     cardCur: 0,
     indexData:{},
-    customBar:app.globalData.CustomBar
+    customBar:app.globalData.CustomBar,
+    store:""
   },
   onLoad: function (options) {
     // console.log(options);
@@ -19,6 +20,9 @@ Page({
       LON: "108.93984"
     }, function (res) {
       console.log(res);
+      _this.setData({
+        store:res.store[0]
+      })
       wx.setStorageSync('DB_STORE_ID',res.store[0].DB_STORE_ID)
       if (res.status == "success") {
         call.getData('/app/user/appgetplat', {
@@ -71,6 +75,11 @@ Page({
           that.path();
         }
       }
+    })
+  },
+  goStoreList(){
+    wx.navigateTo({
+      url: '/pages/goods/store/list',
     })
   },
   path: function () {

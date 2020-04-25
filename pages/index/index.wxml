@@ -3,9 +3,9 @@
 	<view slot="content">烘焙工坊</view>
 </cu-custom>
 <view class="container bg-white">
-	<view class="cu-bar bg-gradual-main search">
+	<view class="cu-bar bg-gradual-main search" bindtap="goStoreList">
 		<view class="action">
-			<text>西安</text>
+			<text>{{store.ST_FOR_SHORT}}</text>
 			<text class="cuIcon-triangledownfill padding-left"></text>
 		</view>
 		<view class="search-form radius">

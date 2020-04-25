@@ -8,14 +8,44 @@ Page({
    * 页面的初始数据
    */
   data: {
-    couponslist:[]
+    couponslist:[],
+    goods: [],
+    statusType: ["优惠卷", "积分商品"],
+    currentType: 0,
+    tabClass: ["", ""],
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      currentType: options.type
+    })
     this.appcouponslist();
+    this.appAllgoodslist();
+  },
+
+  statusTap: function (e) {
+    this.setData({
+      list: []
+    })
+    var obj = e;
+    var count = 0;
+    for (var key in obj) {
+      count++;
+    }
+    if (count == 0) {
+      var curType = 0;
+    } else {
+      var curType = e.currentTarget.dataset.index;
+    }
+    this.data.currentType = curType
+    this.setData({
+      currentType: curType
+    });
+    this.appcouponslist(this.data.currentType);
   },
 
   appcouponslist() {
@@ -32,50 +62,30 @@ Page({
       }
     }, function () {})
   },
+  // 积分商品
+  appAllgoodslist: function () {
+    var _this = this;
+    call.getData('/app/integralgoods/appAllgoodslist', {
+      DB_STORE_ID: wx.getStorageSync('DB_STORE_ID'),
+      PULLNUM: '0'
+    }, function (res) {
+      console.log(res);
+      if (res.state == "success") {
+        _this.setData({
+          goods: res.goods
+        })
+      }
+    }, function () { })
+  },
   goCouDetail(e) {
     wx.navigateTo({
       url: '/pages/my/coupons/detail?id=' + e.currentTarget.dataset.id
     })
   },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  goDetail(e) {
+    wx.navigateTo({
+      url: '/pages/goods/detail/detail?id=' + e.currentTarget.dataset.id
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

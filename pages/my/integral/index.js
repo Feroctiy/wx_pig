@@ -79,12 +79,12 @@ Page({
   },
   goOrder:function(){
     wx.navigateTo({
-      url: "/pages/my/integral/coupons"
+      url: "/pages/my/integral/coupons?type=0"
     })
   },
   goStore:function(){
     wx.navigateTo({
-      url: "/pages/my/integral/good"
+      url: "/pages/my/integral/coupons?type=1"
     })
   }
 

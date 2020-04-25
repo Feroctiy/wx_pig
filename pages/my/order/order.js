@@ -21,8 +21,14 @@ Page({
     bottomSize: 0,
     empty: false
   },
-  onShow: function(options) {
-    this.getOrderList(0);
+  onLoad: function (options){
+    this.setData({
+      currentType: options.type
+    })
+    this.getOrderList(this.data.currentType);
+  },
+  onShow: function() {
+    this.getOrderList(this.data.currentType);
   },
   onReady: function() {
 

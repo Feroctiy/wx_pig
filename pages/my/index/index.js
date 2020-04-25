@@ -11,26 +11,31 @@ Page({
       url: "sale1.png",
       icon: 'cardboardfill',
       color: 'red',
+      type: 1,
       name: '待付款'
     }, {
       url: "sale2.png",
       icon: 'recordfill',
       color: 'orange',
+      type: 2,
       name: '待发货'
     }, {
       url: "sale3.png",
       icon: 'picfill',
       color: 'yellow',
+      type: 3,
       name: '待收货'
     }, {
       url: "sale4.png",
       icon: 'noticefill',
       color: 'olive',
+      type: 4,
       name: '评价'
     }, {
       url: "sale5.png",
       icon: 'noticefill',
       color: 'olive',
+      type: 0,
       name: '退款/售后'
     }],
     gridCol: 5,
@@ -41,21 +46,21 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.appgetrecomlist();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     if (wx.getStorageSync('openid')) {
       this.setData({
         openid: wx.getStorageSync('openid')
@@ -68,21 +73,22 @@ Page({
     var _this = this;
     call.getData('/app/user/appgetuser', {
       OPENID: wx.getStorageSync('openid')
-    }, function (res) {
+    }, function(res) {
       if (res.state == "success") {
         _this.setData({
           userInfo: res.user
         })
       }
       console.log(res);
-    }, function () {})
+    }, function() {})
   },
 
 
   /**
    * 我的订单
    */
-  goOrder: function () {
+  goOrder: function(e) {
+    console.log(e)
     if (!wx.getStorageSync('openid')) {
       wx.navigateTo({
         url: '/pages/login/login',
@@ -91,14 +97,14 @@ Page({
       return;
     }
     wx.navigateTo({
-      url: '/pages/my/order/order',
+      url: '/pages/my/order/order?type='+e.currentTarget.dataset.type,
     })
   },
 
   /**
    * 个人信息
    */
-  goInfo: function () {
+  goInfo: function() {
     if (!wx.getStorageSync('openid')) {
       if (!wx.getStorageSync('openid')) {
         wx.navigateTo({
@@ -116,7 +122,7 @@ Page({
   /**
    * 收货地址
    */
-  goAddress: function () {
+  goAddress: function() {
     if (!wx.getStorageSync('openid')) {
       if (!wx.getStorageSync('openid')) {
         wx.navigateTo({
@@ -132,13 +138,13 @@ Page({
     })
   },
   // 下单指南与关于我们
-  goShowCase: function (e) {
+  goShowCase: function(e) {
     wx.navigateTo({
       url: '/pages/my/showcase/showcase?type=' + e.currentTarget.dataset.type
     })
   },
   // 账户与安全
-  goSetings: function () {
+  goSetings: function() {
     if (!wx.getStorageSync('openid')) {
       if (!wx.getStorageSync('openid')) {
         wx.navigateTo({
@@ -165,14 +171,14 @@ Page({
     call.getData('/app/goods/appgetrecomlist', {
       DB_STORE_ID: wx.getStorageSync('DB_STORE_ID'),
       PULLNUM: '0'
-    }, function (res) {
+    }, function(res) {
       if (res.state == "success") {
         _this.setData({
           recomlist: res.goods
         })
       }
       console.log(res);
-    }, function () {})
+    }, function() {})
   },
   goDetail(e) {
     if (!wx.getStorageSync('openid')) {
@@ -189,7 +195,7 @@ Page({
       url: '/pages/goods/detail/detail?id=' + e.currentTarget.dataset.id
     })
   },
-  goFollow(e){
+  goFollow(e) {
     if (!wx.getStorageSync('openid')) {
       if (!wx.getStorageSync('openid')) {
         wx.navigateTo({

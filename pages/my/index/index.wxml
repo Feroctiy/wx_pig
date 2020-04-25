@@ -38,8 +38,8 @@
 		</view>
 	</view>
 	<view class="cu-list grid col-{{gridCol}} no-border">
-		<view class="cu-item" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}" bindtap="goOrder">
-			<view>
+		<view class="cu-item" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}" >
+			<view bindtap="goOrder" data-type="{{item.type}}">
 				<image src="../../../images/{{item.url}}" style="width:50rpx;height:50rpx"></image>
 			</view>
 			<text class="text-black">{{item.name}}</text>

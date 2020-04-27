@@ -57,6 +57,10 @@ Page({
       Utils.showMessage("请输入收货人手机号");
       return false
     }
+    if(e.detail.value.ADD_PHONE.length < 11){
+      Utils.showMessage("请输入正确的收货人手机号");
+      return false
+    }
     if (Utils.isEmpty(that.data.region[0])) {
       Utils.showMessage("请选择省份");
       return false

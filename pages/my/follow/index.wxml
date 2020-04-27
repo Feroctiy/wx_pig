@@ -10,7 +10,7 @@
         <text class="text-cut">{{item.ST_NAME}} </text>
       </view>
       <view class="text-gray text-sm flex">
-        <text class="text-cut">企</text>
+        <image src="../../../images/2.png" style="width: 30rpx;" mode='widthFix'></image>
       </view>
     </view>
     <view class="action">

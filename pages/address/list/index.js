@@ -23,9 +23,9 @@ Page({
   toChoose: function(e) {
     var that = this
     var id = e.currentTarget.dataset.id
-    // if (back == 0) {
-    //   console.log('不返回')
-    // } else {
+    if (back == 0) {
+      console.log('不返回')
+    } else {
       var pages = getCurrentPages(); // 获取页面栈
       var currPage = pages[pages.length - 1]; // 当前页面
       var prevPage = pages[pages.length - 2]; // 上一个页面
@@ -36,7 +36,7 @@ Page({
       wx.navigateBack({
         delta: 1,
       })
-    // }
+    }
   },
   /**
    * 添加地址

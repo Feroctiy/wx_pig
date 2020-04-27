@@ -1,6 +1,6 @@
 <cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
 	<view slot="backText">返回</view>
-	<view slot="content">积分商品</view>
+	<view slot="content">花积分</view>
 </cu-custom>
 <view>
 	<view class="bg-white padding">

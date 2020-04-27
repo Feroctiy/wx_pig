@@ -19,29 +19,34 @@ Page({
     num: 1,
     smoney: "",
     store: {},
-    id:"",
+    id: "",
     sharecode: true,
     sharebox: true,
+    interPrice: "",
+    SPE_NOWMONEY: "",
+    SPE_INTEGRAL: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.setData({
-      id:options.id
+      id: options.id
     })
     this.getDetail()
   },
-  getShareBox(){
-    this.setData({sharebox: false})
+  getShareBox() {
+    this.setData({
+      sharebox: false
+    })
   },
-  getDetail: function() {
+  getDetail: function () {
     var _this = this;
     call.getData('/app/goods/appgoodsdatile', {
       DB_GOODS_ID: _this.data.id,
       OPENID: wx.getStorageSync('openid')
-    }, function(res) {
+    }, function (res) {
       console.log(res);
       if (res.state == "success") {
         _this.setData({
@@ -49,12 +54,15 @@ Page({
           specSelected: res.goods.specif[0].SPE_NAME + "(" + res.goods.specif[0].DIN_NAME + ")",
           specId: res.goods.specif[0].DB_SPECIFICATION_ID,
           smoney: res.goods.specif[0].SPE_MONEY,
-          store: res.goods.store
+          store: res.goods.store,
+          SPE_INTEGRAL: res.goods.specif[0].SPE_INTEGRAL,
+          SPE_NOWMONEY: res.goods.specif[0].SPE_NOWMONEY,
+          interPrice: res.goods.specif[0].SPE_INTEGRAL + "积分" + "+¥" + res.goods.specif[0].SPE_NOWMONEY
         })
         var artice = res.goods.G_NOTE;
         WxParse.wxParse('artice', 'html', artice, _this, 5);
       }
-    }, function() {})
+    }, function () {})
 
     _this.getcartNum();
   },
@@ -67,12 +75,26 @@ Page({
     // /app/share/appgetshare
 
     var _this = this;
-    call.getData('/app/share/appgetshare', {}, function(res) {
+    call.getData('/app/goods/appSharePosters', {
+      OPENID: wx.getStorageSync('openid'),
+      DB_GOODS_ID: _this.data.id,
+    }, function (res) {
       console.log(res);
-      if (res.state == "success") {
-         
-      }
-    }, function() {})
+      
+
+        wx.downloadFile({
+          url: res,
+          success: function (res) {
+            wx.hideLoading()
+            _this.setData({
+              codeimg: res.tempFilePath,
+              sharecode: false,
+              sharebox: true
+            });
+          }
+        })
+      
+    }, function () {})
 
     // wx.request({
     //   url: app.globalData.urls + '/qrcode/wxa/unlimit',
@@ -122,30 +144,30 @@ Page({
   },
 
   // 分店信息
-  otherShop:function(){
+  otherShop: function () {
     wx.navigateTo({
       url: '/pages/goods/store/list',
     })
   },
 
   // 关注店铺
-  giveStateH: function(e) {
+  giveStateH: function (e) {
     console.log(e)
     var _this = this;
     call.getData('/app/share/appusersavegive', {
       OPENID: wx.getStorageSync('openid'),
       DB_STORE_ID: e.currentTarget.dataset.id
-    }, function(res) {
+    }, function (res) {
       console.log(res);
       if (res.state == "success") {
-        var message = ( res.message == "CANCEL" ) ? "取消成功" : "关注成功"
+        var message = (res.message == "CANCEL") ? "取消成功" : "关注成功"
         util.showMessage(message)
         _this.getDetail()
       }
-    }, function() {})
+    }, function () {})
   },
   //进店逛逛
-  gotoStore: function(e) {
+  gotoStore: function (e) {
     wx.switchTab({
       url: '/pages/index/index',
     })
@@ -156,13 +178,14 @@ Page({
       showSpec: false
     })
   },
-  selectSpec: function(e) {
+  selectSpec: function (e) {
     var that = this
     var idx = e.currentTarget.id
     that.setData({
       tabSize: idx,
       specId: e.currentTarget.dataset.fid,
-      smoney: e.currentTarget.dataset.money
+      smoney: e.currentTarget.dataset.money,
+      interPrice: e.currentTarget.dataset.intergral + "积分+¥" + e.currentTarget.dataset.moneynowmoney
     })
 
     that.data.detail.specif.forEach(item => {
@@ -180,20 +203,17 @@ Page({
       showSpec: !this.data.showSpec
     })
   },
-  onChange(event) {
-    console.log(event.detail);
-  },
 
   /**
    * 全部评论页面
    */
-  goComment: function() {
+  goComment: function () {
     wx.navigateTo({
-      url: '/pages/goods/comment/index',
+      url: '/pages/goods/comment/index?id='+this.data.id,
     })
   },
   // 购物车跳转
-  goCart: function() {
+  goCart: function () {
     wx.switchTab({
       url: '/pages/cart/home/home',
     })
@@ -216,6 +236,13 @@ Page({
   submit() {
     this.setData({
       type: 2,
+      showSpec: true
+    })
+  },
+  // 积分兑换
+  exchange() {
+    this.setData({
+      type: 4,
       showSpec: true
     })
   },
@@ -247,7 +274,7 @@ Page({
         DB_SPECIFICATION_ID: _this.data.specId,
         OPENID: wx.getStorageSync('openid'),
         NUM: _this.data.num
-      }, function(res) {
+      }, function (res) {
         console.log(res);
         if (res.state == "success") {
           wx.showToast({
@@ -260,7 +287,22 @@ Page({
           })
           _this.getcartNum();
         }
-      }, function() {})
+      }, function () {})
+    } else if (this.data.type == 4) {
+      var orderParam = {
+        detail: _this.data.detail,
+        specSelected: _this.data.specSelected,
+        num: _this.data.num,
+        amoney: _this.data.smoney,
+        specId: _this.data.specId,
+        SPE_INTEGRAL: _this.data.SPE_INTEGRAL,
+        SPE_NOWMONEY: _this.data.SPE_NOWMONEY
+
+      }
+      wx.setStorageSync('orderParam', orderParam)
+      wx.navigateTo({
+        url: '/pages/cart/pay-order/pay-order?orderType=exchageInter',
+      })
     }
   },
   // 购物车数量
@@ -269,13 +311,13 @@ Page({
     var _this = this;
     call.getData('/app/shopcar/appusershopcarnum', {
       OPENID: wx.getStorageSync('openid')
-    }, function(res) {
+    }, function (res) {
       console.log(res);
       if (res.state == "success") {
         _this.setData({
           cartNum: res.ShopCarNum
         })
       }
-    }, function() {})
+    }, function () {})
   }
 })

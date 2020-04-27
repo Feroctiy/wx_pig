@@ -1,3 +1,4 @@
+<wxs module="filter" src="../../../utils/util.wxs"></wxs>
 <cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
 	<view slot="backText">返回</view>
 	<view slot="content">确认订单</view>
@@ -25,7 +26,7 @@
 		</view>
 		<view class="goods-list">
 			<view class="list-title">商品列表</view>
-			<view class="a-goods" wx:if="{{orderType != 'buyNow'}}" wx:for-items="{{orderData.goodslist}}" wx:key="{{index}}">
+			<view class="a-goods" wx:if="{{orderType == 'cart'}}" wx:for-items="{{orderData.goodslist}}" wx:key="{{index}}">
 				<view class="img-box">
 					<image src="{{item.G_IMG}}" class="img" />
 				</view>
@@ -41,7 +42,7 @@
 					</view>
 				</view>
 			</view> 
-			<view class="a-goods" wx:if="{{orderType == 'buyNow'}}">
+			<view class="a-goods" wx:if="{{orderType != 'cart' }}">
 				<view class="img-box">
 					<image src="{{buyNowInfoMem.detail.G_IMG}}" class="img" />
 				</view>
@@ -49,7 +50,7 @@
 					<view class="arow arow01">
 						<view class="goods-name">{{buyNowInfoMem.detail.G_NAME}}</view>
 						<view class="goods-price" wx:if="{{ buyNowInfoMem.detail.G_TRAFFIC == 1}}">¥ {{buyNowInfoMem.amoney}}</view>
-						<view class="goods-price" wx:if="{{ buyNowInfoMem.detail.G_TRAFFIC == 2}}">{{buyNowInfoMem.detail.G_YMONEY}}</view>
+						<view class="goods-price" wx:if="{{ orderType == 'exchageInter'}}">{{filter.getMoney(buyNowInfoMem.detail.G_YMONEY)}}</view>
 					</view>
 					<view class="arow">
 						<view class="goods-label">{{buyNowInfoMem.specSelected}}</view>
@@ -80,9 +81,13 @@
 			</view>
 		</view>
 		<view class="goods-info">
-			<view class="row-box" wx:if="{{isNeedLogistics > 0}}">
+			<view class="row-box" wx:if="{{isNeedLogistics > 0 && orderType != 'exchageInter'}}">
 				<view class="row-label">商品金额</view>
 				<view class="right-text">¥ {{orderData.money}}</view>
+			</view>
+			<view class="row-box" wx:if="{{isNeedLogistics > 0 && orderType == 'exchageInter'}}">
+				<view class="row-label">商品金额</view>
+				<view class="right-text">¥ {{buyNowInfoMem.SPE_NOWMONEY * buyNowInfoMem.num}}</view>
 			</view>
 			<view class="row-box" wx:if="{{isNeedLogistics > 0 && yunPrice > 0}}">
 				<view class="row-label">运费</view>
@@ -92,9 +97,18 @@
 				<view class="row-label">优惠券</view>
 				<view class="right-text">- ¥ {{youhuijine}}</view>
 			</view>
+			<view class="row-box" wx:if="{{ orderType == 'exchageInter'}}">
+				<view class="row-label">积分</view>
+				<view class="right-text">- {{buyNowInfoMem.SPE_INTEGRAL * buyNowInfoMem.num}}</view>
+			</view>
 		</view>
 
-		<van-submit-bar price="{{ orderData.money * 100 }}" button-text="提交订单" bind:submit="onSubmit" />
+
+		<van-submit-bar wx:if="{{ orderType == 'exchageInter' && buyNowInfoMem.SPE_NOWMONEY != 0 }}" label="支付金额" price="{{ buyNowInfoMem.SPE_NOWMONEY * buyNowInfoMem.num * 100 }}" button-text="提交订单" bind:submit="onSubmit" />
+
+		<van-submit-bar wx:elif="{{ orderType == 'exchageInter' && buyNowInfoMem.SPE_NOWMONEY == 0 }}"  button-text="积分兑换" bind:submit="onSubmit" />
+
+		<van-submit-bar  wx:else price="{{ orderData.money * 100 }}" button-text="提交订单" bind:submit="onSubmit" />
 
 		<van-popup show="{{ show }}" closeable round position="bottom" custom-style="height: 50%" bind:close="onClose" close-on-click-overlay>
 			<view style="height:50px;line-height:50px;" class="text-center">选择配送时间</view>

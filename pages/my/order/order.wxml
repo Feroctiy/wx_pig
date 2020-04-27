@@ -46,7 +46,7 @@
 			</view>
 			<view class="price-box" wx:if="{{item.O_STATE == 1}}">
 				<view class="btn-box" style="width:100%;">
-					<view class="btn upd-btn">修改地址</view>
+					<view class="btn upd-btn" catchtap="updAdd" data-id="{{item.DB_ORDER_ID}}">修改地址</view>
 					<view class="btn cancel-btn" catchtap="cancleOrder" data-id="{{item.DB_ORDER_ID}}">删除订单</view>
 					<view class="btn topay-btn" catchtap="payOrder" data-id="{{item.DB_ORDER_ID}}" data-money="{{item.O_ALL_MONEY}}">立即支付</view>
 				</view>
@@ -72,8 +72,8 @@
 
 
 
- 
-<!-- <view class='cu-load load-modal' wx:if="{{loadModal}}">
+<!--  
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
   <image src='/images/logo1.png' class='png' mode='aspectFit'></image>
   <view class='gray-text'>加载中...</view>
 </view>
@@ -82,4 +82,4 @@
   <view class="weui-loadmore__tips">正在加载...</view>
 </view>
 <view class="line" wx:if="{{pageNum == 1 && shopList.length == 0}}" hidden="{{line_h}}"> 暂无数据 </view>
-<view class="line" wx:else hidden="{{line_h}}">-- 我是有底线的 --</view> --> 
+<view class="line" wx:else hidden="{{line_h}}">-- 我是有底线的 --</view>  -->

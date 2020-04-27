@@ -1,4 +1,5 @@
 
+<wxs module="filter" src="../../../utils/util.wxs"></wxs>
 <cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
 	<view slot="backText">返回</view>
 	<view slot="content">积分</view>
@@ -12,7 +13,7 @@
 	<view class="box">
 		<view class="padding flex text-center text-grey bg-white shadow-warp margin radius">
 			<view class="flex flex-sub flex-direction solid-right">
-				<view>积分：{{num}}</view>
+				<view>积分：{{userInfo.U_INTEGRAL}}</view>
 			</view>
 			<view class="flex flex-sub flex-direction solid-right" bindtap="goList">
 				<view>积分记录</view>
@@ -46,7 +47,10 @@
 					<image src="{{item.G_IMG}}"></image>
 					<view class="text-left">{{item.G_NAME}}</view>
 					<view class="flex justify-between margin-top-sm">
-						<text class="text-red">{{item.G_YMONEY}}</text>
+						<view>
+							<text class="text-red text-df">{{filter.getMoney(item.G_YMONEY)}}</text>
+							<text class="text-gray text-sm" style="text-decoration: line-through">¥{{item.G_MONEY}}</text>
+						</view>
 						<text class="bg-red text-xs radius padding-xs-5">立即兑换</text>
 					</view>
 				</view>

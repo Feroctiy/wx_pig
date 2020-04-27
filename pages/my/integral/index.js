@@ -25,11 +25,21 @@ Page({
     this.appcouponslist();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onShow() {
+    this.getUserInfo();
+  },
+  getUserInfo() {
+    var _this = this;
+    call.getData('/app/user/appgetuser', {
+      OPENID: wx.getStorageSync('openid')
+    }, function (res) {
+      if (res.state == "success") {
+        _this.setData({
+          userInfo: res.user
+        })
+      }
+      console.log(res);
+    }, function () {})
   },
   // /app/integralgoods/appAllgoodslist
   appAllgoodslist: function () {

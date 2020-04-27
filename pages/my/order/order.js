@@ -160,6 +160,12 @@ Page({
       url: '/pages/my/afterSale/afterSale?id=' + id,
     })
   },
+  updAdd(e){
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/my/updateAddress/index?id=' + id,
+    })
+  },
   evaluate(e) {
     var id = e.currentTarget.dataset.id;
     wx.navigateTo({

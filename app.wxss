@@ -47,7 +47,11 @@
   color: #F5B1AA;
 }
 .bg-main{
-  background-color: #F5B1AA;
+  background-color: #E02020;
+  color: #fff;
+}
+.bg-main-btn{
+  background-color: #E02020;
   color: #fff;
 }
 .bg-gradual-main-top{

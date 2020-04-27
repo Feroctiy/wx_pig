@@ -7,22 +7,7 @@ radio .wx-radio-input{
   width: 40rpx;
   height: 40rpx;
 }
-radio::before  {
-   
-  content: "\e645";
-  position: absolute;
-  color: var(--white) !important;
-  top: 50%;
-  margin-top: -8px;
-  right: 35px;
-  font-size: 27rpx;
-  line-height: 16px;
-  pointer-events: none;
-  transform: scale(1, 1);
-  transition: all 0.3s ease-in-out 0s;
-  z-index: 9;
-  
-  }
+ 
   
 
 /* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */

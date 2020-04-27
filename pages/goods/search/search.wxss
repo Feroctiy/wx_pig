@@ -51,7 +51,7 @@ button {
 /* 历史记录 */
 
 .box {
-  width: 92%;
+  width: 100%;
   padding: 35rpx 4%;
 }
 

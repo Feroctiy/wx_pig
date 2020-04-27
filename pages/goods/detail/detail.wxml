@@ -1,4 +1,5 @@
 <import src="../../../components/wxParse/wxParse.wxml" />
+<wxs module="filter" src="../../../utils/util.wxs"></wxs>
 <cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
 	<view slot="backText">返回</view>
 	<view slot="content">详情</view>
@@ -13,14 +14,15 @@
 	<view class="introduce-section margin-top-sm">
 		<view class="flex justify-between">
 			<text class="title">{{detail.G_NAME}}</text>
-			<text class="text-grey text-sm margin-top-xs text-right" style="max-width:100px;">分享</text>
+			<text class="text-grey text-sm margin-top-xs text-right cuIcon-share lg" style="max-width:100px;" bindtap="getShareBox">分享</text>
 		</view>
 		<view class="price-box padding-top" wx:if="{{ detail.G_TRAFFIC == 1}}">
 			<text class="price">¥{{detail.G_MONEY}}</text>
 			<text class="m-price">¥{{detail.G_YMONEY}}</text>
 		</view>
-		<view class="price-box padding-top" wx:if="{{ detail.G_TRAFFIC == 2}}">
-			<text class="price">{{detail.G_YMONEY}}</text>
+		<view class="padding-top padding-bottom" wx:if="{{ detail.G_TRAFFIC == 2}}">
+			<view class="price text-red">¥{{detail.G_MONEY}}</view>
+			<view class="text-red"><text class="text-gray">兑换价:</text>{{filter.getMoney(detail.G_YMONEY)}}</view>
 		</view>
 		<view class="bot-row">
 			<text>{{detail.G_ABSTRACT}}</text>
@@ -90,7 +92,7 @@
 									</view>
 								</view>
 								<view class="margin-top-xs flex justify-between">
-									<view class="text-gray text-sm">{{item.SPE_NAME}}（{{item.DIN_NAME}}）</view>
+									<view class="text-gray text-sm">{{item.spec.SPE_NAME}}（{{item.spec.DIN_NAME}}）</view>
 								</view>
 							</view>
 						</view>
@@ -108,7 +110,7 @@
 					<text class="text-cut">{{store.ST_NAME}} </text>
 				</view>
 				<view class="text-gray text-sm flex">
-					<text class="text-cut">企</text>
+					<image src="../../../images/2.png" style="width: 30rpx;" mode='widthFix'></image>
 				</view>
 			</view>
 			<view class="action">
@@ -116,9 +118,11 @@
 				<text class=" margin-right-sm line-red solid opt " size="mini " bindtap="gotoStore" data-id="{{store.DB_STORE_ID}} ">进店逛逛</text>
 			</view>
 		</view>
-		<view class="solid-bottom bg-white flex padding-left padding-right padding-bottom">
-			<text class="cuIcon-location" style="margin-top: 8rpx;"></text>
-			<text class="text-cut">{{store.ST_ADDRESS}}</text>
+		<view class="solid-bottom bg-white flex padding-left padding-right padding-bottom justify-between">
+			<view>
+				<text class="cuIcon-location" style="margin-top: 8rpx;"></text>
+				<text class="text-cut">{{store.ST_ADDRESS}}</text>
+			</view>
 		</view>
 	</view>
 	<view class="cu-bar bg-white solid-bottom" bindtap="otherShop">
@@ -150,7 +154,8 @@
 			</view>
 			购物车
 		</view>
-		<view class="bg-orange submit round" bindtap="joinCart">加入购物车</view>
+		<view class="bg-orange submit round" bindtap="exchange" wx:if="{{ detail.G_TRAFFIC == 2}}">积分兑换</view>
+		<view class="bg-orange submit round" bindtap="joinCart" wx:if="{{ detail.G_TRAFFIC == 1}}">加入购物车</view>
 		<view class="bg-red submit round" bindtap="submit">立即购买</view>
 	</view>
 	<!-- 规格-模态层弹窗 -->
@@ -162,8 +167,9 @@
 				<image src="{{detail.G_IMG}}"></image>
 				<view class="right">
 					<text class="name text-df">{{detail.G_NAME}}</text>
-					<text class="price" wx:if="{{ detail.G_TRAFFIC == 1}}">¥{{smoney ? smoney : detail.G_MONEY}}</text>
-					<text class="price" wx:if="{{ detail.G_TRAFFIC == 2}}">{{detail.G_YMONEY}}</text>
+					
+					<text class="price" wx:if="{{ detail.G_TRAFFIC == 2 && type == 4}}">{{interPrice}}</text>
+					<text class="price" wx:else>¥{{smoney ? smoney : detail.G_MONEY}}</text>
 					<view class="selected">
 						已选：{{specSelected}}
 					</view>
@@ -172,7 +178,7 @@
 			<view class="attr-list">
 				<text class="text-black">规格</text>
 				<view class="item-list">
-					<text class="{{tabSize==index ? 'active' : ''}}" wx:for="{{detail.specif}}" wx:key catchtap="selectSpec" data-fid="{{item.DB_SPECIFICATION_ID}}" id="{{index}}" data-money="{{item.SPE_MONEY}}"> {{item.SPE_NAME}}({{item.DIN_NAME}}) </text>
+					<text class="{{tabSize==index ? 'active' : ''}}" wx:for="{{detail.specif}}" wx:key catchtap="selectSpec" data-fid="{{item.DB_SPECIFICATION_ID}}" id="{{index}}" data-money="{{item.SPE_MONEY}}" data-intergral="{{item.SPE_INTEGRAL}}" data-nowmoney="{{item.SPE_NOWMONEY}}"> {{item.SPE_NAME}}({{item.DIN_NAME}}) </text>
 				</view>
 			</view>
 			<view class="cu-list menu text-left solid-top">
@@ -187,7 +193,7 @@
 			</view>
 			<view class="cu-bar btn-group">
 				<button class="cu-btn text-gray line-gray shadow round" bindtap="cancle">取消</button>
-				<button class="cu-btn bg-gradual-main shadow-blur round" bindtap="handleSub">确认</button>
+				<button class="cu-btn bg-main-btn shadow-blur round" bindtap="handleSub">确认</button>
 			</view>
 		</view>
 	</view>
@@ -195,29 +201,34 @@
 
 
 
-<!-- <view class="show-share" hidden="{{sharebox}}">
+<view class="show-share" hidden="{{sharebox}}">
   <view class="show-close-share" bindtap="closeshare"></view>
   <view class="show-share-box">
     <view class="show-share-title">把商品分享给好友</view>
     <view class="show-share-btn-box">
       <view class="show-share-share">
-        <image src="../../images/kanjia/share_user.png" />
+			<text class="cuIcon-forwardfill lg text-gray" style="font-size: 30px;"></text>
+        <!-- <image src="../../images/kanjia/share_user.png" /> -->
         <text>分享给好友</text>
         <button class="pop-box-btn" open-type="share"></button>
       </view>
       <view class="show-share-code" bindtap="getcode">
-        <image src="../../images/kanjia/share_img.png" />
-        <text>生成二维码</text>
+			
+			<text class="cuIcon-album lg text-gray" style="font-size: 30px;"></text>
+        <!-- <image src="../../images/kanjia/share_img.png" /> -->
+        <text>生成海报</text>
       </view>
     </view>
   </view>
 </view>
+<!--  -->
 <view class="show-share" hidden="{{sharecode}}">
   <view class="show-close-share" bindtap="closeshare"></view>
   <view class="show-code-box">
     <view class="show-code-re">
-      <image src="{{codeimg}}" />
-      <view class="show-code-btn" bindtap="savecode">保存商品二维码</view>
+      <image src="{{codeimg}}" mode="widthFix"/>
+			<!-- <image src="https://lxk.jiafh.com/bakefile/posters/userposters/20200427/cde8e5ea151e4a18825ae6b24f5f4ce8.png" mode="widthFix"></image> -->
+      <view class="show-code-btn" bindtap="savecode">保存海报</view>
     </view>
   </view>
-</view> -->
+</view>

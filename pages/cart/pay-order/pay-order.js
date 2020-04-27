@@ -1,5 +1,6 @@
 var app = getApp()
-var call = require("../../../utils/request.js")
+var call = require("../../../utils/request.js");
+var Utils = require("../../../utils/util.js");
 
 Page({
   data: {
@@ -84,27 +85,27 @@ Page({
       }
     }
 
+ 
+    // if ("buyNow" == that.data.orderType) {
+    //   var buyNowInfoMem = wx.getStorageSync('buyNowInfo');
+    //   if (buyNowInfoMem && buyNowInfoMem.shopList) {
+    //     shopList = buyNowInfoMem.shopList
 
-    //立即购买下单
-    if ("buyNow" == that.data.orderType) {
-      var buyNowInfoMem = wx.getStorageSync('buyNowInfo');
-      if (buyNowInfoMem && buyNowInfoMem.shopList) {
-        shopList = buyNowInfoMem.shopList
+    //   }
+    // } else if("exchageInter" == that.data.orderType){
 
-      }
-    } else {
-      //购物车下单
-      var shopCarInfoMem = wx.getStorageSync('shopCarInfo');
-      if (shopCarInfoMem && shopCarInfoMem.shopList) {
-        // shopList = shopCarInfoMem.shopList
-        shopList = shopCarInfoMem.shopList.filter(entity => {
-          return entity.active;
-        });
-      }
-    }
-    that.setData({
-      goodsList: shopList,
-    });
+    // }else { 
+    //   var shopCarInfoMem = wx.getStorageSync('shopCarInfo');
+    //   if (shopCarInfoMem && shopCarInfoMem.shopList) {
+    //     shopList = shopCarInfoMem.shopList
+    //     shopList = shopCarInfoMem.shopList.filter(entity => {
+    //       return entity.active;
+    //     });
+    //   }
+    // }
+    // that.setData({
+    //   goodsList: shopList,
+    // });
     this.getDayList()
 
   },
@@ -121,6 +122,13 @@ Page({
     that.initShippingAddress();
     if (e.orderType == "buyNow") {
       var buyNowInfoMem = wx.getStorageSync('orderParam');
+      that.setData({
+        buyNowInfoMem: buyNowInfoMem,
+        "orderData.money": buyNowInfoMem.num * buyNowInfoMem.amoney
+      })
+    }else if (e.orderType == "exchageInter") {
+      var buyNowInfoMem = wx.getStorageSync('orderParam');
+      console.log(buyNowInfoMem)
       that.setData({
         buyNowInfoMem: buyNowInfoMem,
         "orderData.money": buyNowInfoMem.num * buyNowInfoMem.amoney
@@ -471,48 +479,118 @@ Page({
     });
   },
 
+
+
+
+
   // 提交订单  /app/shopcar/appshopcarCreateOrder
   onSubmit() {
     var that = this;
+    if(Utils.isEmpty(that.data.payOrderParam.O_DATE)){
+      wx.showToast({
+        title: '请选择配送时间',
+        icon:'none'
+      })
+      return;
+    }
     if ("buyNow" == that.data.orderType) {
       // 立即购买
-      call.getData('/app/order/appGoodsCreateOrder', {
-        OPENID: wx.getStorageSync('openid'),
-        DB_SPECIFICATION_ID: that.data.buyNowInfoMem.specId,
-        NUM: that.data.buyNowInfoMem.num,
-        DB_ADDRESS_ID: that.data.payOrderParam.DB_ADDRESS_ID, // 地址ID
-        DB_USER_COU_ID: that.data.payOrderParam.DB_USER_COU_ID, // 优惠券ID
-        O_NOTE: that.data.payOrderParam.O_NOTE, // 备注
-        O_DATE: that.data.payOrderParam.O_DATE // 时间
-      }, function (res) {
-        if (res.state == "success") {
-          console.log(res);
-          wx.navigateTo({
-            url: '/pages/cart/pay-money/pay-money?money=' + that.data.buyNowInfoMem.amoney + '&O_PLAY_Z_ID=' + res.O_PLAY_Z_ID
-          })
-        }
-
-      }, function () {})
+      that.handleBuy();
+    } else if("exchageInter" == that.data.orderType){
+    // 积分兑换
+      that.handleInterExchage();
     } else {
       //购物车下单
-      call.getData('/app/shopcar/appshopcarCreateOrder', {
-        OPENID: wx.getStorageSync('openid'),
-        shopcarlist: that.data.payOrderParam.shopcarlist || ["0bbc5a2b0cbb412890cfb772ab14e432", "006fe523d19048a3bfbee41b242e71a7"], // 购物车组id
-        DB_ADDRESS_ID: that.data.payOrderParam.DB_ADDRESS_ID || "4e6b3154039c49219ae57f0c581dc0f3", // 地址ID
-        DB_USER_COU_ID: that.data.payOrderParam.DB_USER_COU_ID, // 优惠券ID
-        O_NOTE: that.data.payOrderParam.O_NOTE, // 备注
-        O_DATE: that.data.payOrderParam.O_DATE || "04-18 10:00-12:00" // 时间
-      }, function (res) {
-        if (res.state == "success") {
-          wx.navigateTo({
-            url: '/pages/cart/pay-money/pay-money?money=' + that.data.orderData.money + '&O_PLAY_Z_ID=' + res.O_PLAY_Z_ID
-          })
-        }
-        console.log(res);
-      }, function () {})
+      that.handleCart();
 
     }
   },
+  // 立即购买
+  handleBuy(){
+    var that = this;
+    call.getData('/app/order/appGoodsCreateOrder', {
+      OPENID: wx.getStorageSync('openid'),
+      DB_SPECIFICATION_ID: that.data.buyNowInfoMem.specId,
+      NUM: that.data.buyNowInfoMem.num,
+      DB_ADDRESS_ID: that.data.payOrderParam.DB_ADDRESS_ID, // 地址ID
+      DB_USER_COU_ID: that.data.payOrderParam.DB_USER_COU_ID, // 优惠券ID
+      O_NOTE: that.data.payOrderParam.O_NOTE, // 备注
+      O_DATE: that.data.payOrderParam.O_DATE // 时间
+    }, function (res) {
+      if (res.state == "success") {
+        wx.navigateTo({
+          url: '/pages/cart/pay-money/pay-money?money=' + that.data.buyNowInfoMem.amoney + '&O_PLAY_Z_ID=' + res.O_PLAY_Z_ID
+        })
+      }
+    }, function () {})
+  },
+  // 积分兑换
+  handleInterExchage(){
+    var that = this;
+    call.getData('/app/order/appExchangeCreateOrder', {
+      OPENID: wx.getStorageSync('openid'),
+      DB_SPECIFICATION_ID: that.data.buyNowInfoMem.specId,
+      NUM: that.data.buyNowInfoMem.num,
+      DB_ADDRESS_ID: that.data.payOrderParam.DB_ADDRESS_ID, // 地址ID
+      DB_USER_COU_ID: that.data.payOrderParam.DB_USER_COU_ID, // 优惠券ID
+      O_NOTE: that.data.payOrderParam.O_NOTE, // 备注
+      O_DATE: that.data.payOrderParam.O_DATE // 时间
+    }, function (res) {
+      if (res.state == "success") {
+        if(res.O_PLAY_Z_ID){
+          wx.navigateTo({
+            url: '/pages/cart/pay-money/pay-money?money=' + that.data.buyNowInfoMem.SPE_NOWMONEY * that.data.buyNowInfoMem.num + '&O_PLAY_Z_ID=' + res.O_PLAY_Z_ID
+          })
+        }else{
+          wx.navigateTo({
+            url: '/pages/cart/pay-success/pay-success',
+          })
+        }
+        
+      }else{
+        wx.showToast({
+          title: res.message,
+        })
+      }
+    }, function () {})
+  },
+  // 购物下单
+  handleCart(){
+    var that = this;
+    call.getData('/app/shopcar/appshopcarCreateOrder', {
+      OPENID: wx.getStorageSync('openid'),
+      shopcarlist: that.data.payOrderParam.shopcarlist , // 购物车组id
+      DB_ADDRESS_ID: that.data.payOrderParam.DB_ADDRESS_ID, // 地址ID
+      DB_USER_COU_ID: that.data.payOrderParam.DB_USER_COU_ID, // 优惠券ID
+      O_NOTE: that.data.payOrderParam.O_NOTE, // 备注
+      O_DATE: that.data.payOrderParam.O_DATE // 时间
+    }, function (res) {
+      if (res.state == "success") {
+        wx.navigateTo({
+          url: '/pages/cart/pay-money/pay-money?money=' + that.data.orderData.money + '&O_PLAY_Z_ID=' + res.O_PLAY_Z_ID
+        })
+      }
+      console.log(res);
+    }, function () {})
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // 选择时间
   choseTime() {
     this.setData({

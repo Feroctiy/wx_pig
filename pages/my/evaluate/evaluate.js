@@ -37,7 +37,8 @@ Page({
       OPENID:wx.getStorageSync('openid'),
       DB_SHOPCAR_ID: _this.data.DB_SHOPCAR_ID,
       COM_NOTE:_this.data.remark,
-      COM_NUM:_this.data.value
+      COM_NUM:_this.data.value,
+      imgList:_this.data.imgList
     }, function (res) {
       console.log(res);
       if (res.state == "success") {

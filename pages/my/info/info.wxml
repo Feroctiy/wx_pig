@@ -9,13 +9,23 @@
 	</view>
 	<view class="cu-form-group">
 		<view class="title">性别</view> 
-		<radio-group class="radio-group" bindchange="radioChange">
+		<radio-group bindchange="radioChange">
+      <label class="justify-between align-center flex-sub">
+        <radio class="round red" value="1" checked="{{personInfo.U_GENDER == '1'}}"></radio>
+        <text class="padding-lg">男</text>
+      </label>
+      <label class="justify-between align-center flex-sub">
+        <radio class="round red" value="2" checked="{{personInfo.U_GENDER == '2'}}"></radio>
+        <text class="padding-lg">女</text>
+      </label>
+    </radio-group>
+		<!-- <radio-group class="radio-group" bindchange="radioChange">
 			<label class="justify-between align-center flex-sub margin-right" wx:for-items="{{sex}}" wx:key="name" value="{{item.name}}" >
 				<radio checked="{{item.checked}}">
 					<text class="padding-left">{{item.value}}</text>
 				</radio>
 			</label>
-		</radio-group>
+		</radio-group> -->
 	</view>
 	<!-- <view class="cu-form-group">
 		<view class="title">电话</view>
@@ -33,7 +43,7 @@
 		<input placeholder="请填写现居地" name="U_ADDRESS" value='{{personInfo.U_ADDRESS}}'></input>
 	</view>
 	<view class="padding-btn">
-		<button class="cu-btn block bg-gradual-main lg" form-type='submit' disabled='{{disabled}}' style="width:100%">确认
+		<button class="cu-btn block bg-main-btn lg" form-type='submit' disabled='{{disabled}}' style="width:100%">确认
 		</button>
 	</view>
 </form>

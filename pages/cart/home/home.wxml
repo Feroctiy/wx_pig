@@ -62,10 +62,25 @@
 				<view class="account flex">
 					<text class="text-normal">合计：</text>
 					<view class="price">{{accountInfo.allAccount}}.<text class="decimal">00</text></view>
-					<view class="balance text-lg text-fff bg-red" bindtap="cartPay">结算 ({{accountInfo.allCount}})</view>
+					<view class="balance text-lg text-fff bg-red round" bindtap="cartPay">结算 ({{accountInfo.allCount}})</view>
 				</view>
 			</view>
 		</block>
 	</block>
 	<no-content wx:else types="cart" title="登录账号才能看到购物车哦" subTitle="登录失效" btn="马上登录"></no-content>
+
+
+<view class="padding text-center">商品推荐</view>
+<view class="bg-white padding">
+		<view class="grid col-2 margin-bottom text-center grid-square">
+			<view class="img" bindtap="goDetail" wx:for="{{recomlist}}" wx:key data-id="{{item.DB_GOODS_ID}}">
+				<image src="{{item.G_IMG}}"></image>
+				<view class="text-left">{{item.G_NAME}}</view>
+				<view class="flex justify-between margin-top-sm">
+					<text class="text-red">¥{{item.G_MONEY}}</text>
+					<text class="bg-red text-xs radius padding-xs-5">强烈推荐</text>
+				</view>
+			</view>
+		</view>
+	</view>
 </view>

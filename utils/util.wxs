@@ -21,10 +21,19 @@ var filter = {
         break
     }
     return _txt
+  },
+  // 积分金额样式展示
+  getMoney: function (value) {
+    if (value.indexOf('+') > -1) {
+      return value.slice(0, value.indexOf('+')) + "积分+ ¥" + value.slice(5)
+    }else{
+      return value+"积分"
+    }
   }
 
 
 }
 module.exports = {
-  getInterType: filter.getInterType
+  getInterType: filter.getInterType,
+  getMoney:filter.getMoney
 }

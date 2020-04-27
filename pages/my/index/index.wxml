@@ -25,7 +25,7 @@
 			<view class="text-lg">{{openid ? userInfo.coupons : 0 }}</view>
 			<text>优惠券</text>
 		</view>
-		<view class="cu-item">
+		<view class="cu-item" bindtap="goBalance">
 			<view class="text-lg">{{openid? userInfo.U_BALANCE : 0}}</view>
 			<text>余额</text>
 		</view>
@@ -38,7 +38,7 @@
 		</view>
 	</view>
 	<view class="cu-list grid col-{{gridCol}} no-border">
-		<view class="cu-item" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}" >
+		<view class="cu-item" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}">
 			<view bindtap="goOrder" data-type="{{item.type}}">
 				<image src="../../../images/{{item.url}}" style="width:50rpx;height:50rpx"></image>
 			</view>
@@ -46,7 +46,9 @@
 		</view>
 	</view>
 	<view style="overflow: hidden;margin: auto;" class="bg-white text-center">
-		<image src="../../../images/userbanner.png" mode="widthFix" style="width:90%;margin:auto;"></image>
+		<navigator url="/pages/share/share">
+			<image src="../../../images/userbanner.png" mode="widthFix" style="width:90%;margin:auto;"></image>
+		</navigator>
 	</view>
 	<view class="cu-list grid col-4 no-border">
 		<view class="cu-item" bindtap="goInfo">
@@ -57,7 +59,7 @@
 		</view>
 		<view class="cu-item" bindtap="goAddress">
 			<view class="margin-top">
-				<image src="../../../images/user2.png" mode="widthFix" style="width:40rpx;height:40rpx;"></image>
+				<image src="../../../images/user2.png" style="width:40rpx;height:44rpx;"></image>
 			</view>
 			<text class="text-black">收货地址</text>
 		</view>
@@ -69,19 +71,19 @@
 		</view>
 		<view class="cu-item" bindtap="goFollow">
 			<view class="margin-top">
-				<image src="../../../images/user4.png" mode="widthFix" style="width:40rpx;height:40rpx;"></image>
+				<image src="../../../images/user4.png" style="width:40rpx;height:44rpx;"></image>
 			</view>
 			<text class="text-black">关注店铺</text>
 		</view>
 		<view class="cu-item" bindtap="goShowCase" data-type="1">
 			<view class="margin-top">
-				<image src="../../../images/user5.png" mode="widthFix" style="width:40rpx;height:40rpx;"></image>
+				<image src="../../../images/user5.png" style="width:40rpx;height:44rpx;"></image>
 			</view>
 			<text class="text-black">关于我们</text>
 		</view>
 		<view class="cu-item" bindtap="goSetings">
 			<view class="margin-top">
-				<image src="../../../images/user6.png" mode="widthFix" style="width:40rpx;height:40rpx;"></image>
+				<image src="../../../images/user6.png" style="width:40rpx;height:44rpx;"></image>
 			</view>
 			<text class="text-black">账户与安全</text>
 		</view>

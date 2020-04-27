@@ -6,6 +6,7 @@
      cart_img: "http://gw.alicdn.com/tfscom/TB1xdQSJFXXXXcuXXXXy7S8WFXX-176-176.png",
      // 加入购物车的商品
      commodities: [],
+     recomlist: [],
      accountInfo: {
        allCount: 0,
        allAccount: 0,
@@ -14,6 +15,7 @@
    },
 
    onLoad: function (options) {
+    this.appgetrecomlist();
      this.openId = wx.getStorageSync('openid');
      if (!wx.getStorageSync('openid')) {
        wx.redirectTo({
@@ -34,7 +36,23 @@
 
        }
      }, function () {})
+     this.getCommodities();
    },
+   // 推荐列表
+  appgetrecomlist() {
+    var _this = this;
+    call.getData('/app/goods/appgetrecomlist', {
+      DB_STORE_ID: wx.getStorageSync('DB_STORE_ID'),
+      PULLNUM: '0'
+    }, function(res) {
+      if (res.state == "success") {
+        _this.setData({
+          recomlist: res.goods
+        })
+      }
+      console.log(res);
+    }, function() {})
+  },
    // 获取购物车列表
    getCommodities() {
      wx.showLoading({
@@ -249,7 +267,7 @@
 
 
      wx.navigateTo({
-       url: '/pages/cart/pay-order/pay-order?shoppingcartlist=' + shoppingcartlist,
+       url: '/pages/cart/pay-order/pay-order?shoppingcartlist=' + shoppingcartlist + "&orderType=cart",
      })
 
 

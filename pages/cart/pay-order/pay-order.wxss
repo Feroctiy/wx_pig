@@ -67,10 +67,10 @@ form {
 }
 
 .goods-list  .a-goods {
-  width: 720rpx;
+  width: 100%;
   display: flex;
   border-top: 1px solid #eee;
-  padding: 30rpx 30rpx 30rpx 0;
+  padding: 30rpx 0 30rpx 0;
 }
 
 .goods-list  .a-goods .img-box {

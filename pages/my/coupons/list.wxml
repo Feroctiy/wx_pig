@@ -47,6 +47,6 @@
 </view>
 
 	<view hidden="{{list.length > 0 ? true : false}}" class="no-more-goods">
-		<image src="/images/none/address_empty.png" class="no-order-img"></image>
+		<image src="/images/none/coupons_empty.png" class="no-order-img"></image>
 		<view class="text">暂无优惠券</view>
 	</view>

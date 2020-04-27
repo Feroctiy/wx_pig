@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    personInfo: {},
+    personInfo: {
+      U_GENDER:'1'
+    },
     date: '',
     state: true,
     sex: [{
@@ -20,7 +22,7 @@ Page({
         checked: 'true'
       },
     ],
-    gender:''
+    gender:'1'
   },
 
   /**

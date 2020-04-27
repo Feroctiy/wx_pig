@@ -1,7 +1,8 @@
 /**index.wxss**/
-page{
+page {
   background: #fff;
 }
+
 .userinfo {
   display: flex;
   flex-direction: column;
@@ -22,14 +23,22 @@ page{
 .usermotto {
   margin-top: 200px;
 }
-.con{
+
+.con {
   position: absolute;
   /* top: 240rpx; */
-  top:133px;
+  top: 133px;
   width: 100%;
 
 }
-swiper{
+
+swiper {
   width: calc(100% - 60rpx);
   margin: auto;
+}
+
+swiper-item {
+  overflow: hidden;
+  will-change: transform;
+  border-radius: 10rpx;
 }

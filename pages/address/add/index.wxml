@@ -9,11 +9,11 @@
 	</view>
 	<view class="cu-form-group">
 		<view class="title">手机号码</view>
-		<input placeholder="请输入收货人手机号码" value='{{addressInfo.ADD_PHONE}}' type="number" name="ADD_PHONE"></input>
+		<input placeholder="请输入收货人手机号码" value='{{addressInfo.ADD_PHONE}}' type="number" name="ADD_PHONE"  ></input>
 	</view>
 	<view class="cu-form-group">
 		<view class="title">所在地区</view>
-		<picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}" style="width:500rpx;">
+		<picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}"    style="width:500rpx;">
 			<view wx:if="{{state}}" style="color:#888885;font-size:28rpx;" class="text-right picker">请选择所在地区</view>
 			<view class="picker" wx:else>
 				{{region[0]}}，{{region[1]}}，{{region[2]}}

@@ -6,21 +6,33 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    comments:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      id: options.id
+    })
+    this.getCommList()
     // /app/goods/appgetCommList
   },
+  getCommList: function () {
+    var _this = this;
+    call.getData('/app/goods/appgetCommList', {
+      DB_GOODS_ID: _this.data.id,
+      PULLNUM:0
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+    }, function (res) {
+      console.log(res);
+      if (res.state == "success") {
+        _this.setData({
+          comments: res.comlist
+        })
+      }
+    }, function () {})
   },
 
   /**

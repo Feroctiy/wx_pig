@@ -29,6 +29,7 @@ Page({
   },
   gotoStore:function(e){
     wx.setStorageSync('store', e.currentTarget.dataset.store)
+    wx.setStorageSync('DB_STORE_ID', e.currentTarget.dataset.id)
     wx.switchTab({
       url: '/pages/index/index',
     })

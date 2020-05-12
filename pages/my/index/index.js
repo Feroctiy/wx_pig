@@ -46,21 +46,21 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.appgetrecomlist();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     if (wx.getStorageSync('openid')) {
       this.setData({
         openid: wx.getStorageSync('openid')
@@ -73,21 +73,21 @@ Page({
     var _this = this;
     call.getData('/app/user/appgetuser', {
       OPENID: wx.getStorageSync('openid')
-    }, function(res) {
+    }, function (res) {
       if (res.state == "success") {
         _this.setData({
           userInfo: res.user
         })
       }
       console.log(res);
-    }, function() {})
+    }, function () {})
   },
 
 
   /**
    * 我的订单
    */
-  goOrder: function(e) {
+  goOrder: function (e) {
     console.log(e)
     if (!wx.getStorageSync('openid')) {
       wx.navigateTo({
@@ -97,14 +97,27 @@ Page({
       return;
     }
     wx.navigateTo({
-      url: '/pages/my/order/order?type='+e.currentTarget.dataset.type,
+      url: '/pages/my/order/order?type=' + e.currentTarget.dataset.type,
+    })
+  },
+
+  goBalance() {
+    if (!wx.getStorageSync('openid')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+        url: `/pages/login/login?from=${this.route}&tab=true`,
+      })
+      return;
+    }
+    wx.navigateTo({
+      url: '/pages/my/balance/balance',
     })
   },
 
   /**
    * 个人信息
    */
-  goInfo: function() {
+  goInfo: function () {
     if (!wx.getStorageSync('openid')) {
       if (!wx.getStorageSync('openid')) {
         wx.navigateTo({
@@ -122,7 +135,7 @@ Page({
   /**
    * 收货地址
    */
-  goAddress: function() {
+  goAddress: function () {
     if (!wx.getStorageSync('openid')) {
       if (!wx.getStorageSync('openid')) {
         wx.navigateTo({
@@ -134,17 +147,17 @@ Page({
       return;
     }
     wx.navigateTo({
-      url: '/pages/address/list/index',
+      url: '/pages/address/list/index?back=0',
     })
   },
   // 下单指南与关于我们
-  goShowCase: function(e) {
+  goShowCase: function (e) {
     wx.navigateTo({
       url: '/pages/my/showcase/showcase?type=' + e.currentTarget.dataset.type
     })
   },
   // 账户与安全
-  goSetings: function() {
+  goSetings: function () {
     if (!wx.getStorageSync('openid')) {
       if (!wx.getStorageSync('openid')) {
         wx.navigateTo({
@@ -171,14 +184,14 @@ Page({
     call.getData('/app/goods/appgetrecomlist', {
       DB_STORE_ID: wx.getStorageSync('DB_STORE_ID'),
       PULLNUM: '0'
-    }, function(res) {
+    }, function (res) {
       if (res.state == "success") {
         _this.setData({
           recomlist: res.goods
         })
       }
       console.log(res);
-    }, function() {})
+    }, function () {})
   },
   goDetail(e) {
     if (!wx.getStorageSync('openid')) {

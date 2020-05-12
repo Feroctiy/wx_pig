@@ -20,6 +20,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    url:"https://www.xzykcake.com/bake-workshop"
   }
 })

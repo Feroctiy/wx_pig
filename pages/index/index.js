@@ -7,9 +7,11 @@ Page({
   data: {
     gridCol: 5,
     cardCur: 0,
-    indexData:{},
-    customBar:app.globalData.CustomBar,
-    store:""
+    indexData: {},
+    customBar: app.globalData.CustomBar,
+    store: "",
+    goodsList: [{}, {}],
+    groupList: []
   },
   onLoad: function (options) {
     // console.log(options);
@@ -20,26 +22,41 @@ Page({
       LON: "108.93984"
     }, function (res) {
       console.log(res);
-      _this.setData({ store:res.store[0] })
-      wx.setStorageSync('store',res.store[0])
-      wx.setStorageSync('DB_STORE_ID',res.store[0].DB_STORE_ID)
+      _this.setData({
+        store: res.store[0]
+      })
+      wx.setStorageSync('store', res.store[0])
+      wx.setStorageSync('DB_STORE_ID', res.store[0].DB_STORE_ID)
       if (res.status == "success") {
         call.getData('/app/user/appgetplat', {
-          DB_STORE_ID:res.store[0].DB_STORE_ID
+          DB_STORE_ID: res.store[0].DB_STORE_ID
         }, function (res) {
           _this.setData({
-            indexData:res
+            indexData: res
           })
+          _this.getGrouplist();
         }, function () {})
 
       }
     }, function () {})
 
+ 
   },
-  onShow(){
-    if(wx.getStorageSync('store')){
+  onShow() {
+    var _this = this;
+    if (wx.getStorageSync('store')) {
       var store = wx.getStorageSync('store');
-      this.setData({ store:store })
+      this.setData({
+        store: store
+      })
+      call.getData('/app/user/appgetplat', {
+        DB_STORE_ID: wx.getStorageSync('DB_STORE_ID')
+      }, function (res) {
+        _this.setData({
+          indexData: res
+        })
+        _this.getGrouplist();
+      }, function () {})
     }
   },
   pos: function () {
@@ -82,7 +99,7 @@ Page({
       }
     })
   },
-  goStoreList(){
+  goStoreList() {
     wx.navigateTo({
       url: '/pages/goods/store/list',
     })
@@ -100,7 +117,7 @@ Page({
           longitude: res.longitude,
           latitude: res.latitude
         });
-        
+
       },
       fail: function (res) {
         console.log(res);
@@ -114,15 +131,15 @@ Page({
     })
   },
   goDetail(e) {
-   if (!wx.getStorageSync('openid')) {
+    if (!wx.getStorageSync('openid')) {
       wx.navigateTo({
         url: '/pages/login/login',
         url: `/pages/login/login?from=${this.route}&tab=true`,
       })
       return;
-    } 
+    }
     wx.navigateTo({
-      url: '/pages/goods/detail/detail?id='+e.currentTarget.dataset.id
+      url: '/pages/goods/detail/detail?id=' + e.currentTarget.dataset.id
     })
   },
   goGoods() {
@@ -130,20 +147,42 @@ Page({
       url: '/pages/goods/index/index'
     })
   },
-  goSearch(){
+  goSearch() {
     wx.navigateTo({
       url: '/pages/goods/search/search',
     })
   },
-  goNotice(){
+  goNotice() {
     wx.navigateTo({
       url: '/pages/notice/notice',
     })
   },
-  goBanner(e){
+  goBanner(e) {
     console.log(e);
     wx.navigateTo({
-      url: '/pages/goods/loop/loop?id='+e.currentTarget.dataset.id,
+      url: '/pages/goods/loop/loop?id=' + e.currentTarget.dataset.id,
+    })
+  },
+  // /app/goods/appgetgrouplist
+  getGrouplist() {
+    var _this = this;
+    call.getData('/app/goods/appgetgrouplist', {
+      DB_STORE_ID: wx.getStorageSync('DB_STORE_ID'),
+      PULLNUM:'0'
+    }, function (res) {
+      console.log(res);
+      if (res.state == "success") { 
+        _this.setData({
+          groupList:res.goods
+        })
+        console.log("*********",_this.data)
+      }
+    }, function () {})
+  },
+  allproduct(){
+    wx.navigateTo({
+      url: '/pages/goods/index/index'
     })
   }
+
 })

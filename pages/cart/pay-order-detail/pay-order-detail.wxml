@@ -26,24 +26,24 @@
 </view>
 <!-- 商品列表 -->
 <view class="solid-bottom">
-	<view class="a-goods">
+	<view class="a-goods" wx:for="{{orderDetail.shop}}" wx:for-index="idx" wx:for-item="itemName">
 		<view class="img-box">
-			<image src="{{goods.G_IMG}}" class="img" />
+			<image src="{{itemName.goods.G_IMG}}" class="img" />
 		</view>
 		<view class="text-box">
 			<view class="arow arow01">
-				<view class="goods-name">{{goods.G_NAME}}</view>
-				<view class="goods-price">¥ {{goods.G_MONEY}}</view>
+				<view class="goods-name">{{itemName.goods.G_NAME}}</view>
+				<view class="goods-price">¥ {{itemName.goods.G_MONEY}}</view>
 			</view>
 			<view class="arow">
-				<view class="goods-label">{{specif.SPE_NAME}}({{specif.DIN_NAME}})</view>
-				<view class="goods-num">x {{shop.SH_NUM}}</view>
+				<view class="goods-label">{{itemName.specif.SPE_NAME}}({{itemName.specif.DIN_NAME}})</view>
+				<view class="goods-num">x {{itemName.SH_NUM}}</view>
 			</view>
 		</view>
 	</view>
 </view>
 <!-- 配送方式 -->
-<view class="cu-list menu">
+<view class="cu-list menu" style="padding-bottom: 60px;">
 	<view class="cu-item">
 		<view class="content">
 			<text class="text-black">配送方式</text>
@@ -66,11 +66,11 @@
 		</view>
 		<view class="action"> {{orderDetail.DetO_NOTE}} </view>
 	</view>
-	<view class="cu-item margin-top">
+	<!-- <view class="cu-item margin-top">
 		<view class="content">
 			<text class="text-black">商品金额</text>
 		</view>{{goods.G_MONEY}}
-	</view>
+	</view> -->
 	<!-- <view class="cu-item">
 		<view class="content">
 			<text class="text-black">运费</text>

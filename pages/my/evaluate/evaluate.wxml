@@ -25,7 +25,7 @@
 		图片上传
 	</view>
 	<view class="action">
-		{{imgList.length}}/4
+		{{imgList.length}}/3
 	</view>
 </view>
 <view class="cu-form-group">
@@ -36,12 +36,12 @@
 				<text class="cuIcon-close"></text>
 			</view>
 		</view>
-		<view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<4}}">
+		<view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<3}}">
 			<text class="cuIcon-cameraadd"></text>
 		</view>
 	</view>
 </view>
 <view class="padding-btn">
-	<button class="cu-btn block bg-gradual-main lg" bindtap='handle' style="width:100%" form-type='submit'>确认
+	<button class="cu-btn block bg-main-btn lg" bindtap='handle' style="width:100%" form-type='submit'>确认
 	</button>
 </view>

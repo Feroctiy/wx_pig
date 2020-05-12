@@ -1,0 +1,29 @@
+<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
+	<view slot="content">我的储值</view>
+</cu-custom>
+<view class="cu-list menu">
+	<view class="cu-item arrow">
+		<view class="content padding-tb-sm">
+			<view>店铺余额</view>
+			<view class="balance">300.00</view>
+		</view>
+		<view class="action">
+			<text>卡充值</text>
+		</view>
+	</view>
+</view>
+<view class="cu-bar bg-white solid-bottom" style="font-weight:500;">
+	<view class="action text-df">充值中心 <text class="tip">充值有礼</text></view>
+</view>
+<view class='nav-list bg-white'>
+	<view class="nav-li" wx:for="{{list}}" wx:key>
+		<view class="nav-title">
+			<text class="micon">¥</text>
+			<text class="money">399.00</text>
+		</view>
+		<view class="nav-name des">送2张255元专享券</view>
+	</view>
+  <view class="nav-li other">
+    其他金额
+	</view>
+</view>

@@ -10,6 +10,7 @@ Page({
    */
   data: {
     tabSize: 0,
+    tabSize1: 0,
     showSpec: false,
     detail: {},
     specSelected: "",
@@ -24,7 +25,8 @@ Page({
     sharebox: true,
     interPrice: "",
     SPE_NOWMONEY: "",
-    SPE_INTEGRAL: ""
+    SPE_INTEGRAL: "",
+    flavour:[{name:'甜',id:'1'},{name:'巧克力',id:'2'}]
   },
 
   /**
@@ -178,6 +180,13 @@ Page({
       showSpec: false
     })
   },
+  selectflavour(e){
+    var that = this
+    var idx = e.currentTarget.id;
+    that.setData({
+      tabSize1: idx
+    })
+  },
   selectSpec: function (e) {
     var that = this
     var idx = e.currentTarget.id
@@ -239,6 +248,9 @@ Page({
       showSpec: true
     })
   },
+  opentuan(){
+    this.setData({ type: 5, showSpec: true })
+  },
   // 积分兑换
   exchange() {
     this.setData({
@@ -297,12 +309,27 @@ Page({
         specId: _this.data.specId,
         SPE_INTEGRAL: _this.data.SPE_INTEGRAL,
         SPE_NOWMONEY: _this.data.SPE_NOWMONEY
-
       }
       wx.setStorageSync('orderParam', orderParam)
       wx.navigateTo({
         url: '/pages/cart/pay-order/pay-order?orderType=exchageInter',
       })
+    } else if( this.data.type == 5 ){
+      // 一键开团
+      var orderParam = {
+        detail: _this.data.detail,
+        specSelected: _this.data.specSelected,
+        num: _this.data.num,
+        amoney: _this.data.smoney,
+        specId: _this.data.specId,
+        SPE_INTEGRAL: _this.data.SPE_INTEGRAL,
+        SPE_NOWMONEY: _this.data.SPE_NOWMONEY
+      }
+      wx.setStorageSync('orderParam', orderParam)
+      wx.navigateTo({
+        url: '/pages/cart/pay-order/pay-order?orderType=pintuan',
+      })
+
     }
   },
   // 购物车数量

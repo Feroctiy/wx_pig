@@ -25,7 +25,7 @@
 		<input placeholder="如道路，门牌号，小区，单元室等" value='{{addressInfo.ADD_ADD}}' name="ADD_ADD"></input>
 	</view>
 	<view class="padding-btn">
-		<button class="cu-btn block bg-gradual-main lg" bindtap='handleAddress' disabled='{{disabled}}' style="width:100%" form-type='submit'>确认
+		<button class="cu-btn block bg-main-btn lg" bindtap='handleAddress' disabled='{{disabled}}' style="width:100%" form-type='submit'>确认
 		</button>
 	</view>
 </form>

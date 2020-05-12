@@ -9,7 +9,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    addressList: []
+    addressList: [],
+    back:''
+  },
+  onLoad(options){
+    this.setData({
+      back:options.back
+    })
   },
 
   /**
@@ -23,7 +29,7 @@ Page({
   toChoose: function(e) {
     var that = this
     var id = e.currentTarget.dataset.id
-    if (back == 0) {
+    if (this.data.back == 0) {
       console.log('不返回')
     } else {
       var pages = getCurrentPages(); // 获取页面栈

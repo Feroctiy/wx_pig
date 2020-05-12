@@ -2,6 +2,7 @@
 .screen-swiper {
   min-height: 275rpx;
 }
+
 .VerticalNav.nav {
   width: 200rpx;
   white-space: initial;
@@ -20,6 +21,7 @@
 .VerticalNav.nav .cu-item.cur {
   background-color: #f1f1f1;
 }
+
 .VerticalNav.nav .cu-item.cur::after {
   content: "";
   width: 8rpx;
@@ -32,9 +34,17 @@
   bottom: 0;
   margin: auto;
 }
-.VerticalBox{
+
+.VerticalBox {
   display: flex;
 }
-.VerticalMain{
+
+.VerticalMain {
   background-color: #f1f1f1;
+}
+
+.cu-list.menu-avatar>.cu-item .content { 
+  line-height: 1; 
+  width: calc(100% - 250rpx);
+
 }

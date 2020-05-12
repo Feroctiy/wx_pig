@@ -128,12 +128,18 @@ Page({
       })
     }else if (e.orderType == "exchageInter") {
       var buyNowInfoMem = wx.getStorageSync('orderParam');
-      console.log(buyNowInfoMem)
+      that.setData({
+        buyNowInfoMem: buyNowInfoMem,
+        "orderData.money": buyNowInfoMem.num * buyNowInfoMem.amoney
+      })
+    } else if(e.orderType == "pintuan"){
+      var buyNowInfoMem = wx.getStorageSync('orderParam');
       that.setData({
         buyNowInfoMem: buyNowInfoMem,
         "orderData.money": buyNowInfoMem.num * buyNowInfoMem.amoney
       })
     } else {
+      console.log("sssss",e.shoppingcartlist)
       that.setData({
         shopcarlist:e.shoppingcartlist.split(',')
       })
@@ -499,6 +505,8 @@ Page({
     } else if("exchageInter" == that.data.orderType){
     // 积分兑换
       that.handleInterExchage();
+    }else if("pintuan" == that.data.orderType){
+       console.log("拼团")
     } else {
       //购物车下单
       that.handleCart();
@@ -559,7 +567,7 @@ Page({
     var that = this;
     call.getData('/app/shopcar/appshopcarCreateOrder', {
       OPENID: wx.getStorageSync('openid'),
-      shopcarlist: that.data.payOrderParam.shopcarlist , // 购物车组id
+      shopcarlist: that.data.shopcarlist , // 购物车组id
       DB_ADDRESS_ID: that.data.payOrderParam.DB_ADDRESS_ID, // 地址ID
       DB_USER_COU_ID: that.data.payOrderParam.DB_USER_COU_ID, // 优惠券ID
       O_NOTE: that.data.payOrderParam.O_NOTE, // 备注
@@ -571,6 +579,25 @@ Page({
         })
       }
       console.log(res);
+    }, function () {})
+  }, 
+  // 一键开团
+  createTuanOrder(){
+    var that = this;
+    call.getData('/app/order/appCreateTuanOrder', {
+      OPENID: wx.getStorageSync('openid'),
+      DB_SPECIFICATION_ID: that.data.buyNowInfoMem.specId,
+      NUM: that.data.buyNowInfoMem.num,
+      DB_ADDRESS_ID: that.data.payOrderParam.DB_ADDRESS_ID, // 地址ID
+      DB_USER_COU_ID: that.data.payOrderParam.DB_USER_COU_ID, // 优惠券ID
+      O_NOTE: that.data.payOrderParam.O_NOTE, // 备注
+      O_DATE: that.data.payOrderParam.O_DATE // 时间
+    }, function (res) {
+      if (res.state == "success") {
+        wx.navigateTo({
+          url: '/pages/cart/pay-money/pay-money?money=' + that.data.buyNowInfoMem.amoney + '&O_PLAY_Z_ID=' + res.O_PLAY_Z_ID
+        })
+      }
     }, function () {})
   },
 

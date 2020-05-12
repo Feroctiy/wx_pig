@@ -202,7 +202,21 @@
    },
 
 
-
+   goDetail(e) {
+    if (!wx.getStorageSync('openid')) {
+      if (!wx.getStorageSync('openid')) {
+        wx.navigateTo({
+          url: '/pages/login/login',
+          url: `/pages/login/login?from=${this.route}&tab=true`,
+        })
+        return;
+      }
+      return;
+    }
+    wx.navigateTo({
+      url: '/pages/goods/detail/detail?id=' + e.currentTarget.dataset.id
+    })
+  },
 
 
 

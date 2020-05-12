@@ -1,14 +1,14 @@
 <cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
-  <view slot="backText">返回</view>
-  <view slot="content">用户评价</view>
+	<view slot="backText">返回</view>
+	<view slot="content">用户评价</view>
 </cu-custom>
-<view> 
-  <view class="margin-top"> 
-   <view class="bg-white" style="padding-top:0;">
+<view>
+	<view class="margin-top">
+		<view class="bg-white" style="padding-top:0;">
 			<view class="cu-card dynamic no-card">
 				<view class="cu-item shadow">
-					<view class="cu-list menu-avatar comment">
-						<view class="cu-item solid-bottom" wx:for="{{comments}}" wx:key>
+					<view class="cu-list menu-avatar comment" wx:for="{{comments}}" wx:key>
+						<view class="cu-item solid-bottom">
 							<view class="cu-avatar round" style="background-image:url({{item.U_IMG}});"></view>
 							<view class="content">
 								<view class="flex justify-between">
@@ -30,9 +30,14 @@
 								</view>
 							</view>
 						</view>
+						<view class="bg-white padding" style="padding-left:120rpx;" wx:if="{{item.img.length > 0}}">
+							<view class="grid col-3 grid-square">
+								<view class="bg-img" wx:for="{{item.img}}" wx:key style="background-image:url({{item.IMG_ADD}});"></view>
+							</view>
+						</view>
 					</view>
 				</view>
 			</view>
 		</view>
-  </view> 
+	</view>
 </view>

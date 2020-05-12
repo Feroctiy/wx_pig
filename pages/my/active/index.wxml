@@ -1,3 +1,4 @@
 <cu-custom bgColor="bg-gradual-main-top"> 
 	<view slot="content">活动</view>
 </cu-custom>
+<image src="../../../images/act.png"></image>

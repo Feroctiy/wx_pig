@@ -1,0 +1,63 @@
+/* pages/my/index/index.wxss */
+.cu-list.menu-avatar>.cu-item .content {
+  left: 30rpx;
+}
+
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0px 15rpx 0px;
+  justify-content: space-between;
+}
+
+.nav-li {
+  padding: 40rpx 30rpx;
+  border-radius: 10rpx;
+  width: 47%;
+  margin: 0 10rpx 30rpx;
+  border: 1px solid rgba(219, 187, 130, 1);
+}
+
+.money {
+  color: #A67928;
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.des {
+  color: #DBBB82;
+  line-height: 30px;
+}
+
+.micon {
+  color: #A67928;
+  font-weight: 400;
+  font-size: 12px;
+  margin-right: 3px;
+}
+
+.other {
+  font-size: 22px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(166, 121, 40, 1);
+  line-height: 50px
+}
+
+.tip {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 1);
+  background: rgba(219, 187, 130, 1);
+  border-radius: 2px;
+  margin-left: 5px;
+}
+
+.balance {
+  font-size: 30px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(166, 121, 40, 1);
+  line-height: 40px;
+}

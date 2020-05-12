@@ -1,4 +1,5 @@
-const app = getApp()
+const app = getApp();
+var call = require("../../../utils/request.js");
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,
@@ -9,22 +10,15 @@ Page({
     VerticalNavTop: 0,
     list: [{
         id: "1",
-        name: "热销蛋糕"
+        name: "慕斯蛋糕"
       },
       {
         id: "2",
-        name: "新品上市"
+        name: "裱花蛋糕"
       },
-      {
-        id: "3",
-        name: "新鲜蛋糕"
-      },
-      {
-        id: "4",
-        name: "孩子最爱"
-      }
     ],
-    load: true
+    load: true,
+    indexData:{}
   },
   onLoad() {
     wx.showLoading({
@@ -34,6 +28,18 @@ Page({
     this.setData({
       listCur: this.data.list[0].id
     })
+
+    var _this = this;
+    call.getData('/app/user/appgetplat', {
+      DB_STORE_ID:  wx.getStorageSync('DB_STORE_ID')
+    }, function (res) {
+      _this.setData({
+        indexData: res
+      })
+    }, function () {})
+
+
+
   },
   onReady() {
     wx.hideLoading()
@@ -75,5 +81,17 @@ Page({
         return false
       }
     }
+  },
+  goDetail(e) {
+    if (!wx.getStorageSync('openid')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+        url: `/pages/login/login?from=${this.route}&tab=true`,
+      })
+      return;
+    }
+    wx.navigateTo({
+      url: '/pages/goods/detail/detail?id=' + e.currentTarget.dataset.id
+    })
   }
 })

@@ -73,7 +73,7 @@ Page({
           }, function(res) {
             console.log(res);
             if (res.state == "success") {
-
+              _this.getOrderList(_this.data.currentType);
             }
           }, function() {})
         } else if (res.cancel) {
@@ -106,7 +106,7 @@ Page({
     }, function(res) {
       console.log(res);
       if (res.state == "success") {
-
+        _this.getOrderList(_this.data.currentType);
       }
     }, function() {})
   },

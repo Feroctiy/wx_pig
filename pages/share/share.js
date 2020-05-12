@@ -12,7 +12,7 @@ Page({
     })
     var _this = this;
     _this.setData({
-      height: 'calc(100vh - ' + app.globalData.CustomBar + 'px)'
+      height: 'calc(100vh - 100rpx-' + app.globalData.CustomBar + 'px)'
     })
     call.getData('/app/share/appShare', {
       OPENID: wx.getStorageSync('openid'),

@@ -1,0 +1,17 @@
+<cu-custom bgColor="bg-gradual-main-top">
+	<view slot="content">卡充值</view>
+</cu-custom>
+<form>
+	<view class="cu-form-group margin-top">
+		<view class="title">序列号</view>
+		<input placeholder="请输入序列号"></input>
+	</view>
+	<view class="cu-form-group">
+		<view class="title">兑换码</view>
+		<input placeholder="请输入兑换码"></input>
+	</view>
+  <view class="padding-btn">
+		<button class="cu-btn block bg-main-btn lg" style="width:100%;background:rgba(219,187,130,1);" form-type='submit'>确认
+		</button>
+	</view>
+</form>

@@ -1,9 +1,9 @@
 <!--index.wxml-->
 <cu-custom bgColor="bg-gradual-main-top">
-	<view slot="content">烘焙工坊</view>
+	<view slot="content">小猪有空</view>
 </cu-custom>
 <view class="container bg-white">
-	<view class="cu-bar bg-gradual-main search" >
+	<view class="cu-bar bg-gradual-main search">
 		<view class="action" bindtap="goStoreList">
 			<text class="text-black">{{store.ST_FOR_SHORT}}</text>
 			<text class="cuIcon-triangledownfill padding-left text-black"></text>
@@ -30,9 +30,107 @@
 				<image src="../../images/userbanner.png" mode="widthFix" style="width:100%;margin:auto;"></image>
 			</navigator>
 		</view>
-		<view class="bg-white padding">
-			<view class="grid col-2 margin-bottom text-center grid-square">
-				<view class="img" catchtap="goDetail" wx:for="{{indexData.hotlist}}" wx:key data-id="{{item.DB_GOODS_ID}}">
+		<!-- 秒杀 -->
+
+		<!-- <view class="bg-white padding">
+			<view class="cu-bar bg-white">
+				<view class="action sub-title">
+					<text class="text-xl text-bold text-red">限时秒杀</text>
+					<text class="bg-red" style="width:2rem"></text>
+				</view>
+			</view>
+			<swiper indicator-dots="{{ false }}" autoplay="{{ true }}" display-multiple-items="2" class="swiper-box">
+				<block wx:for="{{goodsList}}" wx:key="item">
+					<swiper-item>
+						<van-image radius="5" width="5rem" height="5rem" src="../../images/userbanner.png" />
+
+						<view class='text-cut text-df'>商品名称</view>
+
+					</swiper-item>
+				</block>
+			</swiper>
+		</view> -->
+
+		<!-- 团购 -->
+		<!-- <view class="group-section">
+			<view class="cu-bar bg-white">
+				<view class="action sub-title">
+					<text class="text-xl text-bold text-red">精品团购</text>
+					<text class="bg-red" style="width:2rem"></text>
+				</view>
+			</view>
+			<swiper class="g-swiper" :duration="500">
+				<swiper-item class="g-swiper-item" wx:for="{{ groupList }}" wx:key>
+					<view class="g-item left" catchtap="goDetail" data-id="{{item.DB_GOODS_ID}}">
+						<image src="{{item.G_IMG}}" mode="aspectFill"></image>
+						<view class="t-box">
+							<text class="title clamp">{{item.G_NAME}}</text>
+							<view class="price-box">
+								<text class="price">￥{{item.G_MONEY}}</text>
+								<text class="m-price">￥{{item.G_YMONEY}}</text>
+							</view>
+							<view class="pro-box">
+								<view class="cu-progress round">
+									<view class="bg-red" style="width:61.8%"></view>
+								</view>
+								<text>{{item.COX_T_NUM_PEOPLE}}人成团</text>
+							</view>
+						</view>
+					</view>
+					<view class="g-item right">
+						<image src="https://img.yzcdn.cn/upload_files/2020/03/15/FuG5RiXZwOp3PUAZ62nZzO_6nh3K.jpg!middle.jpg" mode="aspectFill"></image>
+						<view class="t-box">
+							<text class="title clamp">ddd</text>
+							<view class="price-box">
+								<text class="price">￥33</text>
+								<text class="m-price">￥188</text>
+							</view>
+							<view class="pro-box">
+								<view class="progress-box">
+									<view class="cu-progress round">
+										<view class="bg-red" style="width:61.8%"></view>
+									</view>
+								</view>
+								<text>10人成团</text>
+							</view>
+						</view>
+					</view>
+				</swiper-item>
+
+			</swiper>
+		</view> -->
+
+		<view class="bg-white">
+			<view class="cu-bar bg-white">
+				<view class="action sub-title">
+					<text class="text-xl text-bold text-red">慕斯蛋糕</text>
+					<text class="bg-red" style="width:2rem"></text>
+				</view>
+				<view class="action" bindtap="allproduct">
+					<text class="text-gray">查看更多</text>
+				</view>
+			</view>
+			<view class="grid col-2 margin-bottom text-center grid-square padding">
+				<view class="img" catchtap="goDetail" wx:for="{{indexData.hotlist}}" wx:key data-id="{{item.DB_GOODS_ID}}" wx:if="{{index < 2}}">
+					<image src="{{item.G_IMG}}"></image>
+					<view class="text-left">{{item.G_NAME}}</view>
+					<view class="flex justify-between margin-top-sm">
+						<text class="text-red">¥{{item.G_MONEY}}</text>
+						<text class="bg-red text-xs radius padding-xs-5">购买</text>
+					</view>
+				</view>
+			</view>
+			<view class="cu-bar bg-white" >
+				<view class="action sub-title">
+					<text class="text-xl text-bold text-red">裱花蛋糕</text>
+					<text class="bg-red" style="width:2rem"></text>
+				</view>
+				<view class="action" bindtap="allproduct">
+					<text class="text-gray">查看更多</text>
+				</view>
+			</view>
+			<view class="grid col-2 margin-bottom text-center grid-square padding">
+				<view class="img" catchtap="goDetail" wx:for="{{indexData.hotlist}}" wx:key data-id="{{item.DB_GOODS_ID}}" wx:if="{{index >= 2}}">
 					<image src="{{item.G_IMG}}"></image>
 					<view class="text-left">{{item.G_NAME}}</view>
 					<view class="flex justify-between margin-top-sm">

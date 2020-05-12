@@ -1,34 +1,34 @@
 {
   "pages": [
-    
-    "pages/my/integral/good",
-    "pages/my/integral/coupons",
-    
     "pages/index/index",
+    "pages/my/rechargecard/index",
+    "pages/my/balance/balance",
+    "pages/goods/index/index",
+    "pages/goods/detail/detail",
+    "pages/my/evaluate/evaluate",
+    "pages/my/index/index",
+    "pages/my/updateAddress/index", 
+    "pages/my/integral/index",
+    "pages/share/share", 
+    "pages/my/order/order", 
     "pages/cart/pay-order-detail/pay-order-detail",
     "pages/goods/store/list",
-    
-    
+    "pages/my/integral/good",
+    "pages/my/integral/coupons", 
     "pages/my/seting/index", 
-    "pages/my/index/index",
     "pages/my/coupons/list",
     "pages/my/integral/sign",
-    "pages/my/info/info",
-    
-    "pages/my/integral/index",
+    "pages/my/info/info", 
     "pages/my/integral/list",
-    "pages/my/coupons/detail", 
+    "pages/my/coupons/detail",
     "pages/goods/search/search",
-    "pages/cart/pay-order/pay-order", 
+    "pages/cart/pay-order/pay-order",
     "pages/address/list/index",
-    "pages/address/add/index", 
+    "pages/address/add/index",
     "pages/my/showcase/showcase",
     "pages/my/afterSaleList/afterSaleList",
     "pages/my/afterSale/afterSale",
-    "pages/my/order/order",
-    "pages/my/evaluate/evaluate",
     "pages/my/order-list/index", 
-    "pages/goods/detail/detail",
     "pages/good/city/city",
     "pages/cart/pay-money/pay-money",
     "pages/cart/home/home",
@@ -36,15 +36,15 @@
     "pages/notice/notice",
     "pages/goods/loop/loop",
     "pages/login/login",
-    "pages/goods/index/index",
+    
     "pages/goods/comment/index",
-    "pages/my/active/index", 
+    "pages/my/active/index",
     "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "烘焙工坊",
+    "navigationBarTitleText": "小猪有空",
     "navigationStyle": "custom",
     "navigationBarTextStyle": "black"
   },
@@ -59,17 +59,18 @@
         "text": "首页"
       },
       {
-        "selectedIconPath": "images/icon/cart_fill_light.png",
-        "iconPath": "images/icon/cart_light.png",
-        "pagePath": "pages/cart/home/home",
-        "text": "购物车"
-      },
-      {
         "selectedIconPath": "images/icon/hot_fill_light.png",
         "iconPath": "images/icon/hot_light.png",
         "pagePath": "pages/my/active/index",
         "text": "活动"
       },
+      {
+        "selectedIconPath": "images/icon/cart_fill_light.png",
+        "iconPath": "images/icon/cart_light.png",
+        "pagePath": "pages/cart/home/home",
+        "text": "购物车"
+      },
+      
       {
         "selectedIconPath": "images/icon/my_fill_light.png",
         "iconPath": "images/icon/my_light.png",

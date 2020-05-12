@@ -14,19 +14,47 @@
 	<view class="introduce-section margin-top-sm">
 		<view class="flex justify-between">
 			<text class="title">{{detail.G_NAME}}</text>
-			<text class="text-grey text-sm margin-top-xs text-right cuIcon-share lg" style="max-width:100px;" bindtap="getShareBox">分享</text>
+			<text class="text-red text-sm margin-top-xs text-right cuIcon-share lg" style="display: inline-block;width: 60px;" bindtap="getShareBox">分享</text>
 		</view>
-		<view class="price-box padding-top" wx:if="{{ detail.G_TRAFFIC == 1}}">
+		<view class="price-box padding-top" wx:if="{{  detail.G_TYPE == '1' && detail.G_TRAFFIC == 1}}">
 			<text class="price">¥{{detail.G_MONEY}}</text>
 			<text class="m-price">¥{{detail.G_YMONEY}}</text>
 		</view>
-		<view class="padding-top padding-bottom" wx:if="{{ detail.G_TRAFFIC == 2}}">
+		<view class="padding-top padding-bottom" wx:if="{{  detail.G_TYPE == '1' &&  detail.G_TRAFFIC == 2}}">
 			<view class="price text-red">¥{{detail.G_MONEY}}</view>
 			<view class="text-red"><text class="text-gray">兑换价:</text>{{filter.getMoney(detail.G_YMONEY)}}</view>
 		</view>
+
+
+		<!-- 拼团 -->
+		<view class="goods-info" wx:if="{{ detail.G_TYPE == '3' }}">
+			<view class="goods-left">
+				 
+				<block>
+					<view class="goods-ptuan-box">
+						<view class="goods-ptuan">
+							拼团价 Ұ
+							<text>233</text>
+						</view>
+						<view class="goods-ptuan-info">
+							<text class="txa">{{detail.COX_T_NUM_PEOPLE}}人开团</text>
+							<text class="txb">原价 Ұ1222</text>
+						</view>
+						<view class="goods-right">已团{{detail.G_SALES}}件</view>
+					</view>
+				</block>
+			</view>
+		</view>
+
+
+
+
+
+
 		<view class="bot-row">
 			<text>{{detail.G_ABSTRACT}}</text>
 		</view>
+
 	</view>
 	<view class="c-list margin-top-sm">
 		<view class="flex justify-between c-row b-b solid-bottom bg-white">
@@ -73,8 +101,8 @@
 		<view class="bg-white" style="padding-top:0;">
 			<view class="cu-card dynamic no-card">
 				<view class="cu-item shadow">
-					<view class="cu-list menu-avatar comment">
-						<view class="cu-item solid-bottom" wx:for="{{detail.comments}}" wx:key>
+					<view class="cu-list menu-avatar comment" wx:for="{{detail.comments}}" wx:key>
+						<view class="cu-item solid-bottom">
 							<view class="cu-avatar round" style="background-image:url({{item.U_IMG}});"></view>
 							<view class="content">
 								<view class="flex justify-between">
@@ -96,6 +124,11 @@
 								</view>
 							</view>
 						</view>
+						<view class="bg-white padding" style="padding-left:120rpx;" wx:if="{{item.img.length > 0}}">
+							<view class="grid col-3 grid-square">
+								<view class="bg-img" wx:for="{{item.img}}" wx:key style="background-image:url({{item.IMG_ADD}});"></view>
+							</view>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -114,7 +147,7 @@
 				</view>
 			</view>
 			<view class="action">
-				    <text class="margin-right-sm line-black solid opt" size="mini" bindtap="giveStateH"  data-id="{{store.DB_STORE_ID}}">{{store.givestate == 2  ? '取消关注' : '关注店铺'}} </text>
+				<text class="margin-right-sm line-black solid opt" size="mini" bindtap="giveStateH"  data-id="{{store.DB_STORE_ID}}">{{store.givestate == 2  ? '取消关注' : '关注店铺'}} </text>
 				<text class=" margin-right-sm line-red solid opt " size="mini " bindtap="gotoStore" data-id="{{store.DB_STORE_ID}} ">进店逛逛</text>
 			</view>
 		</view>
@@ -125,14 +158,14 @@
 			</view>
 		</view>
 	</view>
-	<view class="cu-bar bg-white solid-bottom" bindtap="otherShop">
+	<!-- <view class="cu-bar bg-white solid-bottom" bindtap="otherShop">
 		<view class="action">
 			<text class="text-black">其他分店</text>
 		</view>
 		<view class="action" bindtap="goComment">
 			<text class="cuIcon-right lg text-gray"></text>
 		</view>
-	</view>
+	</view> -->
 	<view class="margin-top-sm">
 		<view class="cu-bar bg-white">
 			<view class="action">
@@ -150,13 +183,22 @@
 		</button>
 		<view class="action" bindtap="goCart">
 			<view class="cuIcon-cart">
-				<view class="cu-tag badge">{{cartNum}}</view>
+				<!-- <view class="cu-tag badge">{{cartNum}}</view> -->
 			</view>
 			购物车
 		</view>
-		<view class="bg-orange submit round" bindtap="exchange" wx:if="{{ detail.G_TRAFFIC == 2}}">积分兑换</view>
-		<view class="bg-orange submit round" bindtap="joinCart" wx:if="{{ detail.G_TRAFFIC == 1}}">加入购物车</view>
-		<view class="bg-red submit round" bindtap="submit">立即购买</view>
+		<view class="bg-orange submit round" bindtap="exchange" wx:if="{{detail.G_TYPE == '1' &&  detail.G_TRAFFIC == 2}}">积分兑换</view>
+		<view class="bg-orange submit round" bindtap="joinCart" wx:if="{{ detail.G_TYPE == '1' &&  detail.G_TRAFFIC == 1}}">加入购物车</view>
+		<view class="bg-red submit round" bindtap="submit" wx:if="{{detail.G_TYPE == '1' }}">立即购买</view>
+
+		<view class="bg-gray submit round" bindtap="submit" wx:if="{{detail.G_TYPE == '3' }}">
+			<!-- <view>¥120</view> -->
+			<view>原价购买</view>
+		</view>
+		<view class="bg-red submit round" bindtap="opentuan" wx:if="{{detail.G_TYPE == '3' }}">
+			<!-- <view>¥12</view> -->
+			<view>一键开团</view>
+		</view>
 	</view>
 	<!-- 规格-模态层弹窗 -->
 	<view class="popup spec" catchtap="stopPrevent" bindtap="toggleSpec" wx:if="{{ showSpec }}">
@@ -167,7 +209,7 @@
 				<image src="{{detail.G_IMG}}"></image>
 				<view class="right">
 					<text class="name text-df">{{detail.G_NAME}}</text>
-					
+
 					<text class="price" wx:if="{{ detail.G_TRAFFIC == 2 && type == 4}}">{{interPrice}}</text>
 					<text class="price" wx:else>¥{{smoney ? smoney : detail.G_MONEY}}</text>
 					<view class="selected">
@@ -179,6 +221,12 @@
 				<text class="text-black">规格</text>
 				<view class="item-list">
 					<text class="{{tabSize==index ? 'active' : ''}}" wx:for="{{detail.specif}}" wx:key catchtap="selectSpec" data-fid="{{item.DB_SPECIFICATION_ID}}" id="{{index}}" data-money="{{item.SPE_MONEY}}" data-intergral="{{item.SPE_INTEGRAL}}" data-nowmoney="{{item.SPE_NOWMONEY}}"> {{item.SPE_NAME}}({{item.DIN_NAME}}) </text>
+				</view>
+			</view>
+			<view class="attr-list">
+				<text class="text-black">口味</text>
+				<view class="item-list">
+					<text class="{{tabSize1 == index ? 'active' : ''}}" wx:for="{{flavour}}" wx:key catchtap="selectflavour" data-fid="{{item.DB_SPECIFICATION_ID}}" id="{{index}}" data-money="{{item.SPE_MONEY}}" data-intergral="{{item.SPE_INTEGRAL}}" data-nowmoney="{{item.SPE_NOWMONEY}}"> {{item.name}}</text>
 				</view>
 			</view>
 			<view class="cu-list menu text-left solid-top">
@@ -202,33 +250,33 @@
 
 
 <view class="show-share" hidden="{{sharebox}}">
-  <view class="show-close-share" bindtap="closeshare"></view>
-  <view class="show-share-box">
-    <view class="show-share-title">把商品分享给好友</view>
-    <view class="show-share-btn-box">
-      <view class="show-share-share">
-			<text class="cuIcon-forwardfill lg text-gray" style="font-size: 30px;"></text>
-        <!-- <image src="../../images/kanjia/share_user.png" /> -->
-        <text>分享给好友</text>
-        <button class="pop-box-btn" open-type="share"></button>
-      </view>
-      <view class="show-share-code" bindtap="getcode">
-			
-			<text class="cuIcon-album lg text-gray" style="font-size: 30px;"></text>
-        <!-- <image src="../../images/kanjia/share_img.png" /> -->
-        <text>生成海报</text>
-      </view>
-    </view>
-  </view>
+	<view class="show-close-share" bindtap="closeshare"></view>
+	<view class="show-share-box">
+		<view class="show-share-title">把商品分享给好友</view>
+		<view class="show-share-btn-box">
+			<view class="show-share-share">
+				<text class="cuIcon-forwardfill lg text-gray" style="font-size: 30px;"></text>
+				<!-- <image src="../../images/kanjia/share_user.png" /> -->
+				<text>分享给好友</text>
+				<button class="pop-box-btn" open-type="share"></button>
+			</view>
+			<view class="show-share-code" bindtap="getcode">
+
+				<text class="cuIcon-album lg text-gray" style="font-size: 30px;"></text>
+				<!-- <image src="../../images/kanjia/share_img.png" /> -->
+				<text>生成海报</text>
+			</view>
+		</view>
+	</view>
 </view>
 <!--  -->
 <view class="show-share" hidden="{{sharecode}}">
-  <view class="show-close-share" bindtap="closeshare"></view>
-  <view class="show-code-box">
-    <view class="show-code-re">
-      <image src="{{codeimg}}" mode="widthFix"/>
+	<view class="show-close-share" bindtap="closeshare"></view>
+	<view class="show-code-box">
+		<view class="show-code-re">
+			<image src="{{codeimg}}" mode="widthFix" />
 			<!-- <image src="https://lxk.jiafh.com/bakefile/posters/userposters/20200427/cde8e5ea151e4a18825ae6b24f5f4ce8.png" mode="widthFix"></image> -->
-      <view class="show-code-btn" bindtap="savecode">保存海报</view>
-    </view>
-  </view>
+			<view class="show-code-btn" bindtap="savecode">保存海报</view>
+		</view>
+	</view>
 </view>

@@ -9,7 +9,7 @@
 </view>
 <view class="cu-list menu" >
 	<view class="cu-item" wx:for="{{storeList}}" wx:for-index="idx" wx:for-item="item" wx:key="DB_STORE_ID" >
-		<view class="content padding-tb-sm"  bindtap="gotoStore" data-store="{{item}}">
+		<view class="content padding-tb-sm"  bindtap="gotoStore" data-store="{{item}}" data-id="{{item.DB_STORE_ID}}">
 			<view>
 				<text class="cuIcon-shop text-gray margin-right-xs"></text>{{item.ST_FOR_SHORT}}
       </view>

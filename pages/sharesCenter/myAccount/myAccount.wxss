@@ -1,0 +1,96 @@
+page {
+  background: #f4f4f4;
+}
+
+.account {
+  width: 100%;
+  padding: 40rpx 6%;
+  background: linear-gradient(to right, #fc6864, #f13b61);
+  color: #fff;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 32rpx;
+}
+
+.title image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.balance {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 20rpx;
+}
+
+.money {
+  font-size: 100rpx;
+  margin-left: 60rpx;
+}
+
+.money text {
+  font-size: 35rpx;
+}
+
+.withDraw {
+  padding: 10rpx 20rpx;
+  border-radius: 30rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 28rpx;
+  background: #ff696f;
+  box-shadow: 0 0 15rpx #ba3149;
+}
+
+.withDraw image {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 15rpx;
+}
+
+.record {
+  width: 100%;
+  padding: 20rpx 4%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: #fff;
+  color: #333;
+  font-size: 32rpx;
+}
+
+.record image {
+  width: 30rpx;
+  margin-right: 10rpx;
+}
+
+.info {
+  width: 100%;
+  padding: 20rpx 4%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30rpx;
+  color: #333;
+  background: #fff;
+  border-bottom: 1rpx solid #ddd;
+}
+
+.time {
+  font-size: 25rpx;
+  color: #999;
+  margin-top: 10rpx;
+}
+
+.miues {
+  color: #f13b61;
+}

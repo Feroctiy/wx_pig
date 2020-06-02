@@ -1,0 +1,53 @@
+<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">秒杀列表</view>
+</cu-custom>
+<block wx:for='{{dataList}}' wx:key='pro'>
+  <view class='container' data-id="{{item.DB_GOODS_ID}}" bindtap="proDetails">
+    <view class="title" wx:if="{{countDownList[index].state == 0}}">
+      <view>距离秒杀开始还有</view>
+      <view>
+        <label>{{countDownList[index].day}}</label>
+        :
+        <label>{{countDownList[index].hou}}</label>
+        :
+        <label>{{countDownList[index].min}}</label>
+        :
+        <label>{{countDownList[index].sec}}</label>
+      </view>
+    </view>
+    <view class="title" wx:if="{{countDownList[index].state == 1 && endCountDownList[index].state == 0}}">
+      <view>距离秒杀结束仅剩</view>
+      <view>
+        <label>{{endCountDownList[index].day}}</label>
+        :
+        <label>{{endCountDownList[index].hou}}</label>
+        :
+        <label>{{endCountDownList[index].min}}</label>
+        :
+        <label>{{endCountDownList[index].sec}}</label>
+      </view>
+    </view>
+    <view class="title" wx:if="{{endCountDownList[index].state == 1}}">
+      <view></view>
+      <view>秒杀已结束</view>
+    </view>
+    <view class="content1">
+      <image class="logo" src="{{item.G_IMG}}" mode="aspectFill"></image>
+      <view class="proinfo">
+        <view class="name">{{item.G_NAME}}</view>
+        <view class="opera">
+          <view class="price">
+            <view>￥{{item.G_MONEY}}</view>
+            <view class="old" style=" font-size: 28rpx;">￥{{item.G_YMONEY}}</view>
+          </view>
+          <view class="suport">立即购买</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+<view class="tips" wx:if="{{dataList.length == 0}}">
+  <image src="../../images/tabBar/t4.png"></image>
+  <view>暂无商品信息</view>
+</view>

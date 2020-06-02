@@ -1,4 +1,8 @@
 /* pages/my/integral/index.wxss */
+page{
+  background: #fff;
+  height: 100.1%;
+}
 .box {
   position: absolute;
   top: 240rpx;
@@ -153,7 +157,7 @@
   width: 100%;
 	height: 100%;
   text-align: center;
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
 	box-sizing: border-box;
 	padding-top: 88rpx;
 }

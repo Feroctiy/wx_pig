@@ -11,60 +11,94 @@
 			<image src="{{item.P_IMG}}" mode='aspectFill'></image>
 		</swiper-item>
 	</swiper>
-	<view class="introduce-section margin-top-sm">
+	<!-- 秒杀 -->
+	<block wx:if='{{detail.G_TYPE == 2}}'>
+		<view class="flashTime bg-white">
+			<image src="{{imageUrl}}21.png" mode="widthFix"></image>
+			<view class="time" wx:if='{{timeState == 0}}'>
+				<view>距离秒杀开始还有</view>
+				<view class="seconds">
+					<label>{{clock.day}}</label>
+					:
+					<label>{{clock.hou}}</label>
+					:
+					<label>{{clock.min}}</label>
+					:
+					<label>{{clock.sec}}</label>
+				</view>
+			</view>
+			<view class="time" wx:if='{{timeState == 1}}'>
+				<view>距离秒杀结束仅剩</view>
+				<view class="seconds">
+					<label>{{clock.day}}</label>
+					:
+					<label>{{clock.hou}}</label>
+					:
+					<label>{{clock.min}}</label>
+					:
+					<label>{{clock.sec}}</label>
+				</view>
+			</view>
+			<view class="time" wx:if='{{timeState == 2}}'>
+				<view>很遗憾，</view>
+				<view class="seconds">
+					<label>{{clock}}</label>
+				</view>
+			</view>
+		</view>
+	</block>
+	<!-- 商品信息 -->
+	<view class="introduce-section margin-top-xs">
 		<view class="flex justify-between">
 			<text class="title">{{detail.G_NAME}}</text>
 			<text class="text-red text-sm margin-top-xs text-right cuIcon-share lg" style="display: inline-block;width: 60px;" bindtap="getShareBox">分享</text>
 		</view>
+		<!-- 秒杀商品 -->
+		<view class="price-box padding-top" wx:if="{{ detail.G_TYPE == 2 }}">
+			<text class="price">¥{{detail.G_MONEY}}</text>
+			<text class="m-price">¥{{detail.G_YMONEY}}</text>
+		</view>
+		<!-- 普通商品 -->
 		<view class="price-box padding-top" wx:if="{{  detail.G_TYPE == '1' && detail.G_TRAFFIC == 1}}">
 			<text class="price">¥{{detail.G_MONEY}}</text>
 			<text class="m-price">¥{{detail.G_YMONEY}}</text>
 		</view>
+		<!-- 积分商品 -->
 		<view class="padding-top padding-bottom" wx:if="{{  detail.G_TYPE == '1' &&  detail.G_TRAFFIC == 2}}">
 			<view class="price text-red">¥{{detail.G_MONEY}}</view>
-			<view class="text-red"><text class="text-gray">兑换价:</text>{{filter.getMoney(detail.G_YMONEY)}}</view>
+			<view class="text-red"><text class="text-gray">兑换价:</text>{{detail.G_YMONEY}}</view>
 		</view>
-
-
-		<!-- 拼团 -->
-		<view class="goods-info" wx:if="{{ detail.G_TYPE == '3' }}">
-			<view class="goods-left">
-				 
-				<block>
-					<view class="goods-ptuan-box">
-						<view class="goods-ptuan">
-							拼团价 Ұ
-							<text>233</text>
-						</view>
-						<view class="goods-ptuan-info">
-							<text class="txa">{{detail.COX_T_NUM_PEOPLE}}人开团</text>
-							<text class="txb">原价 Ұ1222</text>
-						</view>
-						<view class="goods-right">已团{{detail.G_SALES}}件</view>
-					</view>
-				</block>
-			</view>
-		</view>
-
-
-
-
-
-
 		<view class="bot-row">
 			<text>{{detail.G_ABSTRACT}}</text>
 		</view>
-
 	</view>
-	<view class="c-list margin-top-sm">
+	<!-- 拼团商品 -->
+	<view class="goods-info" wx:if="{{ detail.G_TYPE == 3 }}">
+		<view class="goods-left"> 
+			<block>
+				<view class="goods-ptuan-box bg-red">
+					<view class="goods-ptuan">
+						拼团价 Ұ
+						<text>{{detail.G_MONEY}}</text>
+					</view>
+					<view class="goods-ptuan-info">
+						<text class="txa">{{detail.COX_T_NUM_PEOPLE}}人开团</text>
+						<text class="txb">原价 Ұ{{detail.G_YMONEY}}</text>
+					</view>
+					<view class="goods-right">已团{{detail.G_SALES}}</view>
+				</view>
+			</block>
+		</view>
+	</view>
+	<view class="c-list margin-top-xs">
 		<view class="flex justify-between c-row b-b solid-bottom bg-white">
 			<view>
 				<text class="tit">运费</text>
 				<text>{{detail.G_POSTAGE}}</text>
 			</view>
-
-			<view class="view-grey text-right" style="max-width:100px;">已售{{detail.G_SALES}}</view>
+			<view class="view-grey text-right" style="max-width:100px;" wx:if="{{ detail.G_TYPE != 3 }}">已售{{detail.G_SALES}}</view>
 		</view>
+
 		<!-- <view class="c-row b-b solid-bottom bg-white">
 			<text class="tit">促销</text>
 			<view class="con-list">
@@ -89,7 +123,30 @@
 			<view class="cuIcon-right lg text-gray"></view>
 		</view>
 	</view>
-	<view class="margin-top-sm" wx:if="{{detail.comments.length > 0}}">
+	<!-- 拼团商品 - 已有拼团 --> 
+	<view class="groupCon margin-top-xs bg-white" hidden="{{detail.tuan.length == 0}}" wx:if="{{ detail.G_TYPE == 3 }}">
+		<view class="title">已有拼团</view>
+		<block wx:for='{{detail.tuan}}' wx:key='tuan'>
+			<view class="groupItem">
+				<view class="img">
+					<block wx:for='{{item.list}}' wx:for-item='user' wx:key='user'>
+						<image src="{{user.U_IMG}}" style='transform:translateX({{index*20}}rpx)'></image>
+					</block>
+					<image src="{{imageUrl}}/50.png" style='transform:translateX({{-(item.list.length)*20}}rpx)'></image>
+				</view>
+				<view class="detail">
+					<view class="infos">
+						<view>还差
+							<text>{{item.TUAN_ALL_PNUM - item.TUAN_NOW_PNUM}}</text> 人成团</view>
+						<view class="time">剩余{{endCountDownList[index].day}}:{{endCountDownList[index].hou}}:{{endCountDownList[index].min}}:{{endCountDownList[index].sec}}</view>
+					</view>
+					<view class="btnGroup" data-id="{{item.DB_TUAN_ID}}" bindtap="groupDetails">立即参团</view>
+				</view>
+			</view>
+		</block>
+	</view>
+	<!-- 商品评价 -->
+	<view class="margin-top-xs" wx:if="{{detail.comments.length > 0}}">
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				<text class="text-black">用户评价</text>
@@ -135,7 +192,7 @@
 		</view>
 	</view>
 	<!-- 店铺信息 -->
-	<view class="cu-list menu-avatar margin-top">
+	<view class="cu-list menu-avatar margin-top-xs">
 		<view class="cu-item">
 			<view class="cu-avatar lg" style="background-image:url({{store.ST_IMG}});"></view>
 			<view class="content">
@@ -147,14 +204,14 @@
 				</view>
 			</view>
 			<view class="action">
-				<text class="margin-right-sm line-black solid opt" size="mini" bindtap="giveStateH"  data-id="{{store.DB_STORE_ID}}">{{store.givestate == 2  ? '取消关注' : '关注店铺'}} </text>
-				<text class=" margin-right-sm line-red solid opt " size="mini " bindtap="gotoStore" data-id="{{store.DB_STORE_ID}} ">进店逛逛</text>
+				<text class="margin-right-sm line-black solid opt text-df" size="mini" bindtap="giveStateH"  data-id="{{store.DB_STORE_ID}}">{{store.givestate == 2  ? '取消关注' : '关注店铺'}} </text>
+				<text class=" margin-right-sm line-red solid opt text-df " size="mini " bindtap="gotoStore" data-id="{{store.DB_STORE_ID}} ">进店逛逛</text>
 			</view>
 		</view>
 		<view class="solid-bottom bg-white flex padding-left padding-right padding-bottom justify-between">
 			<view>
 				<text class="cuIcon-location" style="margin-top: 8rpx;"></text>
-				<text class="text-cut">{{store.ST_ADDRESS}}</text>
+				<text class="text-cut text-df">{{store.ST_ADDRESS}}</text>
 			</view>
 		</view>
 	</view>
@@ -166,7 +223,7 @@
 			<text class="cuIcon-right lg text-gray"></text>
 		</view>
 	</view> -->
-	<view class="margin-top-sm">
+	<view class="margin-top-xs">
 		<view class="cu-bar bg-white">
 			<view class="action">
 				<text class="text-black">产品详情</text>
@@ -176,29 +233,45 @@
 			<template is="wxParse" data="{{wxParseData:artice.nodes}}" />
 		</view>
 	</view>
+	<!-- 操作按钮 -->
 	<view class="cu-bar bg-white tabbar border shop foot">
 		<button class="action" open-type="contact">
 			<view class="cuIcon-service text-green"></view>
 			客服
 		</button>
 		<view class="action" bindtap="goCart">
-			<view class="cuIcon-cart">
-				<!-- <view class="cu-tag badge">{{cartNum}}</view> -->
-			</view>
+			<view class="cuIcon-cart"> <!-- <view class="cu-tag badge">{{cartNum}}</view> --> </view>
 			购物车
 		</view>
-		<view class="bg-orange submit round" bindtap="exchange" wx:if="{{detail.G_TYPE == '1' &&  detail.G_TRAFFIC == 2}}">积分兑换</view>
+		<!-- 秒杀商品 -->
+		<view class="bg-red submit round" bindtap="submit" data-goodsorderType="1" wx:if="{{detail.G_TYPE == '2' }}">立即抢购</view>
+		<!-- 拼团商品 -->
+		<view class="bg-gray round submit" bindtap="submit" data-goodsorderType="3" wx:if="{{detail.G_TYPE == '3' }}" style="text-align: center;font-size: 13px;width: 200rpx;padding: 5rpx;">
+			
+			<view>原价购买</view><view>(¥{{detail.G_YMONEY}})</view>
+		</view>
+		<view class="bg-red round submit" bindtap="submit" data-goodsorderType="4" wx:if="{{detail.G_TYPE == '3' }}" style="text-align: center;font-size: 13px;width: 200rpx;padding: 5rpx;">
+			
+			<view>一键开团</view><view>(¥{{detail.G_MONEY}})</view>
+		</view>
+		<!-- 普通商品 -->
+		<view class="bg-orange submit round" bindtap="submit" wx:if="{{ detail.G_TYPE == '1' &&  detail.G_TRAFFIC == 1}}" data-goodsorderType="5">加入购物车</view>
+		<view class="bg-red submit round" bindtap="submit" data-goodsorderType="1"  wx:if="{{detail.G_TYPE == '1' }}">立即购买</view>
+		<!-- 积分兑换 -->
+		<view class="bg-orange submit round" bindtap="submit" data-goodsorderType="2" wx:if="{{detail.G_TYPE == '1' &&  detail.G_TRAFFIC == 2}}">积分兑换</view>
+
+
+
+
+
+
+		<!-- 
+		
 		<view class="bg-orange submit round" bindtap="joinCart" wx:if="{{ detail.G_TYPE == '1' &&  detail.G_TRAFFIC == 1}}">加入购物车</view>
 		<view class="bg-red submit round" bindtap="submit" wx:if="{{detail.G_TYPE == '1' }}">立即购买</view>
+		-->
 
-		<view class="bg-gray submit round" bindtap="submit" wx:if="{{detail.G_TYPE == '3' }}">
-			<!-- <view>¥120</view> -->
-			<view>原价购买</view>
-		</view>
-		<view class="bg-red submit round" bindtap="opentuan" wx:if="{{detail.G_TYPE == '3' }}">
-			<!-- <view>¥12</view> -->
-			<view>一键开团</view>
-		</view>
+		
 	</view>
 	<!-- 规格-模态层弹窗 -->
 	<view class="popup spec" catchtap="stopPrevent" bindtap="toggleSpec" wx:if="{{ showSpec }}">
@@ -210,7 +283,7 @@
 				<view class="right">
 					<text class="name text-df">{{detail.G_NAME}}</text>
 
-					<text class="price" wx:if="{{ detail.G_TRAFFIC == 2 && type == 4}}">{{interPrice}}</text>
+					<text class="price" wx:if="{{ detail.G_TRAFFIC == 2 && goodsorderType == '2'}}">{{detail.G_YMONEY}}</text>
 					<text class="price" wx:else>¥{{smoney ? smoney : detail.G_MONEY}}</text>
 					<view class="selected">
 						已选：{{specSelected}}
@@ -223,10 +296,10 @@
 					<text class="{{tabSize==index ? 'active' : ''}}" wx:for="{{detail.specif}}" wx:key catchtap="selectSpec" data-fid="{{item.DB_SPECIFICATION_ID}}" id="{{index}}" data-money="{{item.SPE_MONEY}}" data-intergral="{{item.SPE_INTEGRAL}}" data-nowmoney="{{item.SPE_NOWMONEY}}"> {{item.SPE_NAME}}({{item.DIN_NAME}}) </text>
 				</view>
 			</view>
-			<view class="attr-list">
+			<view class="attr-list" wx:if="{{detail.taste.length > 0}}">
 				<text class="text-black">口味</text>
 				<view class="item-list">
-					<text class="{{tabSize1 == index ? 'active' : ''}}" wx:for="{{flavour}}" wx:key catchtap="selectflavour" data-fid="{{item.DB_SPECIFICATION_ID}}" id="{{index}}" data-money="{{item.SPE_MONEY}}" data-intergral="{{item.SPE_INTEGRAL}}" data-nowmoney="{{item.SPE_NOWMONEY}}"> {{item.name}}</text>
+					<text class="{{tabSize1 == index ? 'active' : ''}}" wx:for="{{detail.taste}}" wx:key catchtap="selectflavour" data-fid="{{item.DB_TASTE_ID}}" id="{{index}}"> {{item.TA_NAME}}</text>
 				</view>
 			</view>
 			<view class="cu-list menu text-left solid-top">
@@ -248,7 +321,7 @@
 </view>
 
 
-
+<!-- 分享 -->
 <view class="show-share" hidden="{{sharebox}}">
 	<view class="show-close-share" bindtap="closeshare"></view>
 	<view class="show-share-box">
@@ -269,7 +342,7 @@
 		</view>
 	</view>
 </view>
-<!--  -->
+
 <view class="show-share" hidden="{{sharecode}}">
 	<view class="show-close-share" bindtap="closeshare"></view>
 	<view class="show-code-box">

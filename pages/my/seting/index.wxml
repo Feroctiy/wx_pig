@@ -5,7 +5,10 @@
 <view class="cu-list menu margin-top margin-bottom-xl shadow-lg" style="position:relative">
 	<view class="cu-item arrow">
 		<view class="content">
-			<text class="text-black">绑定手机号</text>
+			<text class="text-black"> {{mobile ? '已绑手机号':'绑定手机号'}}</text>
+		</view>
+		<view class="action text-red">
+			{{mobile}}
 		</view>
 	</view>
 	<!-- <view class="cu-item arrow">
@@ -18,7 +21,7 @@
       <text class="text-black">安全中心</text>
     </view>
   </view> -->
-	<view class="btn">
-		<button open-type="getPhoneNumber" lang="zh_CN" bindgetuserinfo="onGetPhoneNumber">获取用户信息</button>
+	<view class="btn" wx:if="{{!mobile}}">
+		<button open-type="getPhoneNumber" lang="zh_CN" bindgetphonenumber="onGetPhoneNumber">获取用户信息</button>
 	</view>
 </view>

@@ -2,12 +2,9 @@
 	<view slot="backText">返回</view>
 	<view slot="content">商品搜索</view>
 </cu-custom>
-
 <form>
-	 <van-search background="#f1f1f1" focus="1" value="{{ value }}" placeholder="请输入搜索关键词" bind:search="search"></van-search>
+	<van-search background="#f1f1f1" focus="1" value="{{ value }}" placeholder="请输入搜索关键词" bind:search="search"></van-search>
 </form>
-
-
 <!-- 列表 -->
 <view class="box" wx:if="{{list.length!=0}}">
 	<view class="list" wx:for="{{list}}" wx:key="list" bindtap='todetail' data-id="{{item.DB_GOODS_ID}}">
@@ -16,8 +13,7 @@
 			<view class="name">{{item.G_NAME}}</view>
 			<view class="bottom">
 				<view class="price">
-					￥
-					<text style="font-size:28rpx;">{{item.G_MONEY}}</text>
+					￥ <text style="font-size:28rpx;">{{item.G_MONEY}}</text>
 				</view>
 				<view class="num">已售{{item.G_SALES}}</view>
 			</view>

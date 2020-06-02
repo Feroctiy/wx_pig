@@ -1,7 +1,0 @@
-<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
-  <view slot="backText">返回</view>
-  <view slot="content">选择城市</view>
-</cu-custom>
-<view class='wrapper'>
-    <city-list data="{{city}}" binddetail="bindtap" my-city="{{false}}" config="{{config}}"></city-list>
-</view>

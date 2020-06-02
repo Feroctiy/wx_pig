@@ -1,4 +1,39 @@
 <cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
 	<view slot="backText">返回</view>
-	<view slot="content">售后订单</view>
+	<view slot="content">退款订单</view>
 </cu-custom>
+<view class="container"> 
+	<view class="no-order" hidden="{{afterSaleList.length > 0 ? true : false}}" style="height: {{bodyHeight}}px;">
+		<image src="/images/none/empty_order.png" class="no-order-img"></image>
+		<view class="text">还没有订单呢</view>
+	</view>
+	<view class="order-list" hidden="{{afterSaleList.length > 0 ? false : true}}">
+		<view class="a-order" wx:for-items="{{afterSaleList}}" wx:key="{{index}}">
+			<view class="order-date" bindtap="orderDetail" data-id="{{item.DB_ORDER_ID}}">
+				<view class="date-box">{{item.store.ST_NAME}}</view>
+				<view class="status text-red" wx:if="{{item.O_STATE == 6}}">已退款</view>
+				<view class="status text-red" wx:if="{{item.O_STATE == 2}}">待发货 </view>
+        <view class="status text-red" wx:if="{{item.O_STATE == 3}}">待收货 </view>
+        <view class="status text-red" wx:if="{{item.O_STATE == 4}}">待评价 </view>
+			</view>
+			<view bindtap="orderDetail" data-id="{{item.DB_ORDER_ID}}" class="solid-bottom">
+				<view class="a-goods" wx:for="{{item.shop}}" wx:for-index="idx" wx:for-item="itemName">
+					<view class="img-box">
+						<image src="{{itemName.goods.G_IMG}}" class="img" />
+					</view>
+					<view class="text-box">
+						<view class="arow arow01">
+							<view class="goods-name">{{itemName.goods.G_NAME}}</view>
+							<view class="goods-price">¥ {{itemName.SH_MONEY}}</view>
+						</view>
+						<view class="arow">
+							<view class="goods-label">{{itemName.specif.SPE_NAME}}({{itemName.specif.DIN_NAME}})</view>
+							<view class="goods-num">x {{itemName.SH_NUM}}</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			 
+		</view>
+	</view>
+</view>

@@ -1,7 +1,7 @@
 // pages/my/integral/index.js
 var call = require("../../../utils/request.js")
 var util = require("../../../utils/util.js")
-
+var getUrl = require('../../../utils/url.js')
 const app = getApp()
 Page({
 
@@ -9,7 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    goods: []
+    goods: [],
+    imageUrl: getUrl.imageUrl()
     
   },
 

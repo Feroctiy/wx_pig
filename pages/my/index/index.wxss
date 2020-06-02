@@ -1,9 +1,14 @@
-/* pages/my/index/index.wxss */
+
 .cu-list.menu-avatar>.cu-item .content {
   position: absolute;
   left: 180rpx;
-  width: calc(100% - 220rpx);
+  width: calc(100% - 320rpx);
   line-height: 1.6em;
+}
+
+.cu-list.menu-avatar>.cu-item .action {
+  width: 200rpx;
+  text-align: center;
 }
 
 .cu-btn {
@@ -13,7 +18,7 @@
 .cu-list.menu>.cu-item .content>image {
   width: 1.3em;
   margin-right: 20rpx;
-  
+
 }
 
 .cu-btn {
@@ -28,7 +33,16 @@
 .cu-list.menu>.cu-item.arrow {
   padding-right: 70rpx;
 }
-.cu-list.grid>.cu-item text.text-black{
+
+.cu-list.grid>.cu-item text.text-black {
   color: #333;
 }
 
+.level image {
+  width: 50rpx;
+  height: 40rpx;
+  margin-right: 5rpx;
+  vertical-align: middle;
+
+
+}

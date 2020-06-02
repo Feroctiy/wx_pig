@@ -47,11 +47,8 @@
 							</view>
 						</block>
 					</view>
-				</view>
-
+				</view> 
 			</block>
-
-
 			<!-- 底部结算栏 -->
 			<view class="accounts flex">
 				<view class="checkAll flex text-normal" catchtap="checkedAll">
@@ -70,8 +67,8 @@
 	<no-content wx:else types="cart" title="登录账号才能看到购物车哦" subTitle="登录失效" btn="马上登录"></no-content>
 
 
-<view class="padding text-center">商品推荐</view>
-<view class="bg-white padding">
+<view class="padding text-center" wx:if="{{recomlist.length > 0 }}">商品推荐</view>
+<view class="bg-white padding" wx:if="{{recomlist.length > 0 }}">
 		<view class="grid col-2 margin-bottom text-center grid-square">
 			<view class="img" bindtap="goDetail" wx:for="{{recomlist}}" wx:key data-id="{{item.DB_GOODS_ID}}">
 				<image src="{{item.G_IMG}}"></image>

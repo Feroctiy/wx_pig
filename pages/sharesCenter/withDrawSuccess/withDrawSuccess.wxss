@@ -1,0 +1,31 @@
+/* pages/withDrawSuccess/withDrawSuccess.wxss */
+/* pages/addCardSuccess/addCardSuccess.wxss */
+
+.content1 {
+  width: 100%;
+  padding: 0 4%;
+  padding-top: 150rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #666;
+  font-size: 45rpx;
+}
+
+image {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 20rpx;
+
+}
+
+.submit {
+  width: 100%;
+  margin: 150rpx 0;
+  background: #333;
+  color: #fff;
+  border-radius: 10rpx;
+  line-height: 90rpx;
+  text-align: center;
+  font-size: 32rpx;
+}

@@ -1,0 +1,101 @@
+/* pages/crowdFundingList/crowdFundingList.wxss */
+
+page {
+  background: #f4f4f4;
+}
+
+.container {
+  margin: 25rpx 4%;
+  padding: 20rpx 2%;
+  box-shadow: 0 0 15rpx #eaeaea;
+  border-radius: 10rpx;
+  background: #fff;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+label {
+  background: linear-gradient(to right, #fc6864, #f13b61);
+  color: #fff;
+  padding: 0 8rpx;
+  border-radius: 10rpx;
+}
+
+.content1 {
+  width: 100%;
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content1:last-child {
+  margin-bottom: 0;
+}
+
+.logo {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 15rpx;
+}
+
+.proinfo {
+  width: 65%;
+  height: 200rpx;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: space-around;
+  font-size: 32rpx;
+  color: #323232;
+}
+
+.proinfo .name {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.num {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.old {
+  font-size: 28rpx;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.opera {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.opera .price {
+  color: #f3535d;
+}
+
+.opera .suport {
+  color: #fff;
+  background: linear-gradient(to right, #fc6864, #f13b61);
+  border-radius: 15rpx;
+  font-size: 28rpx;
+  padding: 5rpx 25rpx;
+  text-align: center;
+}

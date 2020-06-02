@@ -21,19 +21,19 @@
 </view> -->
 
 <view class="VerticalBox">
-	<scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - 120rpx)">
-		<view class="cu-item {{index==TabCur?'text-red cur':''}}" wx:for="{{list}}" wx:key bindtap='tabSelect' data-id="{{index}}">
-			{{item.name}}
+	<scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - 110rpx)">
+		<view class="cu-item {{index==TabCur?'text-red cur':''}}" wx:for="{{typeList}}" wx:key bindtap='tabSelect' data-id="{{index}}" data-typeid="{{item.DB_TYPE_ID}}" data-name="{{item.T_NAME}}">
+			{{item.T_NAME}}
 		</view>
 	</scroll-view>
-	<scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 120rpx)" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
-		<view class="padding-top padding-lr" wx:for="{{list}}" wx:key id="main-{{index}}">
+	<scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 110rpx)" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
+		<view class="padding-top padding-lr">
 			<view class='cu-bar solid-bottom bg-white'>
 				<view class='action'>
-					<text class='cuIcon-title text-red'></text> {{item.name}} </view>
+					<text class='cuIcon-title text-red'></text>{{typeName}} </view>
 			</view>
 			<view class="cu-list menu-avatar">
-				<view class="cu-item" catchtap="goDetail" wx:for="{{indexData.hotlist}}" wx:for-index="idx" wx:key data-id="{{item.DB_GOODS_ID}}" wx:if="{{index == 0 ? idx < 2   : idx >= 2 }}" >
+				<view class="cu-item" catchtap="goDetail" wx:for="{{goodslist}}" wx:for-index="idx" wx:key data-id="{{item.DB_GOODS_ID}}">
 					<view class="cu-avatar radius lg" style="background-image:url({{item.G_IMG}});"></view>
 					<view class="content">
 						<view class="text-grey text-cut">{{item.G_NAME}}</view>

@@ -1,0 +1,19 @@
+<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
+	<view slot="content">充值明细</view>
+</cu-custom>
+<view class="cells" wx:for="{{list}}" wx:for-index="idx" wx:for-item="item" wx:key="item.id">
+	<view class="bg-white padding-sm item" style="margin-bottom:10px;">
+		<view class="flex justify-between">
+			<view>{{item.CREATEDATE}}</view>
+		</view>
+		<view class="flex justify-between  padding-top-xs">
+			<view style='color:#333;font-size:17px;' wx:if="{{item.RE_STATE == '1'}}">购买商品</view>
+			<view style='color:#333;font-size:17px;' wx:if="{{item.RE_STATE == '2'}}">下线购买</view>
+			<view style='color:#333;font-size:17px;' wx:if="{{item.RE_STATE == '3'}}">提现</view>
+			<view style='color:#333;font-size:17px;' wx:if="{{item.RE_STATE == '4'}}">金额充值</view>
+			<view style='color:#333;font-size:17px;' wx:if="{{item.RE_STATE == '5'}}">储值卡兑换</view>
+			<view style='color:#333;font-size:17px;' wx:if="{{item.RE_TYPE == '1'}}">+{{item.RE_MONEY}}</view>
+			<view style='color:#333;font-size:17px;' wx:if="{{item.RE_TYPE == '2'}}">-{{item.RE_MONEY}}</view>
+		</view>
+	</view>
+</view>

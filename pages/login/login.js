@@ -37,7 +37,7 @@ Page({
                     OPENID: res,
                     U_NICKNAME: _this.data.userInfo.nickName,
                     U_IMG: _this.data.userInfo.avatarUrl,
-                    SUP_OPENID: ""
+                    SUP_OPENID: wx.getStorageSync('SUP_OPENID') ? wx.getStorageSync('SUP_OPENID') : ''
                   }, function (res) {
                     console.log(res);
                     wx.setStorageSync('openid', res)

@@ -1,0 +1,16 @@
+<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
+	<view slot="content">等级说明</view>
+</cu-custom>
+<import src="../../../components/wxParse/wxParse.wxml" />
+<view class="bg">
+	<image src="{{memberInfo.ME_IMG}}" style="width:100%"></image> 
+</view>
+<view class="cu-bar bg-white text-center">
+	<view class="action sub-title" style="margin: auto;">
+		<text class="text-xl text-red">{{memberInfo.ME_NAME}}</text>
+		<text class="bg-red"></text>
+	</view>
+</view>
+<view class="padding bg-white des">
+	<template is="wxParse" data="{{wxParseData:artice.nodes}}" />
+</view>

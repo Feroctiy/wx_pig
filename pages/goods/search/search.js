@@ -1,24 +1,11 @@
-const app = getApp();
-var openid;
 var call = require("../../../utils/request.js");
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     list: [],
-    value: ""
+    value: "",
+    PULLNUM:0
   },
-  onLoad: function (options) {
-    var that = this
-    //获取存储信息
-    wx.getStorage({
-      key: 'openid',
-      success: function (res) {
-        openid = res.data
-      }
-    })
+  onLoad: function (options) {  
   },
   search(e) {
     var _this = this;
@@ -26,28 +13,26 @@ Page({
       DB_STORE_ID: wx.getStorageSync('DB_STORE_ID'),
       INPUT: e.detail,
       G_TYPE_ID: '',
-      PULLNUM: '0'
-
-    }, function (res) {
-      console.log(res);
-
+      PULLNUM: _this.data.PULLNUM
+    }, function (res) { 
       if (res.state == "success") {
-        _this.setData({
-          list: res.goods
-        })
-
+        _this.setData({ list: res.goods })
+      }else{
+        _this.setData({ list: [] })
       }
     }, function () {})
-
-
-
   },
-  onClick() {
-    console.log(this.data)
-  },
+  // 商品详情
   todetail(e){
+    if (!wx.getStorageSync('openid')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+        url: `/pages/login/login?from=${this.route}&tab=true`,
+      })
+      return;
+    }
     wx.navigateTo({
-      url: '/pages/goods/detail/detail?id='+e.currentTarget.dataset.id
+      url: '/pages/goods/detail/detail?id=' + e.currentTarget.dataset.id
     })
   }
 })

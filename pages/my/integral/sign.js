@@ -1,8 +1,10 @@
 var util = require("../../../utils/util.js")
 var call = require("../../../utils/request.js")
+var getUrl = require('../../../utils/url.js')
 var app = getApp();
 Page({
   data: {
+    imageUrl: getUrl.imageUrl(),
     curHdIndex: "0",
     selectedDate: '',
     selectedWeek: '',
@@ -88,6 +90,7 @@ Page({
     }, function(res) {
       if (res.state == "success") {
         util.showMessage("签到成功")
+        _this.getSign();
       }
       console.log(res);
     }, function() {})

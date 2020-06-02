@@ -22,7 +22,7 @@
     <view>
       <text class="cuIcon-location"></text> {{item.ST_ADDRESS}}
     </view>
-    <view class="">100米</view>
+    <!-- <view class="">100米</view> -->
   </view>
 </view>
-<view wx:if="{{givelist.length == 0}}" class="text-center"> 暂无数据</view>
+<view wx:if="{{givelist.length == 0}}" class="text-center padding-top-xl"> 暂无数据</view>

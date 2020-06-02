@@ -82,7 +82,7 @@ Page({
   //参数检验
   validtioan: function(e) {
     var that = this;
-    if (Utils.isEmpty(e.detail.value.U_NICKNAME)) {
+    if (Utils.isEmpty(e.detail.value.U_NAME)) {
       Utils.showMessage("请填写姓名");
       return false
     }
@@ -114,7 +114,7 @@ Page({
     call.getData('/app/user/appuserperfect', {
       DB_USER_ID: this.data.id,
       OPENID: wx.getStorageSync('openid'),
-      U_NAME: e.detail.value.U_NICKNAME,
+      U_NAME: e.detail.value.U_NAME,
       U_GENDER: that.data.gender,
       U_PHONE: '',
       U_BIRTHDAY: that.data.date,

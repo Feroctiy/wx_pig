@@ -1,5 +1,5 @@
-<cu-custom bgColor="bg-gradual-main-top" >
-	<!-- <view slot="backText">返回</view> -->
+<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
+	<view slot="backText">返回</view>
 	<view slot="content">登录</view>
 </cu-custom>
 

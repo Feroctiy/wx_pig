@@ -1,0 +1,9 @@
+<cu-custom bgColor="bg-gradual-main-top"  isBack="{{true}}">
+	<view slot="content">提现</view>
+</cu-custom>
+<view class="content1">
+  <image src='{{imageUrl}}14.png' mode="widthFix"></image>
+  <!-- <icon type="success" size="60rpx" style="margin-bottom:100rpx"></icon> -->
+  <view style="font-size: 33rpx;">提现申请已提交</view>
+  <view class="submit" bindtap="navBack">确定</view>
+</view>

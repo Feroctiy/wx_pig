@@ -1,0 +1,78 @@
+/* pages/shareCenter/shareCenter.wxss */
+page{
+  height: 100.1%;
+  overflow-y: scroll;
+}
+.userCon {
+  width: 100%;
+  padding: 40rpx 4%;
+  background: linear-gradient(to right, #fc6864, #f13b61);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+
+.userInfo {
+  width: 80%;
+  color: #fff;
+}
+
+.userInfo .name {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 35rpx;
+  margin-bottom: 20rpx;
+}
+
+.userInfo .balance {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userInfo text {
+  font-size: 28rpx;
+}
+
+.price {
+  text-decoration: underline;
+}
+
+.info {
+  width: 100%;
+  padding: 20rpx 4%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1rpx solid #ddd;
+  background: #fff;
+}
+
+.user {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #333;
+  font-size: 30rpx;
+}
+
+.user image {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.time {
+  font-size: 28rpx;
+  color: #999;
+}

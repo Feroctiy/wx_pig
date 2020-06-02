@@ -1,0 +1,33 @@
+<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
+	<view slot="content">我的余额</view>
+</cu-custom>
+<view class='account'>
+	<view class="title">
+		<view>我的余额</view>
+		<text class="cuIcon-question lg text-white text-xl" catchtap="selfSetting" style="font-size:40rpx;"></text> 
+	</view>
+	<view class="balance">
+		<view class="money">
+			<text>￥</text>{{userInfo.U_ACCOUNT}}</view>
+		<view class="withDraw" bindtap="widthDraw">
+			<text class="cuIcon-forwardfill lg text-white text-xl" style="font-size:30rpx;"></text>
+			<view>提 现</view>
+		</view>
+	</view>
+</view>
+<view class="record">
+	<text class="cuIcon-copy lg text-red text-xl" catchtap="selfSetting" style="font-size:40rpx;"></text>
+	<view>账户明细</view>
+</view>
+<view class="cu-list menu-avatar">
+	<view class="cu-item" wx:for='{{record}}' wx:key='record'>
+		<view class="cu-avatar round lg" style="background-image:url({{item.LOWER_IMG}});"></view>
+		<view class="content">
+			<view class="text-grey">{{item.LOWER_NICKNAME}}</view> 
+      <view class="text-grey text-df">{{item.CREATEDATE}}</view>
+		</view>
+		<view class="action">
+			<view class="text-block text-df">¥{{item.RE_MONEY}}</view>
+		</view>
+	</view>
+</view>

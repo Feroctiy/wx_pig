@@ -5,7 +5,7 @@
 <form bindsubmit='formsubmit'>
 	<view class="cu-form-group">
 		<view class="title">姓名</view>
-		<input placeholder="请填写姓名" name="U_NICKNAME" value='{{personInfo.U_NICKNAME}}' maxlength="10"></input>
+		<input placeholder="请填写姓名" name="U_NAME" value='{{personInfo.U_NAME}}' maxlength="10"></input>
 	</view>
 	<view class="cu-form-group">
 		<view class="title">性别</view> 

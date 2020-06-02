@@ -1,65 +1,28 @@
 // pages/my/index/index.js
 var call = require("../../../utils/request.js");
+var getUrl = require('../../../utils/url.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    imageUrl: getUrl.imageUrl(),
     userInfo: {},
-    iconList: [{
-      url: "sale1.png",
-      icon: 'cardboardfill',
-      color: 'red',
-      type: 1,
-      name: '待付款'
-    }, {
-      url: "sale2.png",
-      icon: 'recordfill',
-      color: 'orange',
-      type: 2,
-      name: '待发货'
-    }, {
-      url: "sale3.png",
-      icon: 'picfill',
-      color: 'yellow',
-      type: 3,
-      name: '待收货'
-    }, {
-      url: "sale4.png",
-      icon: 'noticefill',
-      color: 'olive',
-      type: 4,
-      name: '评价'
-    }, {
-      url: "sale5.png",
-      icon: 'noticefill',
-      color: 'olive',
-      type: 0,
-      name: '退款/售后'
-    }],
+    iconList: [
+      { url: "sale1.png",icon: 'cardboardfill',color: 'red',type: 1,name: '待付款'}, 
+      { url: "sale2.png", icon: 'recordfill', color: 'orange', type: 2, name: '待发货' }, 
+      { url: "sale3.png", icon: 'picfill', color: 'yellow', type: 3, name: '待收货' }, 
+      { url: "sale4.png", icon: 'noticefill', color: 'olive', type: 4, name: '评价' }, 
+      { url: "sale5.png", icon: 'noticefill', color: 'olive', type: 0, name: '退款/售后' }
+    ],
     gridCol: 5,
     recomlist: [],
     openid: ''
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     this.appgetrecomlist();
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     if (wx.getStorageSync('openid')) {
       this.setData({
@@ -82,11 +45,6 @@ Page({
       console.log(res);
     }, function () {})
   },
-
-
-  /**
-   * 我的订单
-   */
   goOrder: function (e) {
     console.log(e)
     if (!wx.getStorageSync('openid')) {
@@ -96,9 +54,16 @@ Page({
       })
       return;
     }
-    wx.navigateTo({
-      url: '/pages/my/order/order?type=' + e.currentTarget.dataset.type,
-    })
+    if(e.currentTarget.dataset.type == 0){ 
+      wx.navigateTo({
+        url: '/pages/my/afterSaleList/afterSaleList?type=' + e.currentTarget.dataset.type,
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/my/order/order?type=' + e.currentTarget.dataset.type,
+      })
+    }
+    
   },
 
   goBalance() {
@@ -119,17 +84,29 @@ Page({
    */
   goInfo: function () {
     if (!wx.getStorageSync('openid')) {
-      if (!wx.getStorageSync('openid')) {
-        wx.navigateTo({
-          url: '/pages/login/login',
-          url: `/pages/login/login?from=${this.route}&tab=true`,
-        })
-        return;
-      }
+      wx.navigateTo({
+        url: '/pages/login/login',
+        url: `/pages/login/login?from=${this.route}&tab=true`,
+      })
       return;
     }
+
     wx.navigateTo({
       url: '/pages/my/info/info',
+    })
+  },
+  goLevel() {
+
+    if (!wx.getStorageSync('openid')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+        url: `/pages/login/login?from=${this.route}&tab=true`,
+      })
+      return;
+    }
+
+    wx.navigateTo({
+      url: '/pages/my/userlevel/index',
     })
   },
   /**
@@ -137,15 +114,13 @@ Page({
    */
   goAddress: function () {
     if (!wx.getStorageSync('openid')) {
-      if (!wx.getStorageSync('openid')) {
-        wx.navigateTo({
-          url: '/pages/login/login',
-          url: `/pages/login/login?from=${this.route}&tab=true`,
-        })
-        return;
-      }
+      wx.navigateTo({
+        url: '/pages/login/login',
+        url: `/pages/login/login?from=${this.route}&tab=true`,
+      })
       return;
     }
+
     wx.navigateTo({
       url: '/pages/address/list/index?back=0',
     })
@@ -159,17 +134,27 @@ Page({
   // 账户与安全
   goSetings: function () {
     if (!wx.getStorageSync('openid')) {
-      if (!wx.getStorageSync('openid')) {
-        wx.navigateTo({
-          url: '/pages/login/login',
-          url: `/pages/login/login?from=${this.route}&tab=true`,
-        })
-        return;
-      }
+      wx.navigateTo({
+        url: '/pages/login/login',
+        url: `/pages/login/login?from=${this.route}&tab=true`,
+      })
       return;
     }
     wx.navigateTo({
       url: '/pages/my/seting/index',
+    })
+  },
+  // 分销中心
+  goShareCenter() {
+    if (!wx.getStorageSync('openid')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+        url: `/pages/login/login?from=${this.route}&tab=true`,
+      })
+      return;
+    }
+    wx.navigateTo({
+      url: '/pages/sharesCenter/userInfo/userInfo',
     })
   },
   // 拨打商家电话

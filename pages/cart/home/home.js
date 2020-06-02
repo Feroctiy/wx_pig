@@ -281,7 +281,7 @@
 
 
      wx.navigateTo({
-       url: '/pages/cart/pay-order/pay-order?shoppingcartlist=' + shoppingcartlist + "&orderType=cart",
+       url: '/pages/cart/pay-order/pay-order?shoppingcartlist=' + shoppingcartlist + "&orderType=5",
      })
 
 

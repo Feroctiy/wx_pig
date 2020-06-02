@@ -10,12 +10,20 @@
   justify-content: space-between;
 }
 
+
 .nav-li {
   padding: 40rpx 30rpx;
   border-radius: 10rpx;
   width: 47%;
   margin: 0 10rpx 30rpx;
   border: 1px solid rgba(219, 187, 130, 1);
+}
+.nav-li.active{
+  background:rgba(219, 187, 130, 1);
+  color: #fff;
+}
+.nav-li.active .money,.nav-li.active .des,.nav-li.active .micon{
+  color: #fff;
 }
 
 .money {
@@ -60,4 +68,11 @@
   font-weight: 500;
   color: rgba(166, 121, 40, 1);
   line-height: 40px;
+}
+.cu-list.menu>.cu-item.top{
+  position: static ;
+  background-color:transparent;
+}
+.footer{
+  margin: 20px 0;
 }

@@ -19,7 +19,7 @@ Page({
     }, function (res) {
       console.log(res);
       if (res.state == "success") {
-        _this.setData({afterSaleList:res.salslist})
+        _this.setData({afterSaleList:res.orderlist})
       }
     }, function () {})
   },

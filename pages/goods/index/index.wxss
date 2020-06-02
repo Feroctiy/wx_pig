@@ -1,4 +1,7 @@
-/* pages/component/nav/nav.wxss */
+page{
+  background: #fff;
+}
+
 .screen-swiper {
   min-height: 275rpx;
 }

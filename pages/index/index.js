@@ -1,66 +1,35 @@
-//index.js
-//获取应用实例
 const app = getApp();
 var call = require("../../utils/request.js");
+var getUrl = require('../../utils/url.js');
 
 Page({
   data: {
+    imageUrl: getUrl.imageUrl(),
     gridCol: 5,
     cardCur: 0,
     indexData: {},
     customBar: app.globalData.CustomBar,
     store: "",
-    goodsList: [{}, {}],
+    goodsList: [],
     groupList: []
   },
-  onLoad: function (options) {
-    // console.log(options);
-    // this.pos();
-    var _this = this;
-    call.getData('/app/user/appgetstoreHome', {
-      LAT: "34.34127",
-      LON: "108.93984"
-    }, function (res) {
-      console.log(res);
-      _this.setData({
-        store: res.store[0]
-      })
-      wx.setStorageSync('store', res.store[0])
-      wx.setStorageSync('DB_STORE_ID', res.store[0].DB_STORE_ID)
-      if (res.status == "success") {
-        call.getData('/app/user/appgetplat', {
-          DB_STORE_ID: res.store[0].DB_STORE_ID
-        }, function (res) {
-          _this.setData({
-            indexData: res
-          })
-          _this.getGrouplist();
-        }, function () {})
-
-      }
-    }, function () {})
-
- 
+  onLoad: function (options) { 
   },
   onShow() {
     var _this = this;
     if (wx.getStorageSync('store')) {
       var store = wx.getStorageSync('store');
-      this.setData({
-        store: store
-      })
+      this.setData({ store: store })
       call.getData('/app/user/appgetplat', {
         DB_STORE_ID: wx.getStorageSync('DB_STORE_ID')
       }, function (res) {
-        _this.setData({
-          indexData: res
-        })
-        _this.getGrouplist();
+        _this.setData({ indexData: res }) 
       }, function () {})
+    } else {
+      _this.pos();
     }
   },
-  pos: function () {
-    console.log("呼呼呼呼呼")
+  pos: function () { 
     var that = this;
     wx.getSetting({
       success: (res) => {
@@ -73,18 +42,10 @@ Page({
                 wx.openSetting({
                   success: function (data) {
                     if (data.authSetting["scope.userLocation"] == true) {
-                      wx.showToast({
-                        title: '授权成功',
-                        icon: 'success',
-                        duration: 5000
-                      })
+                      wx.showToast({ title: '授权成功', icon: 'success', duration: 5000 })
                       that.path();
                     } else {
-                      wx.showToast({
-                        title: '授权失败',
-                        icon: 'success',
-                        duration: 5000
-                      })
+                      wx.showToast({ title: '授权失败', icon: 'success', duration: 5000 })
                     }
                   }
                 })
@@ -99,14 +60,8 @@ Page({
       }
     })
   },
-  goStoreList() {
-    wx.navigateTo({
-      url: '/pages/goods/store/list',
-    })
-  },
-  path: function () {
-
-
+  path: function () { 
+    var _this = this;
     //获取用户的初始位置
     wx.getLocation({
       type: "gcj02",
@@ -118,19 +73,33 @@ Page({
           latitude: res.latitude
         });
 
+        call.getData('/app/user/appgetstoreHome', { LAT: res.latitude, LON: res.longitude }, function (res) {
+          console.log(res);
+          if (res.status == "success") {
+            _this.setData({ store: res.store[0] })
+            wx.setStorageSync('store', res.store[0])
+            wx.setStorageSync('DB_STORE_ID', res.store[0].DB_STORE_ID)
+            call.getData('/app/user/appgetplat', {
+              DB_STORE_ID: res.store[0].DB_STORE_ID
+            }, function (res) {
+              _this.setData({  indexData: res }) 
+            }, function () {})
+  
+          }else{
+            wx.showToast({title:res.message,icon:"none"})
+          }
+        }, function () {})
+
       },
       fail: function (res) {
         console.log(res);
       }
     });
   },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
+  // 商品详情页面
   goDetail(e) {
+    var type = e.currentTarget.dataset.type //类型（1普通；2秒杀；3拼团；4众筹；）
+    var DB_GOODS_ID = e.currentTarget.dataset.id
     if (!wx.getStorageSync('openid')) {
       wx.navigateTo({
         url: '/pages/login/login',
@@ -142,47 +111,49 @@ Page({
       url: '/pages/goods/detail/detail?id=' + e.currentTarget.dataset.id
     })
   },
-  goGoods() {
-    wx.navigateTo({
-      url: '/pages/goods/index/index'
-    })
+  // 店铺列表
+  goStoreList() {
+    wx.navigateTo({ url: '/pages/goods/store/list' })
   },
+  // 商品搜索
   goSearch() {
-    wx.navigateTo({
-      url: '/pages/goods/search/search',
-    })
+    wx.navigateTo({ url: '/pages/goods/search/search'})
   },
-  goNotice() {
-    wx.navigateTo({
-      url: '/pages/notice/notice',
-    })
-  },
-  goBanner(e) {
-    console.log(e);
+  // 轮播图
+  goBanner(e) { 
     wx.navigateTo({
       url: '/pages/goods/loop/loop?id=' + e.currentTarget.dataset.id,
     })
   },
-  // /app/goods/appgetgrouplist
-  getGrouplist() {
-    var _this = this;
-    call.getData('/app/goods/appgetgrouplist', {
-      DB_STORE_ID: wx.getStorageSync('DB_STORE_ID'),
-      PULLNUM:'0'
-    }, function (res) {
-      console.log(res);
-      if (res.state == "success") { 
-        _this.setData({
-          groupList:res.goods
-        })
-        console.log("*********",_this.data)
-      }
-    }, function () {})
+  // 公告列表
+  goNotice() {
+    wx.navigateTo({ url: '/pages/notice/notice' })
   },
-  allproduct(){
+  // 活动页面
+  goShare(){
+    if (!wx.getStorageSync('openid')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+        url: `/pages/login/login?from=${this.route}&tab=true`,
+      })
+      return;
+    }
+    wx.navigateTo({ url: '/pages/share/share' })
+  },
+  // 秒杀列表
+  goSeckilList(){
+    wx.navigateTo({ url: '/pages/goods/seckilList/index' })
+  },
+  // 团购列表
+  goGroupList(){
     wx.navigateTo({
-      url: '/pages/goods/index/index'
-    })
+      url: '/pages/goods/groupList/index'
+    }) 
+  },
+  allproduct() {
+    wx.navigateTo({ url: '/pages/goods/index/index' })
+  },
+  goGoods() {
+    wx.navigateTo({ url: '/pages/goods/index/index' })
   }
-
 })

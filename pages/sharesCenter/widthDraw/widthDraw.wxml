@@ -1,0 +1,39 @@
+<cu-custom bgColor="bg-gradual-main-top"  isBack="{{true}}">
+	<view slot="content">提现</view>
+</cu-custom>
+<view>
+  <view class="balance">可提现金额：{{userInfo.U_BALANCE}}元</view>
+  <view class="money">
+    <text>￥</text>
+    <input placeholder="请输入提现金额" placeholder-style="color:#dde0e6;" value="{{iptValue}}" type="digit" bindinput="getMoney"></input>
+    <view data-id="{{userInfo.U_BALANCE}}" bindtap="getAllBalance">全部提取</view>
+  </view>
+  <view class="type">
+    <view>提现至：</view>
+    <label data-state="1" bindtap="withType">
+      <image wx:if='{{STATE == 1}}' src="{{iconsUrl}}/icons/17.png"></image>
+      <image wx:else src="{{iconsUrl}}/icons/18.png"></image>
+      <view>微信</view>
+    </label>
+    <!-- <label data-state="2" bindtap="withType">
+      <image wx:if='{{STATE == 2}}' src="{{iconsUrl}}/icons/17.png"></image>
+      <image wx:else src="{{iconsUrl}}/icons/18.png"></image>
+      <view>银行卡</view>
+    </label> -->
+  </view>
+  <view class="cardList" wx:if='{{STATE == 2}}'>
+    <block wx:for='{{cardList}}' wx:key='crad'>
+      <view class="item" data-id="{{item.DB_BANK_CARD_ID}}" bindtap="getCardId">
+        <image wx:if='{{currentCard==item.DB_BANK_CARD_ID}}' src="{{iconsUrl}}/icons/17.png"></image>
+        <image wx:else src="{{iconsUrl}}/icons/18.png"></image>
+        <view>{{item.BC_BACK_NAME}}{{lastNumList[index]}}</view>
+      </view>
+    </block>
+    <view class="add" bindtap="addBankCard">
+      <image src="{{iconsUrl}}/icons/23.png"></image>
+      <view>添加银行卡</view>
+      <image src="{{iconsUrl}}/icons/16.png" style="margin-right: 0;"></image>
+    </view>
+  </view>
+  <view class="submit" bindtap="widthDraw">提现</view>
+</view>

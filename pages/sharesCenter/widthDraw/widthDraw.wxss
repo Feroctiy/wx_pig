@@ -1,0 +1,100 @@
+/* pages/widthDraw/widthDraw.wxss */
+page{
+  background: #fff;
+}
+
+.balance {
+  width: 100%;
+  padding: 30rpx 4% 0 4%;
+  color: #333;
+  font-size: 28rpx;
+  border-top: 10rpx solid #f5f5f5;
+}
+
+.money {
+  width: 100%;
+  padding: 30rpx 4%;
+  font-size: 32rpx;
+  border-bottom: 1rpx solid #f4f4f4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.money text {
+  font-size: 50rpx;
+  color: #333;
+}
+
+.money input {
+  width: 60%;
+}
+
+.money view {
+  width: 30%;
+  color: #3e67ff;
+  border-left: 1rpx solid #f4f4f4;
+  text-align: center;
+}
+
+.type {
+  width: 100%;
+  padding: 30rpx 4%;
+  font-size: 32rpx;
+  border-bottom: 1rpx solid #f4f4f4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #333;
+}
+
+.type label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+label image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 40rpx;
+}
+
+.cardList {
+  width: 35%;
+  margin-right: 4%;
+  font-size: 30rpx;
+  color: #666;
+  padding: 30rpx 0;
+  margin-left: 61%;
+}
+
+.cardList image {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 30rpx;
+}
+
+.item,
+.add {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.add {
+  color: #999;
+}
+
+.submit {
+  width: 92%;
+  margin: 150rpx 4%;
+  background: rgba(219,187,130,1);
+  color: #fff;
+  border-radius: 10rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 32rpx;
+}

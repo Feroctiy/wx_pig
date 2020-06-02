@@ -1,0 +1,25 @@
+<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
+	<view slot="content">分销中心</view>
+</cu-custom>
+<view class='userCon'>
+	<image class="logo" src="{{userInfo.U_IMG}}"></image>
+	<view class="userInfo">
+		<view class="name">
+			<view wx:if="{{userInfo.U_NAME == '' || userInfo.U_NAME == undefined}}">{{userInfo.U_NICKNAME}}</view>
+			<view wx:else>{{userInfo.U_NAME}}</view>
+			<view class="text-df">已邀请{{directly}}人</view>
+		</view>
+		<view class="balance">
+			<view class='price' bindtap="myAccount">
+				<text>我的余额：</text>{{userInfo.U_ACCOUNT}}元</view>
+			<view class="text-df">今日新增{{directly}}人</view>
+		</view>
+	</view>
+</view>
+<view class="info" wx:for='{{dataList}}' wx:key='data' wx:if='{{ dataList.length > 0 }}'>
+  <view class="user">
+    <image src="{{item.U_IMG}}"></image>
+    <view>{{item.U_NICKNAME}}</view>
+  </view>
+  <view class="time">{{item.CREATEDATE}}</view>
+</view>

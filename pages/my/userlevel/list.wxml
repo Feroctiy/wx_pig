@@ -1,0 +1,17 @@
+<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
+	<view slot="content">成长值记录</view>
+</cu-custom>
+
+<view class="cells" wx:for="{{list}}" wx:for-index="idx" wx:for-item="item" wx:key="item.id">
+    <view class="bg-white padding-sm item" style="margin-bottom:10px;">
+      <view class="flex justify-between">
+        <view>{{item.CREATEDATE}}</view>
+      </view>
+      <view class="flex justify-between  padding-top-xs">
+        <view style='color:#333;font-size:17px;' wx:if="{{item.G_STATE == '3'}}">购买商品</view>
+        <view style='color:#333;font-size:17px;' wx:if="{{item.G_STATE == '2'}}">完善信息</view>
+        <view style='color:#333;font-size:17px;' wx:if="{{item.G_STATE == '1'}}">绑定手机号</view>
+        <view style='color:#333;font-size:17px;'>+{{item.G_VALUE}}</view>
+      </view>
+    </view>
+  </view>

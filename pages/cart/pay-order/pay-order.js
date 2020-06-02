@@ -1,32 +1,53 @@
 var app = getApp()
 var call = require("../../../utils/request.js");
 var Utils = require("../../../utils/util.js");
-
+// 1 立即购买 2 积分兑换 3、原价购买 4 、一健开团 orderType
 Page({
   data: {
+    orderType: "", //1 立即购买 2 积分兑换 3、原价购买 4 、一健开团 5、购物车下单
+    curAddressData: null, // 当前收货地址
+    // 下单参数
+    payOrderParam: {
+      shopcarlist: "", // 购物车组id
+      DB_GOODS_ID: "", // 商品id
+      DB_SPECIFICATION_ID: "", // 规格id
+      DB_TASTE_ID: "", // 口味id
+      NUM: "", // 商品数量
+      DB_ADDRESS_ID: "", // 地址ID
+      DB_USER_COU_ID: "", // 优惠券ID
+      O_NOTE: "", // 备注
+      O_DATE: "", // 时间
+      TUAN_ID: ""
+    },
+    buyNowInfoMem: "", // 商品详情携带的参数
+    goodDetail: {}, // 商品详情
+    totalPrice: 0, // 总价格
+    goodtotalPrice: 0, // 商品总价格
+    orderData: null, // 购物车订单数据
+    couponList: [], // 优惠券
+
+
+
+    hasNoCoupons: true,
+
+
+
+
+
     goodsList: [],
-    orderData: {},
     isNeedLogistics: 0, // 是否需要物流信息
     allGoodsPrice: 0,
     yunPrice: 0,
     allGoodsAndYunPrice: 0,
     goodsJsonStr: "",
 
-    hasNoCoupons: true,
     coupons: [],
     youhuijine: 0, //优惠券金额
     curCoupon: null, // 当前选择使用的优惠券
 
 
-    orderType: "", //订单类型，购物车下单或立即支付下单，默认是购物车，
-    // 下单参数
-    payOrderParam: {
-      shopcarlist: "", // 购物车组id
-      DB_ADDRESS_ID: "", // 地址ID
-      DB_USER_COU_ID: "", // 优惠券ID
-      O_NOTE: "", // 备注
-      O_DATE: "" // 时间
-    },
+
+
     show: false,
     overlay: false,
 
@@ -42,6 +63,386 @@ Page({
     activeId: [],
     max: 2
   },
+  onLoad: function (e) {
+    var that = this;
+    that.setData({
+      isNeedLogistics: 1,
+      orderType: e.orderType // 订单类型
+    });
+    that.initShippingAddress(); // 默认收货地址
+    if (e.orderType == '5') {
+      that.setData({
+        shopcarlist: e.shoppingcartlist.split(',')
+      })
+      that.getOrderData();
+      return;
+    }
+    var buyNowInfoMem = wx.getStorageSync('orderParam');
+    that.setData({
+      buyNowInfoMem: buyNowInfoMem,
+      ["payOrderParam.DB_GOODS_ID"]: buyNowInfoMem.DB_GOODS_ID || '',
+      ["payOrderParam.NUM"]: buyNowInfoMem.NUM || '1',
+      ["payOrderParam.DB_TASTE_ID"]: buyNowInfoMem.DB_TASTE_ID || '',
+      ["payOrderParam.DB_SPECIFICATION_ID"]: buyNowInfoMem.DB_SPECIFICATION_ID || '',
+      ["payOrderParam.TUAN_ID"]: buyNowInfoMem.TUAN_ID || ''
+    })
+    that.getDetail(); // 商品详情
+
+    // if (e.orderType == "buyNow") {
+    //   that.setData({
+    //     buyNowInfoMem: buyNowInfoMem,
+    //     "orderData.money": buyNowInfoMem.num * buyNowInfoMem.amoney
+    //   })
+    // } else if (e.orderType == "exchageInter") {
+    //   var buyNowInfoMem = wx.getStorageSync('orderParam');
+    //   that.setData({
+    //     buyNowInfoMem: buyNowInfoMem,
+    //     "orderData.money": buyNowInfoMem.num * buyNowInfoMem.amoney
+    //   })
+    // } else if (e.orderType == "pintuan") {
+    //   var buyNowInfoMem = wx.getStorageSync('orderParam');
+    //   that.setData({
+    //     buyNowInfoMem: buyNowInfoMem,
+    //     "orderData.money": buyNowInfoMem.num * buyNowInfoMem.amoney
+    //   })
+    // } else {
+    //   console.log("sssss", e.shoppingcartlist)
+    //   that.setData({
+    //     shopcarlist: e.shoppingcartlist.split(',')
+    //   })
+    //   this.getOrderData();
+    // }
+
+  },
+  // 商品详情
+  getDetail: function () {
+    var _this = this;
+    call.getData('/app/goods/appgoodsdatile', {
+      DB_GOODS_ID: _this.data.payOrderParam.DB_GOODS_ID,
+      OPENID: wx.getStorageSync('openid')
+    }, function (res) {
+      console.log(res);
+      if (res.state == "success") {
+        // 商品规格、商品口味、商品价格
+        var totalPrice = 0
+        var interPrice = ''
+        var interPriceNum = 0
+        for (var i = 0; i < res.goods.specif.length; i++) {
+          if (res.goods.specif[i].DB_SPECIFICATION_ID == _this.data.payOrderParam.DB_SPECIFICATION_ID) {
+            var price = res.goods.specif[i].SPE_MONEY
+            totalPrice = (price * _this.data.payOrderParam.NUM).toFixed(2)
+
+            if(_this.data.orderType == '2'){
+              interPrice =(res.goods.specif[i].SPE_INTEGRAL * _this.data.payOrderParam.NUM).toFixed(2)+"积分+" + (res.goods.specif[i].SPE_NOWMONEY * _this.data.payOrderParam.NUM).toFixed(2)+"元"
+              interPriceNum = (res.goods.specif[i].SPE_INTEGRAL * _this.data.payOrderParam.NUM).toFixed(2)
+              totalPrice = (res.goods.specif[i].SPE_NOWMONEY * _this.data.payOrderParam.NUM).toFixed(2)
+            }
+
+
+
+          }
+        }
+        if (res.goods.G_TYPE == 1) {
+          _this.couponList()
+        }
+        _this.setData({
+          goodDetail: res.goods,
+          totalPrice: totalPrice,
+          interPrice:interPrice,
+          goodtotalPrice: totalPrice,
+          interPriceNum:interPriceNum
+        })
+
+      }
+    }, function () {})
+  },
+  // 获取默认的收货地址
+  initShippingAddress: function () {
+    var that = this;
+    call.getData('/app/address/appuserdefaultadd', {
+      OPENID: wx.getStorageSync('openid')
+    }, function (res) {
+      if (res.state == "success") {
+        that.setData({
+          curAddressData: res.address,
+          ['payOrderParam.DB_ADDRESS_ID']: res.address.DB_ADDRESS_ID
+        });
+      } else {
+        that.setData({
+          curAddressData: null
+        });
+      }
+      // that.processYunfei(); 
+    }, function () {})
+  },
+  // 如果没有收货地址 - 新增收货地址
+  addAddress: function () {
+    wx.navigateTo({
+      url: "/pages/address/add/index?type=add"
+    })
+  },
+  // 选择收货地址
+  selectAddress: function () {
+    wx.navigateTo({
+      url: "/pages/address/list/index?back=1"
+    })
+  },
+  // 提交订单
+  onSubmit() {
+    var that = this;
+    if (Utils.isEmpty(that.data.payOrderParam.DB_ADDRESS_ID)) {
+      wx.showToast({
+        title: '请先设置您的收货地址',
+        icon: 'none'
+      })
+      return;
+    }
+    if (Utils.isEmpty(that.data.payOrderParam.O_DATE)) {
+      wx.showToast({
+        title: '请选择配送时间',
+        icon: 'none'
+      })
+      return;
+    }
+    console.log(that.data.orderType);
+    //1 立即购买 2 积分兑换 3、原价购买 4 、一健开团 5、购物车下单
+    if (that.data.orderType == '1') {
+      that.handleBuy();
+    } else if (that.data.orderType == '2') {
+      that.handleInterExchage();
+    } else if (that.data.orderType == '3') {
+      that.createSingleOrder();
+    } else if (that.data.orderType == '4') {
+      that.createTuanOrder();
+    } else if (that.data.orderType == '5') {
+      that.handleCart();
+    }
+  },
+  // 1、立即购买
+  handleBuy() {
+    var that = this;
+    call.getData('/app/order/appGoodsCreateOrder', {
+      OPENID: wx.getStorageSync('openid'),
+      DB_SPECIFICATION_ID: that.data.payOrderParam.DB_SPECIFICATION_ID,
+      DB_TASTE_ID: that.data.payOrderParam.DB_TASTE_ID,
+      NUM: that.data.payOrderParam.NUM,
+      DB_ADDRESS_ID: that.data.payOrderParam.DB_ADDRESS_ID, // 地址ID
+      DB_USER_COU_ID: that.data.payOrderParam.DB_USER_COU_ID, // 优惠券ID
+      O_NOTE: that.data.payOrderParam.O_NOTE, // 备注
+      O_DATE: that.data.payOrderParam.O_DATE // 时间
+    }, function (res) {
+      if (res.state == "success") {
+        wx.navigateTo({
+          url: '/pages/cart/pay-money/pay-money?money=' + that.data.totalPrice + '&O_PLAY_Z_ID=' + res.O_PLAY_Z_ID
+        })
+      } else {
+        wx.showToast({
+          title: res.message,
+          icon: 'none'
+        })
+      }
+    }, function () {})
+  },
+  // 4 、一健开团  
+  createTuanOrder() {
+    var that = this;
+    call.getData('/app/order/appCreateTuanOrder', {
+      OPENID: wx.getStorageSync('openid'),
+      TUAN_ID: that.data.payOrderParam.TUAN_ID,
+      DB_GOODS_ID: that.data.payOrderParam.DB_GOODS_ID,
+      DB_SPECIFICATION_ID: that.data.payOrderParam.DB_SPECIFICATION_ID,
+      NUM: that.data.payOrderParam.NUM,
+      DB_TASTE_ID: that.data.payOrderParam.DB_TASTE_ID,
+      DB_ADDRESS_ID: that.data.payOrderParam.DB_ADDRESS_ID, // 地址ID
+      DB_USER_COU_ID: that.data.payOrderParam.DB_USER_COU_ID, // 优惠券ID
+      O_NOTE: that.data.payOrderParam.O_NOTE, // 备注
+      O_DATE: that.data.payOrderParam.O_DATE // 时间
+    }, function (res) {
+      if (res.state == "success") {
+        wx.navigateTo({
+          url: '/pages/cart/pay-money/pay-money?money=' + that.data.totalPrice + '&O_PLAY_Z_ID=' + res.O_PLAY_Z_ID
+        })
+      } else {
+        wx.showToast({
+          title: res.message,
+          icon: "none"
+        })
+      }
+    }, function () {})
+  },
+  // 3、appCreateSingleOrder 单独购买
+  createSingleOrder() {
+    var that = this;
+    call.getData('/app/order/appCreateSingleOrder', {
+      OPENID: wx.getStorageSync('openid'),
+      DB_GOODS_ID: that.data.payOrderParam.DB_GOODS_ID,
+      DB_SPECIFICATION_ID: that.data.payOrderParam.DB_SPECIFICATION_ID,
+      NUM: that.data.payOrderParam.NUM,
+      DB_TASTE_ID: that.data.payOrderParam.DB_TASTE_ID,
+      DB_ADDRESS_ID: that.data.payOrderParam.DB_ADDRESS_ID, // 地址ID 
+      O_NOTE: that.data.payOrderParam.O_NOTE, // 备注
+      O_DATE: that.data.payOrderParam.O_DATE // 时间
+    }, function (res) {
+      if (res.state == "success") {
+        wx.navigateTo({
+          url: '/pages/cart/pay-money/pay-money?money=' + that.data.totalPrice + '&O_PLAY_Z_ID=' + res.O_PLAY_Z_ID
+        })
+      } else {
+        wx.showToast({
+          title: res.message,
+          icon: "none"
+        })
+      }
+    }, function () {})
+  },
+  // 2 积分兑换
+  handleInterExchage() {
+    var that = this;
+    call.getData('/app/order/appExchangeCreateOrder', {
+      OPENID: wx.getStorageSync('openid'),
+      DB_SPECIFICATION_ID: that.data.payOrderParam.DB_SPECIFICATION_ID,
+      DB_TASTE_ID: that.data.payOrderParam.DB_TASTE_ID,
+      NUM: that.data.payOrderParam.NUM,
+      DB_ADDRESS_ID: that.data.payOrderParam.DB_ADDRESS_ID, // 地址ID
+      O_NOTE: that.data.payOrderParam.O_NOTE, // 备注
+      O_DATE: that.data.payOrderParam.O_DATE // 时间
+    }, function (res) {
+      if (res.state == "success") {
+        if (res.O_PLAY_Z_ID) {
+          wx.navigateTo({
+            url: '/pages/cart/pay-money/pay-money?money=' + that.data.totalPrice + '&O_PLAY_Z_ID=' + res.O_PLAY_Z_ID
+          })
+        } else {
+          wx.navigateTo({
+            url: '/pages/cart/pay-success/pay-success',
+          })
+        }
+
+      } else {
+        wx.showToast({
+          title: res.message,
+        })
+      }
+    }, function () {})
+  },
+  // 5、购物车下单
+  handleCart() {
+    var that = this;
+    call.getData('/app/shopcar/appshopcarCreateOrder', {
+      OPENID: wx.getStorageSync('openid'),
+      shopcarlist: that.data.shopcarlist, // 购物车组id
+      DB_ADDRESS_ID: that.data.payOrderParam.DB_ADDRESS_ID, // 地址ID
+      DB_USER_COU_ID: that.data.payOrderParam.DB_USER_COU_ID, // 优惠券ID
+      O_NOTE: that.data.payOrderParam.O_NOTE, // 备注
+      O_DATE: that.data.payOrderParam.O_DATE // 时间
+    }, function (res) {
+      if (res.state == "success") {
+        wx.navigateTo({
+          url: '/pages/cart/pay-money/pay-money?money=' + that.data.totalPrice + '&O_PLAY_Z_ID=' + res.O_PLAY_Z_ID
+        })
+      }
+      console.log(res);
+    }, function () {})
+  },
+  // 获取购物车的订单数据
+  getOrderData() {
+    var _this = this;
+    call.getData('/app/shopcar/appshopcarPrepare', {
+      OPENID: wx.getStorageSync('openid'),
+      shopcarlist: _this.data.shopcarlist
+    }, function (res) {
+      wx.hideLoading()
+      _this.setData({
+        orderData: res,
+        totalPrice: res.money,
+        goodtotalPrice: res.money
+      })
+    }, function () {})
+  },
+
+
+
+  //用户优惠券
+  couponList: function () {
+    var _this = this;
+    call.getData('/app/user/appusercourse', {
+      UC_TYPE: 1,
+      OPENID: wx.getStorageSync('openid')
+    }, function (res) {
+      console.log(res);
+      if (res.state == "success") {
+        var uclist = res.uclist
+        var couponList = []
+        var couponName = []
+        if (uclist.length > 0) {
+          for (var i = 0; i < uclist.length; i++) {
+            couponList.push(uclist[i])
+            couponName.push('满' + uclist[i].COU_MAN + '减' + uclist[i].COU_MONEY)
+            if (_this.data.totalPrice >= uclist[i].COU_MAN) {
+              DB_USER_COU_ID = uclist[i].DB_USER_COU_ID
+              that.setData({
+                conIdx: i,
+                totalPrice: (_this.data.totalPrice - uclist[i].COU_MONEY).toFixed(2)
+              })
+            }
+          }
+        }
+        _this.setData({
+          couponList: couponList,
+          couponName: couponName
+        })
+      }
+    }, function () {})
+  },
+  //选择优惠券
+  bindClassChange(e) {
+
+
+    var that = this
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    var conIdx = e.detail.value
+    var couponList = that.data.couponList
+    // 先判断优惠券是否能用
+    if (that.data.totalPrice < couponList[conIdx].COU_MONEY || that.data.totalPrice < couponList[conIdx].COU_MAN) {
+      console.log('优惠券用不了')
+      wx.showToast({
+        title: '不满足使用条件',
+        icon: 'none'
+      })
+    } else {
+      that.setData({
+        conIdx: conIdx,
+      })
+      that.data.payOrderParam.DB_USER_COU_ID = couponList[conIdx].DB_USER_COU_ID
+      that.setData({
+        totalPrice: (that.data.totalPrice - couponList[conIdx].COU_MONEY).toFixed(2)
+      })
+    }
+
+
+
+    // var conIdx = e.detail.value
+    // that.setData({ conIdx: conIdx})
+    // var couponList = that.data.couponList
+    // that.payOrderParam.DB_USER_COU_ID = couponList[conIdx].DB_USER_COU_ID
+    // that.setData({
+    //   totalPrice: (that.data.totalPrice - couponList[conIdx].COU_MONEY).toFixed(2)
+    // })
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   onClose() {
     this.data.show = false
     this.setData({
@@ -51,7 +452,6 @@ Page({
   onClickNav({
     detail = {}
   }) {
-    console.log("*******", detail);
     this.setData({
       mainActiveIndex: detail.index || 0
     });
@@ -85,7 +485,7 @@ Page({
       }
     }
 
- 
+
     // if ("buyNow" == that.data.orderType) {
     //   var buyNowInfoMem = wx.getStorageSync('buyNowInfo');
     //   if (buyNowInfoMem && buyNowInfoMem.shopList) {
@@ -110,62 +510,8 @@ Page({
 
   },
 
-  onLoad: function (e) {
-    console.log(e);
-    var that = this;
-    //显示收货地址标识
-    that.setData({
-      isNeedLogistics: 1,
-      orderType: e.orderType,
-      // shopcarlist:e.shoppingcartlist.split(',')
-    });
-    that.initShippingAddress();
-    if (e.orderType == "buyNow") {
-      var buyNowInfoMem = wx.getStorageSync('orderParam');
-      that.setData({
-        buyNowInfoMem: buyNowInfoMem,
-        "orderData.money": buyNowInfoMem.num * buyNowInfoMem.amoney
-      })
-    }else if (e.orderType == "exchageInter") {
-      var buyNowInfoMem = wx.getStorageSync('orderParam');
-      that.setData({
-        buyNowInfoMem: buyNowInfoMem,
-        "orderData.money": buyNowInfoMem.num * buyNowInfoMem.amoney
-      })
-    } else if(e.orderType == "pintuan"){
-      var buyNowInfoMem = wx.getStorageSync('orderParam');
-      that.setData({
-        buyNowInfoMem: buyNowInfoMem,
-        "orderData.money": buyNowInfoMem.num * buyNowInfoMem.amoney
-      })
-    } else {
-      console.log("sssss",e.shoppingcartlist)
-      that.setData({
-        shopcarlist:e.shoppingcartlist.split(',')
-      })
-      this.getOrderData();
-    }
-
-  },
-  // 获取确认订单的数据
-  getOrderData() {
-    // /app/shopcar/appshopcarPrepare
-    var _this = this;
-    call.getData('/app/shopcar/appshopcarPrepare', {
-      OPENID: wx.getStorageSync('openid'),
-      shopcarlist: _this.data.shopcarlist
-    }, function (res) {
-      wx.hideLoading()
-      console.log(res);
-
-      _this.setData({
-        orderData: res
-      })
 
 
-    }, function () {})
-
-  },
 
   getAdd: function () {
     var that = this;
@@ -360,42 +706,7 @@ Page({
       }
     })
   },
-  // 获取默认的收货地址
-  initShippingAddress: function () {
-    var that = this;
-    call.getData('/app/address/appuserdefaultadd', {
-      OPENID: wx.getStorageSync('openid')
-    }, function (res) {
-      console.log(res);
-      if (res.state == "success") {
-        that.setData({
-          curAddressData: res.address,
-          ['payOrderParam.DB_ADDRESS_ID']: res.address.DB_ADDRESS_ID
-        });
-      }
-      // that.processYunfei();
-      console.log(res);
-    }, function () {})
-    // /app/address/appuserdefaultadd
-    // wx.request({
-    //   url: app.globalData.urls + '/user/shipping-address/default',
-    //   data: {
-    //     token: app.globalData.token
-    //   },
-    //   success: (res) => {
-    //     if (res.data.code == 0) {
-    //       that.setData({
-    //         curAddressData: res.data.data
-    //       });
-    //     } else {
-    //       that.setData({
-    //         curAddressData: null
-    //       });
-    //     }
-    //     that.processYunfei();
-    //   }
-    // })
-  },
+
   processYunfei: function () {
     var that = this;
     var goodsList = this.data.goodsList;
@@ -436,16 +747,7 @@ Page({
     });
     that.createOrder();
   },
-  addAddress: function () {
-    wx.navigateTo({
-      url: "/pages/address/add/index?type=add"
-    })
-  },
-  selectAddress: function () {
-    wx.navigateTo({
-      url: "/pages/address/list/index?back=1"
-    })
-  },
+
   getMyCoupons: function () {
     var that = this;
     wx.request({
@@ -489,117 +791,6 @@ Page({
 
 
 
-  // 提交订单  /app/shopcar/appshopcarCreateOrder
-  onSubmit() {
-    var that = this;
-    if(Utils.isEmpty(that.data.payOrderParam.O_DATE)){
-      wx.showToast({
-        title: '请选择配送时间',
-        icon:'none'
-      })
-      return;
-    }
-    if ("buyNow" == that.data.orderType) {
-      // 立即购买
-      that.handleBuy();
-    } else if("exchageInter" == that.data.orderType){
-    // 积分兑换
-      that.handleInterExchage();
-    }else if("pintuan" == that.data.orderType){
-       console.log("拼团")
-    } else {
-      //购物车下单
-      that.handleCart();
-
-    }
-  },
-  // 立即购买
-  handleBuy(){
-    var that = this;
-    call.getData('/app/order/appGoodsCreateOrder', {
-      OPENID: wx.getStorageSync('openid'),
-      DB_SPECIFICATION_ID: that.data.buyNowInfoMem.specId,
-      NUM: that.data.buyNowInfoMem.num,
-      DB_ADDRESS_ID: that.data.payOrderParam.DB_ADDRESS_ID, // 地址ID
-      DB_USER_COU_ID: that.data.payOrderParam.DB_USER_COU_ID, // 优惠券ID
-      O_NOTE: that.data.payOrderParam.O_NOTE, // 备注
-      O_DATE: that.data.payOrderParam.O_DATE // 时间
-    }, function (res) {
-      if (res.state == "success") {
-        wx.navigateTo({
-          url: '/pages/cart/pay-money/pay-money?money=' + that.data.buyNowInfoMem.amoney + '&O_PLAY_Z_ID=' + res.O_PLAY_Z_ID
-        })
-      }
-    }, function () {})
-  },
-  // 积分兑换
-  handleInterExchage(){
-    var that = this;
-    call.getData('/app/order/appExchangeCreateOrder', {
-      OPENID: wx.getStorageSync('openid'),
-      DB_SPECIFICATION_ID: that.data.buyNowInfoMem.specId,
-      NUM: that.data.buyNowInfoMem.num,
-      DB_ADDRESS_ID: that.data.payOrderParam.DB_ADDRESS_ID, // 地址ID
-      DB_USER_COU_ID: that.data.payOrderParam.DB_USER_COU_ID, // 优惠券ID
-      O_NOTE: that.data.payOrderParam.O_NOTE, // 备注
-      O_DATE: that.data.payOrderParam.O_DATE // 时间
-    }, function (res) {
-      if (res.state == "success") {
-        if(res.O_PLAY_Z_ID){
-          wx.navigateTo({
-            url: '/pages/cart/pay-money/pay-money?money=' + that.data.buyNowInfoMem.SPE_NOWMONEY * that.data.buyNowInfoMem.num + '&O_PLAY_Z_ID=' + res.O_PLAY_Z_ID
-          })
-        }else{
-          wx.navigateTo({
-            url: '/pages/cart/pay-success/pay-success',
-          })
-        }
-        
-      }else{
-        wx.showToast({
-          title: res.message,
-        })
-      }
-    }, function () {})
-  },
-  // 购物下单
-  handleCart(){
-    var that = this;
-    call.getData('/app/shopcar/appshopcarCreateOrder', {
-      OPENID: wx.getStorageSync('openid'),
-      shopcarlist: that.data.shopcarlist , // 购物车组id
-      DB_ADDRESS_ID: that.data.payOrderParam.DB_ADDRESS_ID, // 地址ID
-      DB_USER_COU_ID: that.data.payOrderParam.DB_USER_COU_ID, // 优惠券ID
-      O_NOTE: that.data.payOrderParam.O_NOTE, // 备注
-      O_DATE: that.data.payOrderParam.O_DATE // 时间
-    }, function (res) {
-      if (res.state == "success") {
-        wx.navigateTo({
-          url: '/pages/cart/pay-money/pay-money?money=' + that.data.orderData.money + '&O_PLAY_Z_ID=' + res.O_PLAY_Z_ID
-        })
-      }
-      console.log(res);
-    }, function () {})
-  }, 
-  // 一键开团
-  createTuanOrder(){
-    var that = this;
-    call.getData('/app/order/appCreateTuanOrder', {
-      OPENID: wx.getStorageSync('openid'),
-      DB_SPECIFICATION_ID: that.data.buyNowInfoMem.specId,
-      NUM: that.data.buyNowInfoMem.num,
-      DB_ADDRESS_ID: that.data.payOrderParam.DB_ADDRESS_ID, // 地址ID
-      DB_USER_COU_ID: that.data.payOrderParam.DB_USER_COU_ID, // 优惠券ID
-      O_NOTE: that.data.payOrderParam.O_NOTE, // 备注
-      O_DATE: that.data.payOrderParam.O_DATE // 时间
-    }, function (res) {
-      if (res.state == "success") {
-        wx.navigateTo({
-          url: '/pages/cart/pay-money/pay-money?money=' + that.data.buyNowInfoMem.amoney + '&O_PLAY_Z_ID=' + res.O_PLAY_Z_ID
-        })
-      }
-    }, function () {})
-  },
 
 
 
@@ -679,28 +870,26 @@ Page({
     var newTime = currentTime;
     var index = 0;
     var str = ''
-    while (
-      newTime.getDay() == currentTime.getDay() &&
-      newTime.getHours() * 100 + newTime.getMinutes() <
-      (24 - 1) * 100 + 59
-    ) {
-      var hourStr =
-        newTime.getHours() >= 10 ?
-        newTime.getHours().toString() :
-        "0" + newTime.getHours().toString();
-      var minStr =
-        newTime.getMinutes() >= 10 ?
-        newTime.getMinutes().toString() :
-        "0" + newTime.getMinutes().toString();
-      newTime = newTime.addMins(60);
-      index++;
-      str += ',' + hourStr
+    // while ( newTime.getDay() == currentTime.getDay() && newTime.getHours() * 100 + newTime.getMinutes() < (24 - 1) * 100 + 59 ) {
+    //   var hourStr = (newTime.getHours()) >= 10 ? newTime.getHours().toString() : "0" + newTime.getHours().toString();
+    //   var minStr =  newTime.getMinutes() >= 10 ? newTime.getMinutes().toString() : "0" + newTime.getMinutes().toString();
+    //   newTime = newTime.addMins(60);
+    //   index++;
+    //   str += ',' + hourStr
+    // }
+    // var a = str.slice(1).split(',');
+
+    console.log("当前时间",currentTime.getHours())
+
+
+    for (var i = currentTime.getHours() + 6 ; i < 24; i++) {
+      str += ',' + i
     }
     var a = str.slice(1).split(',');
     console.log(a);
+
     var time = []
     for (var i = 0; i < a.length; i++) {
-
       if (i > 0) {
         var t = `${a[i-1]}:00-${a[i]}:00`
         var t1 = {
@@ -714,11 +903,13 @@ Page({
   },
   // 获取时间区间
   getTimeRange() {
-    var str = ""
+    var str = "";
+
     for (var i = 9; i < 24; i++) {
       str += ',' + i
     }
     var a = str.slice(1).split(',');
+
     var time = []
     for (var i = 0; i < a.length; i++) {
 

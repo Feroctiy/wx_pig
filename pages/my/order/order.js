@@ -82,6 +82,22 @@ Page({
       }
     })
   },
+  delOrder(e) {
+    console.log(e);
+    var id = e.currentTarget.dataset.id;
+    var _this = this;
+    wx.showModal({
+      title: '提示',
+      content: '是否要删除订单？',
+      success(res) {
+        if (res.confirm) {
+          _this.handleDel(id);
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
   cancleOrder(e) {
     console.log(e);
     var id = e.currentTarget.dataset.id;
@@ -99,6 +115,21 @@ Page({
     })
   },
   handleCancle(id) {
+    console.log(id);
+    var _this = this;
+    call.getData('/app/order/appCancelOrder', {
+      DB_ORDER_ID: id
+    }, function(res) {
+      console.log(res);
+      if (res.state == "success") {
+        wx.navigateTo({
+          url: '/pages/my/afterSaleList/afterSaleList',
+        })
+        // _this.getOrderList(_this.data.currentType);
+      }
+    }, function() {})
+  },
+  handleDel(id) {
     console.log(id);
     var _this = this;
     call.getData('/app/order/appDeleteOrder', {

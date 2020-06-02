@@ -1,5 +1,6 @@
 const app = getApp();
 var call = require("../../../utils/request.js");
+var PULLNUM = 0;
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,
@@ -18,7 +19,9 @@ Page({
       },
     ],
     load: true,
-    indexData:{}
+    indexData:{},
+    typeList:[],
+    goodslist:[]
   },
   onLoad() {
     wx.showLoading({
@@ -39,8 +42,56 @@ Page({
     }, function () {})
 
 
+    _this.getTypeList();
 
   },
+  // 查看分类
+  getTypeList(){
+    var _this = this;
+    call.getData('/app/goods/appgetgoodstype', {}, function (res) {
+      if(res.state == 'success'){
+        _this.setData({
+          typeList: res.type,
+          typeName:res.type[0].T_NAME
+        })
+        _this.viewGoodsById(res.type[0].DB_TYPE_ID)
+      }
+    }, function () {})
+  },
+  // 通过分类看商品
+  viewGoodsById(id){
+    var _this = this;
+    call.getData('/app/goods/appgoodslist', {
+      DB_STORE_ID:  wx.getStorageSync('DB_STORE_ID'),
+      PULLNUM : PULLNUM,
+      G_TYPE_ID:id
+    }, function (res) {
+      console.log(res);
+      if(res.state == 'success'){
+        _this.setData({
+          goodslist:res.goods
+        })
+      }
+    }, function () {})
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   onReady() {
     wx.hideLoading()
   },
@@ -48,8 +99,11 @@ Page({
     this.setData({
       TabCur: e.currentTarget.dataset.id,
       MainCur: e.currentTarget.dataset.id,
-      VerticalNavTop: (e.currentTarget.dataset.id - 1) * 50
+      VerticalNavTop: (e.currentTarget.dataset.id - 1) * 50,
+      typeName:e.currentTarget.dataset.name,
+      goodslist:[]
     })
+    this.viewGoodsById(e.currentTarget.dataset.typeid)
   },
   VerticalMain(e) {
     let that = this;

@@ -10,7 +10,7 @@ page{
     margin-bottom: -1px;
 }
 .coupon-fetch__main {
-    background: url(https://img.yzcdn.cn/public_files/2018/10/23/9e785603eb1b71b95e16eb729ca1b355.png);
+    /* background: url(https://img.yzcdn.cn/public_files/2018/10/23/9e785603eb1b71b95e16eb729ca1b355.png); */
     background-size: 100% 100%;
     height: 425px;
     padding-top: 35px;
@@ -23,7 +23,7 @@ page{
     height: 500px;
     color: #926135;
     text-align: center;
-    background: url(https://img.yzcdn.cn/public_files/2019/02/02/ae79b97f7fba6cad301c610ea9b2f13d.png);
+    /* background: url(https://img.yzcdn.cn/public_files/2019/02/02/ae79b97f7fba6cad301c610ea9b2f13d.png); */
     background-size: 100% 100%;
 }
 .coupon-receive-box {
@@ -31,7 +31,7 @@ page{
     width: 193px;
     height: 123px;
     margin: 55px auto 0;
-    background: url(https://img.yzcdn.cn/public_files/2018/12/24/1e5f92570c1d3cd5556793aa28fad930.png);
+    /* background: url(https://img.yzcdn.cn/public_files/2018/12/24/1e5f92570c1d3cd5556793aa28fad930.png); */
     background-size: 100% 100%;
 }
 .coupon-fetch__main-logo {

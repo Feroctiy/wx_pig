@@ -1,0 +1,165 @@
+<cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">立即参团</view>
+</cu-custom>
+<view class="container">
+	<view class="title" wx:if='{{clock.state == 0}}'>
+		<view></view>
+		<view>距结束
+			<label>{{clock.day}}</label>
+			:
+			<label>{{clock.hou}}</label>
+			:
+			<label>{{clock.min}}</label>
+			:
+			<label>{{clock.sec}}</label>
+		</view>
+	</view>
+	<view class="title" wx:else>
+		<view></view>
+		<view>拼团已结束
+		</view>
+	</view>
+	<view class="content1">
+		<image src="{{goods.G_IMG}}" mode="aspectFill"></image>
+		<view class="details">
+			<view class="name">{{goods.G_NAME}}</view>
+			<view class="price">
+				<view>
+					<text>拼团价:</text> ￥{{SPE_MONEY}}
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class='groupInfo' wx:if='{{tuan.STATE == 1}}'>
+		<view class='state'>还差
+			<text style='color:#e1514f'>{{tuan.TUAN_ALL_PNUM - tuan.TUAN_NOW_PNUM}}</text>人拼购成功，快来一起拼团吧</view>
+		<view class='imgList'>
+			<block wx:for='{{tuanOrder}}' wx:key='corder'>
+				<view class='img'>
+					<image wx:if="{{item.U_IMG !== ''}}" src='{{item.U_IMG}}'></image>
+					<image wx:else src="{{iconsUrl}}/personal/28.png"></image>
+					<view wx:if='{{tuan.TUAN_CREATE_USETR == item.O_OPENID}}'>团长</view>
+					<view wx:if='{{item.O_STATE == 1}}'>待付款</view>
+				</view>
+			</block>
+			<block wx:for='{{tuan.TUAN_ALL_PNUM - tuan.TUAN_NOW_PNUM}}' wx:key='aaa'>
+				<view class='img'>
+					<image src="{{iconsUrl}}/icons/50.png" style='border:0'></image>
+				</view>
+			</block>
+		</view>
+		<view wx:if='{{shareType == 1}}' style='width:100%;' data-id='2' bindtap='shareType'>
+			<button open-type='share' style="border-radius: 50rpx;padding: 10px 24px;width: 80%;">邀请好友参团</button>
+		</view>
+		<!--  -->
+		<view class='join' data-state="buy" bindtap='layerState' wx:if='{{shareType == 2}}'>我要参团</view>
+		<view class='index' bindtap='goIndex'>返回主页</view>
+	</view>
+	<!--  -->
+	<view class='groupInfo' wx:if='{{tuan.STATE == 2}}'>
+		<view class='state'>拼团成功，请耐心等待发货</view>
+		<view class='imgList'>
+			<block wx:for='{{tuanOrder}}' wx:key='corder'>
+				<view class='img'>
+					<image src='{{item.U_IMG}}'></image>
+					<view wx:if='{{tuan.TUAN_CREATE_USETR == item.O_OPENID}}'>团长</view>
+					<view wx:if='{{item.O_STATE == 1}}'>待付款</view>
+				</view>
+			</block>
+			<block wx:for='{{tuan.TUAN_ALL_PNUM - tuan.TUAN_NOW_PNUM}}' wx:key='aaa'>
+				<view class='img'>
+					<image src="{{iconsUrl}}/icons/50.png" style='border:0'></image>
+				</view>
+			</block>
+		</view>
+		<view class='index' bindtap='goIndex'>返回主页</view>
+	</view>
+</view>
+<!-- 弹出层-->
+<view hidden='{{layerState}}' class='masklayer' data-state="" bindtap='layerState'>
+	<view class='specContent'>
+		<scroll-view scroll-y='true' style="height:100%;">
+			<view class='proDetails'>
+				<image class="logo" src="{{goods.G_IMG}}" mode="aspectFill"></image>
+				<view class='infos'>
+					<view class='money'>
+						<view>￥{{SPE_MONEY}}</view>
+						<label>{{goods.COX_T_NUM_PEOPLE}}人团</label>
+					</view>
+					<view class="residue" style="color:#333;">单买价：￥{{SPE_NOWMONEY}}</view>
+					<!-- <view class='name'>{{goods.G_NAME}}</view> -->
+					<view class='residue'>库存{{SPE_INVENTORY}}件</view>
+					<view class="residue" style="color:#333;">已选：{{SPE_NAME}}</view>
+				</view>
+				<image class="close" src="{{iconsUrl}}/icons/30.png" data-state="" catchtap='layerState'></image>
+			</view>
+			<view class="specInfo">
+				<view>规格</view>
+				<view class="specList">
+					<block wx:for='{{specList}}' wx:key='spec'>
+						<label class="{{currentSpec==item.DB_SPECIFICATION_ID ? 'active' : ''}}" data-id="{{item.DB_SPECIFICATION_ID}}" data-num="{{item.SPE_INVENTORY}}" data-price="{{item.SPE_MONEY}}" data-nprice="{{item.SPE_NOWMONEY}}" data-name="{{item.SPE_NAME}}" catchtap="getSpecId">{{item.SPE_NAME}}</label>
+					</block>
+				</view>
+			</view>
+			<view class='number'>
+				<view>数量</view>
+				<view class="stepper">
+					<text catchtap="bindMinus"> - </text>
+					<!-- disabled="disabled" -->
+					<input bindchange="bindManual" type="number" value="{{num}}" />
+					<text catchtap="bindPlus"> + </text>
+				</view>
+			</view>
+		</scroll-view>
+		<view class='buyOperation' wx:if='{{SPE_INVENTORY > 0}}' catchtap="{{operaState=='buy' ? 'createGroupOrder' : ''}}">确定</view>
+		<view class='btnSellOut' wx:else>商品已售罄</view>
+	</view>
+</view>
+
+
+<!-- 规格-模态层弹窗 -->
+<view class="popup spec" catchtap="stopPrevent" bindtap="toggleSpec" wx:if="{{ showSpec }}">
+	<!-- 遮罩层 -->
+	<view class="mask"></view>
+	<view class="layer attr-content" catchtap="stopPrevent">
+		<view class="a-t">
+			<image src="{{detail.G_IMG}}"></image>
+			<view class="right">
+				<text class="name text-df">{{detail.G_NAME}}</text> 
+				<text class="price" wx:if="{{ detail.G_TRAFFIC == 2 && type == 4}}">{{interPrice}}</text>
+				<text class="price" wx:else>¥{{smoney ? smoney : detail.G_MONEY}}</text>
+				<text>{{detail.COX_T_NUM_PEOPLE}}人团</text>
+				<view class="selected">
+					已选：{{specSelected}}
+				</view>
+			</view>
+		</view>
+		<view class="attr-list">
+			<text class="text-black">规格</text>
+			<view class="item-list">
+				<text class="{{tabSize==index ? 'active' : ''}}" wx:for="{{detail.specif}}" wx:key catchtap="selectSpec" data-fid="{{item.DB_SPECIFICATION_ID}}" id="{{index}}" data-money="{{item.SPE_MONEY}}" data-intergral="{{item.SPE_INTEGRAL}}" data-nowmoney="{{item.SPE_NOWMONEY}}"> {{item.SPE_NAME}}({{item.DIN_NAME}}) </text>
+			</view>
+		</view>
+		<view class="attr-list">
+			<text class="text-black">口味</text>
+			<view class="item-list">
+				<text class="{{tabSize1 == index ? 'active' : ''}}" wx:for="{{detail.taste}}" wx:key catchtap="selectflavour" data-fid="{{item.DB_TASTE_ID}}" id="{{index}}"> {{item.TA_NAME}}</text>
+			</view>
+		</view>
+		<view class="cu-list menu text-left solid-top">
+			<view class="cu-item" style="padding:0">
+				<view class="content">
+					<text class="text-black">数量</text>
+				</view>
+				<view class="action">
+					<van-stepper value="{{ num }}" bind:change="onChange" />
+				</view>
+			</view>
+		</view>
+		<view class="cu-bar btn-group">
+			<button class="cu-btn bg-gray line-gray shadow round" bindtap="cancle">取消</button>
+			<button class="cu-btn bg-main-btn shadow-blur round" bindtap="handleSub">确认</button>
+		</view>
+	</view>
+</view>

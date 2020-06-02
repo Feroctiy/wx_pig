@@ -1,45 +1,74 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/my/rechargecard/index",
-    "pages/my/balance/balance",
-    "pages/goods/index/index",
-    "pages/goods/detail/detail",
-    "pages/my/evaluate/evaluate",
-    "pages/my/index/index",
-    "pages/my/updateAddress/index", 
-    "pages/my/integral/index",
-    "pages/share/share", 
-    "pages/my/order/order", 
-    "pages/cart/pay-order-detail/pay-order-detail",
-    "pages/goods/store/list",
-    "pages/my/integral/good",
-    "pages/my/integral/coupons", 
-    "pages/my/seting/index", 
-    "pages/my/coupons/list",
-    "pages/my/integral/sign",
-    "pages/my/info/info", 
-    "pages/my/integral/list",
-    "pages/my/coupons/detail",
-    "pages/goods/search/search",
+    "pages/my/afterSaleList/afterSaleList",
     "pages/cart/pay-order/pay-order",
+    "pages/my/seting/index",
+    "pages/my/userlevel/index",
+
+    "pages/my/balance/balance",
+    "pages/my/index/index",
+    "pages/goods/index/index",
+    "pages/my/integral/coupons",
+    "pages/my/info/info",
     "pages/address/list/index",
     "pages/address/add/index",
+    "pages/my/follow/index",
     "pages/my/showcase/showcase",
-    "pages/my/afterSaleList/afterSaleList",
-    "pages/my/afterSale/afterSale",
-    "pages/my/order-list/index", 
-    "pages/good/city/city",
-    "pages/cart/pay-money/pay-money",
-    "pages/cart/home/home",
-    "pages/cart/pay-success/pay-success",
-    "pages/notice/notice",
-    "pages/goods/loop/loop",
-    "pages/login/login",
-    
-    "pages/goods/comment/index",
+
+    "pages/sharesCenter/userInfo/userInfo",
+    "pages/sharesCenter/withDrawSuccess/withDrawSuccess",
+    "pages/sharesCenter/widthDraw/widthDraw",
+    "pages/sharesCenter/myAccount/myAccount",
+
+
     "pages/my/active/index",
-    "pages/logs/logs"
+
+
+    "pages/goods/store/list",
+    "pages/goods/search/search",
+    "pages/goods/loop/loop",
+    "pages/notice/notice",
+    "pages/share/share",
+    "pages/goods/groupList/index",
+    "pages/goods/seckilList/index",
+
+    "pages/login/login",
+    "pages/goods/detail/detail",
+    "pages/group/groupDetails/groupDetails",
+    "pages/goods/comment/index",
+
+    "pages/cart/pay-money/pay-money",
+    "pages/cart/pay-success/pay-success",
+
+
+
+    "pages/my/userlevel/des",
+    "pages/my/userlevel/list",
+    "pages/my/integral/index",
+    "pages/my/integral/sign",
+    "pages/my/integral/list",
+    "pages/my/integral/good",
+
+    "pages/my/coupons/list",
+    "pages/my/coupons/detail",
+
+    "pages/my/rechargelist/index",
+    "pages/my/rechargecard/index",
+    "pages/my/order/order",
+
+    "pages/my/afterSale/afterSale",
+    "pages/my/evaluate/evaluate",
+
+    "pages/my/updateAddress/index",
+
+
+
+
+
+
+    "pages/cart/pay-order-detail/pay-order-detail",
+    "pages/cart/home/home"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -70,7 +99,7 @@
         "pagePath": "pages/cart/home/home",
         "text": "购物车"
       },
-      
+
       {
         "selectedIconPath": "images/icon/my_fill_light.png",
         "iconPath": "images/icon/my_light.png",
@@ -93,7 +122,6 @@
     "van-stepper": "/vant/lib/stepper/index",
     "van-tree-select": "/vant/lib/tree-select/index",
     "van-popup": "/vant/lib/popup/index",
-    "city-list": "/components/city-list/wx-index-list",
     "van-search": "/vant/lib/search/index",
     "van-tab": "/vant/lib/tab/index",
     "van-tabs": "/vant/lib/tabs/index"

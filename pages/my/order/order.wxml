@@ -47,13 +47,13 @@
 			<view class="price-box" wx:if="{{item.O_STATE == 1}}">
 				<view class="btn-box" style="width:100%;">
 					<view class="btn upd-btn" catchtap="updAdd" data-id="{{item.DB_ORDER_ID}}">修改地址</view>
-					<view class="btn cancel-btn" catchtap="cancleOrder" data-id="{{item.DB_ORDER_ID}}">删除订单</view>
+					<view class="btn cancel-btn" catchtap="delOrder" data-id="{{item.DB_ORDER_ID}}">删除订单</view>
 					<view class="btn topay-btn" catchtap="payOrder" data-id="{{item.DB_ORDER_ID}}" data-money="{{item.O_ALL_MONEY}}">立即支付</view>
 				</view>
 			</view>
       <view class="price-box" wx:if="{{item.O_STATE == 2}}">
 				<view class="btn-box" style="width:100%;"> 
-          <view class="btn upd-btn" catchtap="goAfterSale" data-id="{{item.DB_ORDER_ID}}" data-money="{{item.O_ALL_MONEY}}">申请退款</view> 
+          <view class="btn upd-btn" catchtap="cancleOrder" data-id="{{item.DB_ORDER_ID}}" data-money="{{item.O_ALL_MONEY}}">申请退款</view> 
 				</view>
 			</view>
       <view class="price-box" wx:if="{{item.O_STATE == 3}}">

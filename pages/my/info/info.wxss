@@ -7,7 +7,9 @@ radio .wx-radio-input{
   width: 40rpx;
   height: 40rpx;
 }
- 
+radio::before, checkbox::before{
+  right: 3px;
+}
   
 
 /* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */

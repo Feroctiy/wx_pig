@@ -2,7 +2,42 @@
 	<view slot="backText">返回</view>
 	<view slot="content">订单详情</view>
 </cu-custom>
-<view class="cu-list menu">
+
+
+
+<view class='addContent bg-gradual-red'>
+	<!-- <image class="bg" src="../../../images/state/12.png"></image> -->
+	<view class="orderState" wx:if='{{orderDetail.O_STATE == 1}}'>
+		<image src="../../../images/state/1.png" mode="widthFix"></image>等待买家付款
+	</view>
+	<view class="orderState" wx:if='{{orderDetail.O_STATE == 2 && orderDetail.TUAN_FLAG == 1}}'>
+		<image src="../../../images/state/7.png" mode="widthFix"></image>待发货
+	</view>
+	<view class="orderState" wx:if='{{orderDetail.O_STATE == 2 && orderDetail.TUAN_FLAG == 2}}'>
+		<image src="../../../images/state/2.png" mode="widthFix"></image>等待成团
+	</view>
+	<view class="orderState" wx:if='{{orderDetail.O_STATE == 2 && orderDetail.TUAN_FLAG == 3}}'>
+		<image src="../../../images/state/5.png" mode="widthFix"></image>拼团失败，已退款
+	</view>
+	<view class="orderState" wx:if='{{orderDetail.O_STATE == 2 && orderDetail.TUAN_FLAG == 4}}'>
+		<image src="../../../images/state/2.png" mode="widthFix"></image>拼团成功，待发货
+	</view>
+		<!-- <view class="orderState" wx:if='{{orderDetail.O_STATE == 2}}'>
+		<image src="../../../images/state/8.png" mode="widthFix"></image>待发货
+	</view> -->
+	<view class="orderState" wx:if='{{orderDetail.O_STATE == 3}}'>
+		<image src="../../../images/state/8.png" mode="widthFix"></image>待收货
+	</view>
+	<view class="orderState" wx:if='{{orderDetail.O_STATE == 4}}'>
+		<image src="../../../images/state/9.png" mode="widthFix"></image>待评价
+	</view>
+</view>
+
+
+
+
+
+<!-- <view class="cu-list menu">
 	<view class="cu-item">
 		<view class="content">
 			<text class="text-black">订单状态</text>
@@ -14,7 +49,7 @@
 			<text class="text-red" wx:if="{{orderDetail.O_STATE == 4}}">待评价 </text>
 		</view>
 	</view>
-</view>
+</view> -->
 
 <!-- 收货地址 -->
 <view class="address-box">

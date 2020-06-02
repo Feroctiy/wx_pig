@@ -1,4 +1,7 @@
 /* pages/my/integral/list.wxss */
+page{
+  height: 100.01%;
+}
 .item {
   color: #999;
   margin-bottom: 10px;

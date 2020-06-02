@@ -16,7 +16,7 @@
 </view>
 <!-- </scroll-view> -->
 
-
+<!-- 
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
 	<image src='/images/logo1.png' class='png' mode='aspectFit'></image>
 	<view class='gray-text'>加载中...</view>
@@ -27,4 +27,4 @@
 </view>
 
 <view class="line" wx:if="{{pageNum == 0 && list.length == 0}}"  hidden="{{line_h}}"> 暂无数据 </view>
-<view class="line" wx:else hidden="{{line_h}}">-- 我是有底线的 --</view>
+<view class="line" wx:else hidden="{{line_h}}">-- 我是有底线的 --</view> -->

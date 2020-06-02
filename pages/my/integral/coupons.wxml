@@ -1,55 +1,40 @@
-<!-- <cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
-	<view slot="backText">返回</view>
-	<view slot="content">积分兑换优惠券</view>
-</cu-custom>
-<view>
-	 
- <view class="bg-white padding">
-			<view class='nav-list'>
-				<navigator open-type="navigate" hover-class='none' class="nav-li bg-red" wx:for="{{couponslist}}" wx:key bindtap="goCouDetail" data-id="{{item.DB_COUPONS_ID}}">
-					<view class="nav-title">{{item.COU_MONEY}}元</view>
-					<view class="nav-name">满{{item.COU_MAN}}元可用</view>
-				</navigator>
-			</view>
-		</view>
-</view> -->
 <cu-custom bgColor="bg-gradual-main-top" isBack="{{true}}">
-  <view slot="backText">返回</view>
-  <view slot="content">积分兑换</view>
+	<view slot="backText">返回</view>
+	<view slot="content">积分兑换</view>
 </cu-custom>
 <view class="container">
-  <view class="status-box">
-    <view bindtap="statusTap" class="status-label {{index == currentType ? 'active' : ''}}" wx:for-items="{{statusType}}" wx:key="{{index}}" data-index="{{index}}">
-      {{item}}
-      <view class="{{tabClass[index]}}"></view>
-    </view>
-  </view>
-  <view class="bg-white padding" wx:if="{{currentType == 0}}">
-    <view class="no-order" hidden="{{couponslist.length > 0 ? true : false}}" style="height: {{bodyHeight}}px;">
-      <image src="/images/none/empty_order.png" class="no-order-img"></image>
-      <view class="text">暂无数据</view>
-    </view>
-    <view class='nav-list'>
-      <navigator open-type="navigate" hover-class='none' class="nav-li bg-red" wx:for="{{couponslist}}" wx:key bindtap="goCouDetail" data-id="{{item.DB_COUPONS_ID}}">
-        <view class="nav-title">{{item.COU_MONEY}}元</view>
-        <view class="nav-name">满{{item.COU_MAN}}元可用</view>
-      </navigator>
-    </view>
-  </view>
-  <view class="bg-white padding" wx:if="{{currentType == 1}}">
-    <view class="no-order" hidden="{{goods.length > 0 ? true : false}}" style="height: {{bodyHeight}}px;">
-      <image src="/images/none/empty_order.png" class="no-order-img"></image>
-      <view class="text">暂无数据</view>
-    </view>
-    <view class="grid col-2 margin-bottom text-center grid-square">
-      <view class="img" catchtap="goDetail" wx:for="{{goods}}" wx:key data-id="{{item.DB_GOODS_ID}}">
-        <image src="{{item.G_IMG}}"></image>
-        <view class="text-left">{{item.G_NAME}}</view>
-        <view class="flex justify-between margin-top-sm">
-          <text class="text-red">{{item.G_YMONEY}}</text>
-          <text class="bg-red text-xs radius padding-xs-5">立即兑换</text>
-        </view>
-      </view>
-    </view>
-  </view>
+	<view class="status-box">
+		<view bindtap="statusTap" class="status-label {{index == currentType ? 'active' : ''}}" wx:for-items="{{statusType}}" wx:key="{{index}}" data-index="{{index}}">
+			{{item}}
+			<view class="{{tabClass[index]}}"></view>
+		</view>
+	</view>
+	<view class="bg-white padding" wx:if="{{currentType == 0}}">
+		<view class="no-order" hidden="{{couponslist.length > 0 ? true : false}}" style="height: {{bodyHeight}}px;">
+			<image src="/images/none/empty_order.png" class="no-order-img"></image>
+			<view class="text">暂无数据</view>
+		</view>
+		<view class='nav-list'>
+			<navigator open-type="navigate" hover-class='none' class="nav-li bg-red" wx:for="{{couponslist}}" wx:key bindtap="goCouDetail" data-id="{{item.DB_COUPONS_ID}}">
+				<view class="nav-title">{{item.COU_MONEY}}元</view>
+				<view class="nav-name">满{{item.COU_MAN}}元可用</view>
+			</navigator>
+		</view>
+	</view>
+	<view class="bg-white padding" wx:if="{{currentType == 1}}">
+		<view class="no-order" hidden="{{goods.length > 0 ? true : false}}" style="height: {{bodyHeight}}px;">
+			<image src="/images/none/empty_order.png" class="no-order-img"></image>
+			<view class="text">暂无数据</view>
+		</view>
+		<view class="grid col-2 margin-bottom text-center grid-square">
+			<view class="img" catchtap="goDetail" wx:for="{{goods}}" wx:key data-id="{{item.DB_GOODS_ID}}">
+				<image src="{{item.G_IMG}}"></image>
+				<view class="text-left">{{item.G_NAME}}</view>
+				<view class="flex justify-between margin-top-sm">
+					<text class="text-red">{{item.G_YMONEY}}</text>
+					<text class="bg-red text-xs radius padding-xs-5">立即兑换</text>
+				</view>
+			</view>
+		</view>
+	</view>
 </view>

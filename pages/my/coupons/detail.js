@@ -1,6 +1,7 @@
 // pages/my/coupons/detail.js
 var call = require("../../../utils/request.js")
 var util = require("../../../utils/util.js")
+var getUrl = require('../../../utils/url.js')
 Page({
   //   /app/integralgoods/appcoupons
   // 传：DB_COUPONS_ID：优惠券id
@@ -10,6 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    imageUrl:getUrl.imageUrl(),
     coupons:{}
   },
 

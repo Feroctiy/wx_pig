@@ -1,0 +1,52 @@
+/* pages/my/userlevel/index.wxss */
+.bg {
+  background: rgba(165, 228, 232, 1);
+}
+
+.bg1 {
+  background: #339E9B;
+}
+
+.list {
+  width: 90%;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: -20px;
+  border-radius: 30rpx;
+  overflow: hidden;
+}
+
+.ree {
+  position: relative;
+}
+
+.cu-avatar.lg {
+  width: 80rpx;
+  height: 80rpx;
+  font-size: 2em;
+
+}
+
+.record {
+  width: 100%;
+  position: absolute;
+  bottom: 40rpx;
+  margin: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #666666;
+}
+
+.cu-list.menu-avatar>.cu-item .action {
+  width: 150rpx;
+  text-align: center;
+}
+
+.cu-list.menu-avatar>.cu-item .action .cu-btn {
+  padding: 0 30rpx;
+  font-size: 25rpx;
+  height: 50rpx;
+}

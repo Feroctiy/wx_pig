@@ -1,0 +1,20 @@
+<block wx:for='{{dataList}}' wx:key='group'>
+  <view class="content" data-id="{{item.DB_GOODS_ID}}" bindtap="groupProDetails">
+    <image class="logo" src="{{item.G_IMG}}" mode="aspectFill"></image>
+    <view class="proinfo">
+      <view class="name">{{item.G_NAME}}</view>
+      <view class="num">
+        <view>已售 {{item.G_SALES}}件</view>
+        <view>剩余 {{item.ALL_NUM}}件</view>
+      </view>
+      <view class="opera">
+        <view class="price">￥{{item.G_MONEY}}</view>
+        <view class="suport">立即购买</view>
+      </view>
+    </view>
+  </view>
+</block>
+<view class="tips" wx:if="{{dataList.length == 0}}">
+  <image src="../../images/tabBar/t4.png"></image>
+  <view>暂无商品信息</view>
+</view>

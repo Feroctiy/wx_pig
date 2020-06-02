@@ -219,3 +219,240 @@ form {
   color: #b5272d;
   text-align: right;
 }
+
+
+
+
+
+.addContent {
+  width: 94%;
+  margin: 30rpx 3%;
+  background: #fff;
+  border-radius: 15rpx;
+  box-shadow: 0 0 15rpx #ddd;
+}
+
+.title {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 32rpx;
+}
+
+.title view {
+  width: 50%;
+  line-height: 80rpx;
+  text-align: center;
+  background: #f4f4f4;
+  color: #707070;
+  border-bottom: 2rpx solid #e9e9e9;
+}
+
+.title view.active {
+  width: 50%;
+  text-align: center;
+  background: #fff;
+  color: #000;
+}
+
+.address {
+  width: 94%;
+  padding: 20rpx 3%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30rpx;
+}
+
+.address image {
+  width: 30rpx;
+}
+
+.address .info {
+  width: 95%;
+}
+.receiveInfo{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+.receiveInfo input{
+  width: 30%;
+  padding:0 2%;
+  height: 60rpx;
+  border: 1rpx solid #f2f2f2;
+  font-size: 30rpx;
+}
+.desc {
+  color: #666;
+}
+
+.container {
+  width: 100%;
+  margin: 20rpx 0 ;
+  padding: 0 2%;
+  background: #fff;
+  border-radius: 15rpx;
+  box-shadow: 0 0 15rpx #ddd;
+}
+
+.shop {
+  width: 100%;
+  padding: 20rpx 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1rpx solid #f2f2f2;
+  font-size: 30rpx;
+}
+
+.shop image {
+  width: 35rpx;
+  margin-right: 10rpx;
+}
+
+.proItem {
+  width: 100%;
+  padding: 20rpx 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+.price {
+  width: 100%;
+  color: #f55160;
+  font-size: 30;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.num {
+  color: #707070;
+}
+
+.oldPrice {
+  font-size: 28rpx;
+  text-decoration: line-through;
+  color: #8a8a8a;
+}
+
+.proItem image {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 15rpx;
+}
+
+.details {
+  height: 180rpx;
+  width: 70%;
+  font-size: 30rpx;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: space-between;
+}
+
+.details .name {
+  width: 100%;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.details .desc{
+  width: 100%;
+  color: #666;
+  font-size: 28rpx;
+}
+.money {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.money .info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.money .info text {
+  color: #f55160;
+}
+
+.money .more {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.money .more image {
+  width: 25rpx;
+  margin-left: 10rpx;
+}
+
+.subtotal {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20rpx 0;
+  border-top: 1rpx solid #f2f2f2;
+}
+
+.subtotal text {
+  color: #f55160;
+}
+
+.remark {
+  width: 100%;
+  padding: 20rpx 0;
+  font-size: 30rpx;
+}
+
+.remark textarea {
+  width: 100%;
+}
+
+.operation {
+  width: 100%;
+  padding: 15rpx 4%;
+  height: 70rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  box-shadow: 0 -10rpx 15rpx #ddd; /*阴影出现在元素上方*/
+}
+
+.total {
+  line-height: 100rpx;
+  text-align: left;
+  font-size: 30rpx;
+}
+
+.total text {
+  font-size: 30rpx;
+  color: #f55160;
+}
+
+.btnSubmit {
+  font-size: 32rpx;
+  width: 30%;
+  line-height: 70rpx;
+  text-align: center;
+  margin: 15rpx 0;
+  color: white;
+  background: linear-gradient(to right, #fc6864, #f13b61);
+  border-radius: 15rpx;
+}

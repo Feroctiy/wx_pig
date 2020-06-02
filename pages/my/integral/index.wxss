@@ -104,3 +104,9 @@
 .text-light {
   font-weight: 300;
 }
+
+.cu-avatar.lg {
+  width: 80rpx;
+  height: 80rpx;
+  font-size: 2em;
+}

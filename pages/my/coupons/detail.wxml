@@ -3,11 +3,10 @@
 	<view slot="content">优惠券详情</view>
 </cu-custom>
 <view class="coupon-fetch">
-	<view class="coupon-fetch__main">
-		<view class="coupon-fetch__main-show">
+	<view class="coupon-fetch__main" style="background: url({{imageUrl}}bg2.png);background-size: 100% 100%;">
+		<view class="coupon-fetch__main-show" style="background: url({{imageUrl}}bg3.png);background-size: 100% 100%;">
 			<view class="coupon-receive">
 				<view class="coupon-receive">
-					<!-- <image src="https://img.yzcdn.cn/upload_files/2015/09/27/3fcd4e9b8f3e9b0df610aa776a4329b5.jpeg!100x100.jpg" class="coupon-fetch__main-logo"></image> -->
 					<view class="coupon-fetch__main-name">
 						满{{coupons.COU_MAN}}元可用
 					</view>
@@ -18,7 +17,7 @@
 						{{coupons.COU_STARTDATE}} - {{coupons.COU_ENDDATE}}
 					</view>
 				</view>
-				<view class="coupon-receive-box"></view>
+				<view class="coupon-receive-box" style="background: url({{imageUrl}}bg4.png);background-size: 100% 100%;"></view>
 				<view class="options-box">
 					<!---->
 					<view class="coupon-receive-btn coupon-btn strong" bindtap="useCoupons">
